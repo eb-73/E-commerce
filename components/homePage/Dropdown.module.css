@@ -1,0 +1,47 @@
+.dropdown {
+  user-select: none;
+  position: relative;
+}
+.dropdown .dropButton {
+  width: 60px;
+  padding: 2px;
+  cursor: pointer;
+}
+.dropdown .dropButton h6 {
+  margin: 0;
+}
+.dropdown .dropBox {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  list-style: none;
+  width: 110px;
+  padding: 5px 0px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 4px;
+  transform: perspective(1200px) rotateX(-30deg);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.dropdown .dropBox li {
+  text-align: center;
+  width: 100%;
+  height: 25px;
+}
+.dropdown .dropBox li:hover {
+  background-color: #f1f1ef;
+}
+.dropdown .dropButton:hover {
+  color: #2b2b2bad;
+}
+.dropdown .dropIcon {
+  width: 15px;
+}
+
+.dropdown .showDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: perspective(1200px) rotateX(0deg);
+}

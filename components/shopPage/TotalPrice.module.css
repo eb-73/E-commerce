@@ -1,0 +1,21 @@
+.totalPrice {
+  width: 100%;
+}
+.totalPrice div {
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.totalPrice div h4 {
+  font-size: 1rem;
+  margin: 0;
+}
+.totalPrice .total {
+  padding: 20px 0px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.295);
+  border-top: 1px solid rgba(128, 128, 128, 0.295);
+}
+.totalPrice .total h4 {
+  font-size: 0.9rem;
+  font-weight: bold;
+}

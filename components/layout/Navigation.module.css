@@ -1,0 +1,87 @@
+.shop {
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+  color: #080b13;
+}
+.shop .navIcon {
+  width: 20px;
+  color: #080b13;
+}
+.shop .profile {
+  border-left: 1px solid #53535369;
+  padding-left: 7px;
+  position: relative;
+  display: flex;
+  width: 60px;
+}
+.profile button {
+  outline: none;
+  padding: 2px 5px;
+  border: 1px solid #53535369;
+  border-radius: 4px;
+  color: #080b13;
+  background-color: rgba(255, 0, 0, 0);
+}
+.navItem {
+  padding: 0px 15px;
+  position: relative;
+}
+
+.navItem .dropIcon {
+  width: 10px;
+  margin-left: 15px;
+}
+.navItem .navDropDown {
+  width: 200px;
+  border-radius: 4px;
+  box-shadow: 0 15px 80px rgb(56 93 165 / 10%), 0 15px 60px rgb(0 0 0 / 5%);
+  padding: 0;
+  list-style: none;
+  background-color: white;
+  /* background-color: #eff2f5; */
+  position: absolute;
+  top: 40px;
+  transform: perspective(1200px) rotateX(-30deg);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.navItem:hover .navDropDown {
+  opacity: 1;
+  visibility: visible;
+  transform: perspective(1200px) rotateX(0deg);
+}
+.navItem .navDropDown li {
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+}
+.navItem .navDropDown li:hover {
+  background-color: rgba(179, 179, 179, 0.288);
+}
+.navItem .navDropDown2 {
+  width: 100%;
+  list-style: none;
+  background-color: rgba(236, 236, 236, 0.411);
+  visibility: hidden;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.3s, height 0.3s;
+}
+.navItem .navDropDown2 li {
+  width: 100%;
+  height: 0;
+  cursor: pointer;
+  transition: opacity 0.3s, height 0.3s;
+}
+
+.navItem .showNavDropDown2 {
+  padding: 5px 0px;
+  opacity: 1;
+  visibility: visible;
+}
+.navItem .showNavDropDown2 li {
+  height: 30px;
+}

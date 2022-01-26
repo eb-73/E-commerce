@@ -1,0 +1,32 @@
+.sort h6 {
+  font-size: 1rem;
+}
+.sort .itemNumber {
+  color: #2b2b2bad;
+}
+.sort .filterIcon {
+  width: 15px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+.sort .filterIcon:hover {
+  color: #2b2b2bad;
+}
+.showModal {
+  opacity: 0;
+  background: rgba(128, 128, 128, 0);
+}
+.showModalActive {
+  opacity: 1;
+  background: rgba(128, 128, 128, 0.24);
+  transition: all ease 0.5s;
+}
+.hideModal {
+  opacity: 1;
+  background: rgba(128, 128, 128, 0.24);
+}
+.hideModalActive {
+  opacity: 0;
+  background: rgba(128, 128, 128, 0);
+  transition: all ease 0.5s;
+}

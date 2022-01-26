@@ -1,0 +1,72 @@
+.cartProduct {
+  width: 100%;
+}
+.cartProduct:not(:last-child) {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.295);
+}
+.cartProduct .image {
+  width: 150px;
+  height: 150px;
+  background-color: #f1f1ef;
+}
+.cartProduct .image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.cartProduct .product {
+  width: 100px;
+  height: 100px;
+}
+.product .name h4 {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: bold;
+}
+.product .name h5 {
+  font-size: 0.9rem;
+  margin: 7px 0;
+  color: rgba(65, 65, 65, 0.664);
+}
+.editBox .quantityBox {
+  border-radius: 25px;
+  background-color: #f1f1ef;
+}
+.editBox .quantityBox .quantityButton {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  background-color: #f1f1ef;
+  font-size: 16px;
+}
+.editBox .quantityBox .quantityButton:hover {
+  color: white;
+  background-color: rgb(46, 46, 46);
+}
+.editBox .quantityBox .quantity {
+  width: 20px;
+  height: 30px;
+  font-size: 1rem;
+  margin: 0;
+}
+.editBox .delete {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(143, 143, 143);
+  padding: 5px;
+}
+.editBox .delete .deleteIcon {
+  width: 100%;
+}
+.editBox .delete:hover {
+  background-color: rgb(250, 70, 70);
+  color: white;
+}
+.cartProduct .price {
+  margin-left: auto;
+  margin-bottom: auto;
+}

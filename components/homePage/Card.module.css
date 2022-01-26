@@ -1,0 +1,33 @@
+.card {
+  width: 220px;
+  /* border: 1px solid #f1f1ef; */
+  border: 1px solid rgb(229, 232, 235);
+  user-select: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+.card .pic {
+  background-color: #f1f1ef;
+}
+.pic img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.card .title {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: rgb(53, 56, 64);
+  margin: 0;
+}
+.card .price {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0;
+}

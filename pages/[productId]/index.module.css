@@ -1,0 +1,21 @@
+/* .productPage {
+  border-bottom: 1px solid gray;
+} */
+.showModal {
+  opacity: 0;
+  background: rgba(128, 128, 128, 0);
+}
+.showModalActive {
+  opacity: 1;
+  background: rgba(128, 128, 128, 0.24);
+  transition: all ease 0.5s;
+}
+.hideModal {
+  opacity: 1;
+  background: rgba(128, 128, 128, 0.24);
+}
+.hideModalActive {
+  opacity: 0;
+  background: rgba(128, 128, 128, 0);
+  transition: all ease 0.5s;
+}

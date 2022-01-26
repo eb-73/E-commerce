@@ -1,0 +1,72 @@
+.cartProduct {
+  width: 100%;
+  height: 100px;
+  background-color: white;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.cartProduct .image {
+  width: 100px;
+  height: 100px;
+  background-color: #f1f1ef;
+}
+.cartProduct .image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.cartProduct .product {
+  width: 100px;
+  height: 100px;
+}
+.product .name h4 {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: bold;
+}
+.product .name h5 {
+  font-size: 0.9rem;
+  margin: 0;
+  color: rgb(48, 179, 150);
+}
+.product .quantityBox {
+  width: 70px;
+  height: 25px;
+  /* border-radius: 2px; */
+  border-radius: 25px;
+  background-color: #f1f1ef;
+}
+.product .quantityBox button {
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  background-color: #f1f1ef;
+}
+.product .quantityBox button:hover {
+  color: white;
+  background-color: rgb(46, 46, 46);
+}
+.product .quantityBox .quantity {
+  width: 20px;
+  font-size: 1rem;
+  margin: 0;
+}
+.cartProduct .close {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: white;
+  color: rgb(143, 143, 143);
+  margin-left: auto;
+  margin-bottom: auto;
+  padding: 5px;
+}
+.cartProduct .close .closeIcon {
+  width: 100%;
+}
+.cartProduct .close:hover {
+  background-color: rgb(250, 70, 70);
+  color: white;
+}

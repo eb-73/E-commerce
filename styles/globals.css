@@ -1,16 +1,65 @@
 html,
 body {
+  font-family: Poppins, sans-serif;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  position: relative;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #faf9f7;
+}
+#__next {
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   color: inherit;
   text-decoration: none;
 }
+nav {
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+.content {
+  width: 100%;
+}
 
-* {
-  box-sizing: border-box;
+@media screen and (min-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media screen and (min-width: 992px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media screen and (min-width: 1400px) {
+  html {
+    font-size: 16px;
+  }
 }

@@ -1,0 +1,9 @@
+.cardsWraper {
+  width: 80%;
+}
+
+@media screen and (max-width: 576px) {
+  .cardsWraper {
+    width: 100%;
+  }
+}
