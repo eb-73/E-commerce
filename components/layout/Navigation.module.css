@@ -1,3 +1,25 @@
+.logo {
+  border: 1.5px solid rgb(32, 32, 32);
+  padding: 0px 5px;
+  border-radius: 5px;
+  background-color: #ffffff00;
+}
+.logo h5 {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+}
+.logo h4 {
+  font-size: 10px;
+  text-align: center;
+  margin: 0;
+}
+.logo a,
+.logo a:hover {
+  text-decoration: none;
+  color: black;
+}
+
 .shop {
   display: flex;
   justify-content: space-between;
@@ -7,6 +29,7 @@
 .shop .navIcon {
   width: 20px;
   color: #080b13;
+  cursor: pointer;
 }
 .shop .profile {
   border-left: 1px solid #53535369;

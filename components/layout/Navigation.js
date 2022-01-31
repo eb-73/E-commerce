@@ -1,8 +1,7 @@
 import style from "./Navigation.module.css";
-import prof from "../../assets/default.jpg";
-import { auth } from "../../firebaseConfig";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
+import { signOut, useSession } from "next-auth/react";
 import { authAction } from "../../redux/authSlice";
 import { useEffect, useState } from "react";
 import {
@@ -16,24 +15,19 @@ const Navigation = () => {
   const isLogin = useSelector((state) => state.isAuth);
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const { data: session, status } = useSession();
+  console.log("session", session);
   useEffect(() => {
     //listen to change authState
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(authAction.login());
-        console.log(user.uid);
-      } else {
-        dispatch(authAction.logout());
-      }
-    });
-  }, []);
+    if (session) {
+      dispatch(authAction.login());
+    } else {
+      dispatch(authAction.logout());
+    }
+  }, [session]);
   //logout user
   const logoutHandler = () => {
-    signOut(auth).then(() => {
-      router.replace("/login");
-    });
+    signOut({ redirect: false });
   };
   //login user
   const loginHandler = () => {
@@ -44,11 +38,15 @@ const Navigation = () => {
     setShowDrop((prevState) => !prevState);
   };
   return (
-    <nav className="navbar fixed-top navbar-expand-sm bg-light navbar-light px-sm-4 ">
+    <nav className="navbar fixed-top navbar-expand-sm  navbar-light px-sm-4 ">
       <div className="container-fluid d-flex flex-row-reverse justify-content-between">
         <div className={style.shop}>
-          <HeartIcon className={style.navIcon} />
-          <ShoppingCartIcon className={style.navIcon} />
+          <Link href="/favorites">
+            <HeartIcon className={style.navIcon} />
+          </Link>
+          <Link href="/cart">
+            <ShoppingCartIcon className={style.navIcon} />
+          </Link>
           <div className={style.profile}>
             {isLogin ? (
               <button onClick={logoutHandler}>Logout</button>
@@ -57,7 +55,14 @@ const Navigation = () => {
             )}
           </div>
         </div>
-        <a className="navbar-brand d-sm-none d-block">Ebrahim</a>
+        <div className={`navbar-brand d-sm-none d-block  ${style.logo}`}>
+          <Link href="/">
+            <a>
+              <h5>shop</h5>
+              <h4>E.B</h4>
+            </a>
+          </Link>
+        </div>
         <button
           className="navbar-toggler"
           type="button"
@@ -82,11 +87,13 @@ const Navigation = () => {
                 >
                   Shoes
                 </li>
-                <li
-                  className={` d-flex  justify-content-center align-items-center`}
-                >
-                  Clothing
-                </li>
+                <Link href="/products/clothing">
+                  <li
+                    className={` d-flex  justify-content-center align-items-center`}
+                  >
+                    Clothing
+                  </li>
+                </Link>
               </ul>
               <ul
                 className={`d-sm-none d-flex flex-column justify-content-between px-2 ${
@@ -117,9 +124,15 @@ const Navigation = () => {
             </li>
           </ul>
         </div>
-        <a className="navbar-brand d-none d-sm-block" href="#">
-          Ebrahim
-        </a>
+
+        <div className={`navbar-brand d-sm-block d-none  ${style.logo}`}>
+          <Link href="/">
+            <a>
+              <h5>shop</h5>
+              <h4>E.B</h4>
+            </a>
+          </Link>
+        </div>
       </div>
     </nav>
   );

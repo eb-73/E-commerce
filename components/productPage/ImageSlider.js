@@ -1,9 +1,10 @@
 import style from "./ImageSlider.module.css";
 import ProductImg from "./ProductImg";
-import img from "../../assets/product1.png";
-import img2 from "../../assets/product2.png";
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
-const ImageSlider = () => {
+const ImageSlider = (props) => {
+  const firstPic = props.imagesUrl[0];
+  const { imagesUrl } = props;
   return (
     <div
       id="carouselExampleInterval"
@@ -12,8 +13,15 @@ const ImageSlider = () => {
       data-bs-interval="false"
     >
       <div className={`carousel-inner ${style.imageWraper}`}>
-        <ProductImg url={img.src} className="active" />
-        <ProductImg url={img2.src} />
+        {imagesUrl.map((item, index) => (
+          <ProductImg
+            key={index}
+            url={item}
+            active={item === firstPic && true}
+          />
+        ))}
+        {/* <ProductImg url={props.imagesUrl[0]} className="active" />
+        <ProductImg url={props.imagesUrl[1]} /> */}
       </div>
       <button
         className="carousel-control-prev"

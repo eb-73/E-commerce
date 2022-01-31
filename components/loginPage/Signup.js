@@ -7,6 +7,8 @@ import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import createUser from "../../lib/createUser";
+import { signIn } from "next-auth/react";
 const Signup = () => {
   const sendUser = useFetch("signup");
   const googleSignin = useFetch("google");
@@ -37,7 +39,7 @@ const Signup = () => {
     clear: clearPass,
   } = useForm("pass");
   const validateForm = nameValidate && emailValidate && passValidate;
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (!validateForm) {
       return;
@@ -46,25 +48,50 @@ const Signup = () => {
     clearName();
     clearEmail();
     clearPass();
-    sendUser(nameInput, emailInput, passInput)
-      .then(() => {
+    // sendUser(nameInput, emailInput, passInput)
+    //   .then(() => {
+    //     setLoading(false);
+    //     router.replace("/");
+    //   })
+    //   .catch((err) => {
+    //     setLoading(false);
+    //     toast.error(errorMessage(err.code));
+    //     console.log(err.code);
+    //   });
+    try {
+      const res = await createUser({
+        name: nameInput,
+        email: emailInput,
+        pass: passInput,
+      });
+      //login
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: emailInput,
+        pass: passInput,
+      });
+      if (result.ok && !result.error) {
         setLoading(false);
         router.replace("/");
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(errorMessage(err.code));
-        console.log(err.code);
-      });
+        toast.success("Wellcome");
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (err) {
+      console.log(err.message);
+      toast.error(err.message);
+      setLoading(false);
+    }
   };
   const googleSigninHandler = () => {
-    googleSignin()
-      .then(() => {
-        router.replace("/");
-      })
-      .catch((err) => {
-        toast.error(err.code);
-      });
+    // googleSignin()
+    //   .then(() => {
+    //     router.replace("/");
+    //   })
+    //   .catch((err) => {
+    //     toast.error(err.code);
+    //   });
+    signIn("google");
   };
   return (
     <div className={`d-flex flex-column align-items-center ${style.signup}`}>

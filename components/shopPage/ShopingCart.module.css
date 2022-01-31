@@ -38,5 +38,6 @@
     bottom: 0px;
     left: 0;
     border-radius: 0;
+    border: 1px solid white;
   }
 }

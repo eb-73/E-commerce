@@ -1,6 +1,10 @@
 /* .productPage {
   border-bottom: 1px solid gray;
 } */
+.productPage {
+  width: 100%;
+  height: calc(100vh - 60px);
+}
 .showModal {
   opacity: 0;
   background: rgba(128, 128, 128, 0);

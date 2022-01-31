@@ -12,7 +12,7 @@
 }
 .dropdown .dropBox {
   position: absolute;
-  top: 100%;
+  top: 125%;
   right: 0;
   list-style: none;
   width: 110px;
@@ -24,6 +24,7 @@
   opacity: 0;
   visibility: hidden;
   transition: transform 0.3s, opacity 0.3s;
+  z-index: 999;
 }
 .dropdown .dropBox li {
   text-align: center;

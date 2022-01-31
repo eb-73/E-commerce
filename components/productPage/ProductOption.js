@@ -16,18 +16,19 @@ const ProductOption = (props) => {
           <div
             className={`w-100  d-flex justify-content-start align-items-center  flex-wrap ${style.radioGroup}`}
           >
-            <input type="radio" id="xs" name="selector" />
-            <label htmlFor="xs">XS</label>
-            <input type="radio" id="s" name="selector" />
-            <label htmlFor="s">S</label>
-            <input type="radio" id="m" itemID name="selector" />
-            <label htmlFor="m">M</label>
-            <input type="radio" id="l" name="selector" />
-            <label htmlFor="l">L</label>
-            <input type="radio" id="xl" name="selector" />
-            <label htmlFor="xl">XL</label>
-            <input type="radio" id="xxl" itemID name="selector" />
-            <label htmlFor="xxl">XXL</label>
+            {props.sizes.map((item, index) => (
+              <div key={index}>
+                <input
+                  type="radio"
+                  id={item.name}
+                  name="selector"
+                  disabled={item.quantity === "0" && true}
+                />
+                <label
+                  htmlFor={item.name}
+                >{`${item.name} (${item.quantity})`}</label>
+              </div>
+            ))}
           </div>
         </form>
         <div
@@ -39,12 +40,12 @@ const ProductOption = (props) => {
           <div
             className={`w-100 d-flex justify-content-start align-items-center flex-wrap ${style.radioGroup}`}
           >
-            <input type="radio" id="brown" name="selector" />
-            <label htmlFor="brown"></label>
-            <input type="radio" id="blue" name="selector" />
-            <label htmlFor="blue"></label>
-            <input type="radio" id="black" itemID name="selector" />
-            <label htmlFor="black"></label>
+            {props.colors.map((item, index) => (
+              <div key={index}>
+                <input type="radio" id={item} name="selector" />
+                <label htmlFor={item} style={{ backgroundColor: item }}></label>
+              </div>
+            ))}
           </div>
         </form>
       </div>

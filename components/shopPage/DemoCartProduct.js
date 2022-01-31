@@ -1,5 +1,5 @@
 import style from "./DemoCartProduct.module.css";
-import img from "../../assets/product1.png";
+
 import { TrashIcon } from "@heroicons/react/outline";
 const DemoCartProduct = () => {
   return (
@@ -9,7 +9,7 @@ const DemoCartProduct = () => {
       <div
         className={`d-flex justify-content-center align-items-center ${style.image}`}
       >
-        <img src={img.src} alt="CartProduct" />
+        <img src="/productImage/product1.png" alt="CartProduct" />
       </div>
       <div
         className={`d-flex flex-column justify-content-around align-items-start mx-3 ${style.product}`}

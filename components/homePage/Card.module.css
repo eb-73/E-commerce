@@ -1,18 +1,26 @@
 .card {
-  width: 220px;
   /* border: 1px solid #f1f1ef; */
   border: 1px solid rgb(229, 232, 235);
   user-select: none;
   cursor: pointer;
   border-radius: 5px;
+  transition: width ease 0.5s;
 }
-
+.card.largeView {
+  min-width: 200px;
+  width: 48%;
+}
+.card.smallView {
+  min-width: 150px;
+  width: 23%;
+}
 .card:hover {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 .card .pic {
   background-color: #f1f1ef;
+  width: 100%;
 }
 .pic img {
   max-width: 100%;
@@ -30,4 +38,14 @@
   text-align: center;
   font-size: 1.5rem;
   margin: 0;
+}
+@media screen and (max-width: 576px) {
+  .card.largeView {
+    min-width: 200px;
+    width: 100%;
+  }
+  .card.smallView {
+    min-width: 150px;
+    width: 48%;
+  }
 }

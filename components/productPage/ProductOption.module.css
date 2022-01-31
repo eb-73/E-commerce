@@ -1,9 +1,10 @@
 .producOption {
   width: 25%;
+  /* height: clamp(100%,100%,100%); */
   height: 100%;
   border-left: 1px solid gray;
   padding-left: 16px;
-  overflow: hidden auto;
+  /* overflow: hidden auto; */
   position: relative;
 }
 .producOption .sizeTitle h4 {
@@ -27,9 +28,9 @@
 }
 
 .sizeSelect .radioGroup label {
-  width: 45px;
-  height: 35px;
-  border-radius: 20px;
+  width: 55px;
+  height: 30px;
+  border-radius: 5px;
   color: black;
   display: inline-block;
   cursor: pointer;
@@ -48,6 +49,14 @@
   color: white;
   background: black;
 }
+.sizeSelect .radioGroup input:disabled + label {
+  color: rgba(104, 104, 104, 0.562);
+  cursor: default;
+}
+
+.sizeSelect .radioGroup input:not(:checked, :disabled):hover + label {
+  border: 1px solid black;
+}
 .producOption .colorTitle h4 {
   font-size: 1rem;
   margin: 0;
@@ -60,15 +69,7 @@
   visibility: visible;
   display: none;
 }
-.colorSelect .radioGroup input[id="brown"] + label {
-  background-color: brown;
-}
-.colorSelect .radioGroup input[id="blue"] + label {
-  background-color: blue;
-}
-.colorSelect .radioGroup input[id="black"] + label {
-  background-color: black;
-}
+
 .colorSelect .radioGroup label {
   width: 30px;
   height: 30px;

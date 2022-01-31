@@ -1,12 +1,12 @@
 import style from "./Dropdown.module.css";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { useState, useEffect, useRef } from "react";
 const Dropdown = () => {
   const [showDrop, setShowDrop] = useState(false);
   const element = useRef();
   const closeDropdownHandler = (e) => {
     e.stopPropagation();
-    if (e.target === element.current) {
+    if (e.target || e.target.parentNode === element.current) {
       return;
     } else {
       setShowDrop(false);
@@ -26,9 +26,11 @@ const Dropdown = () => {
       <div
         className={`d-flex justify-content-around align-items-center ${style.dropButton}`}
         onClick={showDropdownHandler}
+        ref={element}
       >
-        <h6 ref={element}>Sort</h6>
-        <ChevronDownIcon className={style.dropIcon} />
+        <h6>Sort</h6>
+        {!showDrop && <ChevronDownIcon className={style.dropIcon} />}
+        {showDrop && <ChevronUpIcon className={style.dropIcon} />}
       </div>
 
       <ul

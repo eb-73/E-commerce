@@ -4,6 +4,19 @@
 .sort .itemNumber {
   color: #2b2b2bad;
 }
+.sort .viewIcons {
+  border: 1px solid #acacacad;
+  width: 70px;
+  border-radius: 10px;
+}
+.sort .viewIcon {
+  width: 15px;
+  cursor: pointer;
+  color: #2b2b2bad;
+}
+.sort .viewIcon:hover {
+  color: #000000ad;
+}
 .sort .filterIcon {
   width: 15px;
   margin-left: 15px;

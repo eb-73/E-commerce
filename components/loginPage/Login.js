@@ -7,7 +7,7 @@ import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
-
+import { signIn } from "next-auth/react";
 const Login = () => {
   const sendUser = useFetch("login");
   const googleSignin = useFetch("google");
@@ -31,23 +31,42 @@ const Login = () => {
   } = useForm("pass");
   const validateForm = emailValidate && passValidate;
   //submit form
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (!validateForm) {
       return;
     }
+    // setLoading(true);
+    // clearEmail();
+    // clearPass();
+    // sendUser("", emailInput, passInput)
+    //   .then(() => {
+    //     setLoading(false);
+    //     router.replace("/");
+    //   })
+    //   .catch((err) => {
+    //     setLoading(false);
+    //     toast.error(errorMessage(err.code));
+    //   });
     setLoading(true);
-    clearEmail();
-    clearPass();
-    sendUser("", emailInput, passInput)
-      .then(() => {
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: emailInput,
+        pass: passInput,
+      });
+
+      console.log("result", result);
+      if (result.ok && !result.error) {
         setLoading(false);
         router.replace("/");
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(errorMessage(err.code));
-      });
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (err) {
+      console.log("login nashod", err.message);
+      setLoading(false);
+    }
   };
   //signin with google
   const googleSigninHandler = () => {
