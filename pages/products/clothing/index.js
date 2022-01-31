@@ -8,7 +8,7 @@ import { ContextProvider } from "../../../context/ctxStore";
 import { MongoClient } from "mongodb";
 import { useState } from "react";
 const ClothePage = (props) => {
-  const [clothes, setClothes] = useState(props.clothesArray);
+  const { clothesArray: clothes } = props;
   return (
     <ContextProvider>
       <Head>
@@ -20,7 +20,7 @@ const ClothePage = (props) => {
       <SortNav page="clothing" />
       <div className="content mt-2 d-flex align-items-center align-items-sm-start  justify-content-sm-between">
         <Side page="clothing" />
-        <CardsWraper clothes={clothes} />
+        <CardsWraper products={clothes} />
       </div>
     </ContextProvider>
   );
@@ -34,7 +34,6 @@ export async function getStaticProps() {
   const db = client.db();
   const collection = db.collection("products");
   result = await collection.find({ category: "clothing" }).toArray();
-  console.log("result", result);
   client.close();
 
   return {
@@ -54,6 +53,7 @@ export async function getStaticProps() {
         };
       }),
     },
+    revalidate: 86400,
   };
 }
 export default ClothePage;

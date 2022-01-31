@@ -6,7 +6,7 @@ const CardsWraper = (props) => {
     <div
       className={`d-flex flex-wrap flex-sm-row align-items-sm-start  justify-content-center justify-content-sm-start ${style.cardsWraper}`}
     >
-      {props.clothes.map((item) => (
+      {props.products.map((item) => (
         <Card
           key={item.id}
           id={item.id}

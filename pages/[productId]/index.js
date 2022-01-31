@@ -63,6 +63,7 @@ export async function getStaticPaths() {
   const db = client.db();
   const collection = db.collection("products");
   result = await collection.find({}, { _id: true }).limit(5).toArray();
+  console.log("result", result);
   client.close();
   return {
     paths: result.map((item) => ({
@@ -81,7 +82,6 @@ export async function getStaticProps(context) {
   const db = client.db();
   const collection = db.collection("products");
   result = await collection.findOne({ _id: ObjectId(id) });
-  console.log("result", result);
   client.close();
   return {
     props: {
