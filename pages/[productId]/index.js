@@ -28,6 +28,7 @@ const Product = (props) => {
       <ImageSlider imagesUrl={product.pic_url} />
       <ProductInfo
         title={product.product_title}
+        subTitle={product.prosuct_sub_title}
         price={product.product_price}
         description={product.product_description}
         className="d-flex d-sm-none"

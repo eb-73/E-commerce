@@ -5,7 +5,7 @@ const ProductInfo = (props) => {
       className={`pt-3 flex-column align-items-center justify-content-between ${props.className} ${style.productInfo}`}
     >
       <div
-        className={`w-100 d-flex flex-row flex-sm-column justify-content-between justify-content-sm-between align-items-start mb-2 mb-sm-5 ${style.titleBox}`}
+        className={`w-100 d-flex  flex-column  justify-content-between  mb-2 mb-sm-5 ${style.titleBox}`}
       >
         <div className={style.name}>
           <h2 className={style.title}>{props.title}</h2>

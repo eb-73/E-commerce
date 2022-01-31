@@ -82,11 +82,13 @@ const Navigation = () => {
               <ul
                 className={`d-none d-sm-flex flex-sm-column align-items-center py-2 ${style.navDropDown}`}
               >
-                <li
-                  className={` d-flex  justify-content-center align-items-center`}
-                >
-                  Shoes
-                </li>
+                <Link href="/products/shoes">
+                  <li
+                    className={` d-flex  justify-content-center align-items-center`}
+                  >
+                    Shoes
+                  </li>
+                </Link>
                 <Link href="/products/clothing">
                   <li
                     className={` d-flex  justify-content-center align-items-center`}
