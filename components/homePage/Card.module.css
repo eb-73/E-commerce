@@ -1,6 +1,6 @@
 .card {
   /* border: 1px solid #f1f1ef; */
-  border: 1px solid rgb(229, 232, 235);
+  /* border: 1px solid rgb(229, 232, 235); */
   user-select: none;
   cursor: pointer;
   border-radius: 5px;
@@ -15,28 +15,35 @@
   width: 23%;
 }
 .card:hover {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
 }
 .card .pic {
   background-color: #f1f1ef;
   width: 100%;
+  transition: all ease 0.2s;
+}
+.card .pic:hover {
+  position: relative;
+  transform: scale(1.2);
 }
 .pic img {
   max-width: 100%;
   max-height: 100%;
+  position: relative;
 }
 .card .title {
   width: 100%;
-  text-align: center;
+  text-align: start;
   font-size: 1rem;
+  font-weight: 500;
   color: rgb(53, 56, 64);
   margin: 0;
 }
 .card .price {
   width: 100%;
-  text-align: center;
-  font-size: 1.5rem;
+  text-align: start;
+  font-size: 1rem;
   margin: 0;
 }
 @media screen and (max-width: 576px) {

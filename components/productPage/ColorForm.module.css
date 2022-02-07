@@ -1,0 +1,34 @@
+.colorSelect .radioGroup {
+  max-height: 120px;
+  overflow: hidden;
+}
+.colorSelect .radioGroup input {
+  visibility: visible;
+  display: none;
+}
+
+.colorSelect .radioGroup label {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: black;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 2px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.colorSelect .radioGroup input:checked + label::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  color: white;
+  background: rgb(255, 255, 255);
+}

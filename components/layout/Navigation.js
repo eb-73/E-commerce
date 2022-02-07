@@ -3,6 +3,13 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut, useSession } from "next-auth/react";
 import { authAction } from "../../redux/authSlice";
+import {
+  getOrderListFromDatabase,
+  getOrderListFromLocal,
+  sendOrderListToDatabase,
+  sendOrderListToLocal,
+} from "../../redux/actions";
+import { orderAction } from "../../redux/orderSlice";
 import { useEffect, useState } from "react";
 import {
   HeartIcon,
@@ -12,22 +19,56 @@ import {
 import { useRouter } from "next/router";
 const Navigation = () => {
   const [showDrop, setShowDrop] = useState(false);
-  const isLogin = useSelector((state) => state.isAuth);
+  const auth = useSelector((state) => state.Auth);
+  const cart = useSelector((state) => state.Order);
   const dispatch = useDispatch();
   const router = useRouter();
   const { data: session, status } = useSession();
-  console.log("session", session);
+  const isUser = !!session?.user;
+  const userEmail = session?.user.email;
+  let allQuantity;
+
+  allQuantity = cart.orderProducts.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.quantity;
+  }, 0);
+  console.log("isuser", isUser);
+  console.log(session, status);
   useEffect(() => {
     //listen to change authState
-    if (session) {
-      dispatch(authAction.login());
-    } else {
+
+    if (isUser && status === "authenticated") {
+      dispatch(authAction.login(userEmail));
+      localStorage.removeItem("cart");
+    } else if (!isUser && status === "unauthenticated") {
       dispatch(authAction.logout());
+    } else if (status === "loading") {
+      return;
     }
-  }, [session]);
+  }, [status, isUser, userEmail]);
+
+  useEffect(() => {
+    // get order list of user
+
+    if (auth.isAuth) {
+      dispatch(getOrderListFromDatabase(auth.authenticatedEmail));
+    } else if (!auth.isAuth) {
+      dispatch(getOrderListFromLocal());
+    }
+  }, [auth.isAuth, auth.authenticatedEmail]);
+
+  // send updated cart to database
+  useEffect(() => {
+    if (cart.orderId && isUser) {
+      dispatch(sendOrderListToDatabase(cart));
+    } else if (!cart.orderId && !isUser) {
+      dispatch(sendOrderListToLocal(cart));
+    }
+  }, [cart, isUser]);
   //logout user
   const logoutHandler = () => {
     signOut({ redirect: false });
+    localStorage.removeItem("cart");
+    dispatch(orderAction.clearOrder());
   };
   //login user
   const loginHandler = () => {
@@ -40,15 +81,26 @@ const Navigation = () => {
   return (
     <nav className="navbar fixed-top navbar-expand-sm  navbar-light px-sm-4 ">
       <div className="container-fluid d-flex flex-row-reverse justify-content-between">
-        <div className={style.shop}>
+        <div
+          className={`d-flex justify-content-between align-items-center ${style.shop}`}
+        >
           <Link href="/favorites">
-            <HeartIcon className={style.navIcon} />
+            <div className={style.favIcon}>
+              <HeartIcon className={style.navIcon} />
+            </div>
           </Link>
           <Link href="/cart">
-            <ShoppingCartIcon className={style.navIcon} />
+            <div className={style.cartIcon}>
+              <ShoppingCartIcon className={style.navIcon} />
+              <div
+                className={` ${allQuantity ? style.badge : style.hideBadge}`}
+              >
+                {allQuantity}
+              </div>
+            </div>
           </Link>
           <div className={style.profile}>
-            {isLogin ? (
+            {auth.isAuth ? (
               <button onClick={logoutHandler}>Logout</button>
             ) : (
               <button onClick={loginHandler}>Login</button>

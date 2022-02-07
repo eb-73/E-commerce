@@ -11,13 +11,13 @@ const Card = (props) => {
   };
   return (
     <div
-      className={` m-1 ${style.card} ${
+      className={` mx-2 my-3 ${style.card} ${
         ctx.smallView ? style.smallView : style.largeView
       }`}
       onClick={clickHandler}
     >
       <div className={style.pic}>
-        {/* <img src={props.url.src} alt="product picture" /> */}
+        {/* <img src={props.url[0]} alt="product picture" /> */}
 
         <Image
           src={props.url[0]}
@@ -25,10 +25,13 @@ const Card = (props) => {
           width={1728}
           height={2160}
           layout="responsive"
+          priority={false}
+          loading="eager"
         />
       </div>
 
       <h3 className={style.title}>{props.title}</h3>
+      <h4>{props.sub_title}</h4>
       <h1 className={style.price}>${props.price}</h1>
     </div>
   );

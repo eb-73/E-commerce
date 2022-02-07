@@ -1,14 +1,19 @@
 .dropdown {
   user-select: none;
   position: relative;
+  margin: 0 0 0 5px;
 }
 .dropdown .dropButton {
-  width: 60px;
+  width: 50px;
   padding: 2px;
   cursor: pointer;
+  position: relative;
 }
 .dropdown .dropButton h6 {
   margin: 0;
+  position: relative;
+  width: 100%;
+  z-index: 2;
 }
 .dropdown .dropBox {
   position: absolute;
@@ -39,6 +44,9 @@
 }
 .dropdown .dropIcon {
   width: 15px;
+  z-index: 1;
+  position: absolute;
+  right: 0;
 }
 
 .dropdown .showDropdown {

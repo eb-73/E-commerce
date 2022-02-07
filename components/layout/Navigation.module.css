@@ -21,13 +21,35 @@
 }
 
 .shop {
-  display: flex;
-  justify-content: space-between;
-  width: 120px;
+  /* width: 120px; */
   color: #080b13;
+  position: relative;
+}
+.shop .cartIcon,
+.shop .favIcon {
+  position: relative;
+  margin: 0 10px;
+}
+.shop .cartIcon .badge,
+.shop .favIcon .badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: appear ease 0.5s;
+  width: 15px;
+  height: 15px;
+  background-color: rgb(255, 68, 68);
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+
+  top: -3px;
+  right: -5px;
 }
 .shop .navIcon {
-  width: 20px;
+  width: 22px;
   color: #080b13;
   cursor: pointer;
 }
@@ -107,4 +129,19 @@
 }
 .navItem .showNavDropDown2 li {
   height: 30px;
+}
+
+.hideBadge {
+  display: none;
+}
+
+@keyframes appear {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

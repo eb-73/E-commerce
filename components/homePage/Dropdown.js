@@ -6,13 +6,13 @@ const Dropdown = () => {
   const element = useRef();
   const closeDropdownHandler = (e) => {
     e.stopPropagation();
-    if (e.target || e.target.parentNode === element.current) {
+    if (e.target === element.current) {
       return;
     } else {
       setShowDrop(false);
     }
   };
-  const showDropdownHandler = () => {
+  const clickHandler = () => {
     setShowDrop((prevState) => !prevState);
   };
   useEffect(() => {
@@ -25,10 +25,9 @@ const Dropdown = () => {
     <div className={style.dropdown}>
       <div
         className={`d-flex justify-content-around align-items-center ${style.dropButton}`}
-        onClick={showDropdownHandler}
-        ref={element}
+        onClick={clickHandler}
       >
-        <h6>Sort</h6>
+        <h6 ref={element}>Sort</h6>
         {!showDrop && <ChevronDownIcon className={style.dropIcon} />}
         {showDrop && <ChevronUpIcon className={style.dropIcon} />}
       </div>

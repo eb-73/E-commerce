@@ -1,10 +1,12 @@
+import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 import style from "./TotalPrice.module.css";
-const TotalPrice = () => {
+const TotalPrice = (props) => {
+  console.log(props.totalPrice);
   return (
     <div className={` ${style.totalPrice}`}>
       <div className="d-flex align-items-center justify-content-between">
         <h4>Subtotal</h4>
-        <h4>$290.00</h4>
+        <h4>${!!props.totalPrice ? props.totalPrice : "0.00"}</h4>
       </div>
       <div className="d-flex align-items-center justify-content-between">
         <h4>Estimated Shipping & Handling</h4>
@@ -18,7 +20,7 @@ const TotalPrice = () => {
         className={`d-flex align-items-center justify-content-between ${style.total}`}
       >
         <h4>Total</h4>
-        <h4>$290.00</h4>
+        <h4>${!!props.totalPrice ? props.totalPrice : "0.00"}</h4>
       </div>
     </div>
   );

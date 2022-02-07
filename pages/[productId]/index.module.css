@@ -23,3 +23,9 @@
   background: rgba(128, 128, 128, 0);
   transition: all ease 0.5s;
 }
+@media screen and (max-width: 576px) {
+  .productPage {
+    width: 100%;
+    min-height: calc(100vh - 60px);
+  }
+}

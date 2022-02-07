@@ -1,7 +1,32 @@
 import style from "./ShopingCartProduct.module.css";
-
 import { TrashIcon } from "@heroicons/react/outline";
-const ShopingCartProduct = () => {
+import { useDispatch } from "react-redux";
+import { orderAction } from "../../redux/orderSlice";
+const ShopingCartProduct = (props) => {
+  const dispatch = useDispatch();
+  const removeHandler = () => {
+    dispatch(
+      orderAction.remove({ id: props.id, size: props.size, color: props.color })
+    );
+  };
+  const incrementHandler = () => {
+    dispatch(
+      orderAction.increment({
+        id: props.id,
+        size: props.size,
+        color: props.color,
+      })
+    );
+  };
+  const decrementHandler = () => {
+    dispatch(
+      orderAction.decrement({
+        id: props.id,
+        size: props.size,
+        color: props.color,
+      })
+    );
+  };
   return (
     <div
       className={` py-4 d-flex justify-content-start align-items-center ${style.cartProduct}`}
@@ -9,7 +34,7 @@ const ShopingCartProduct = () => {
       <div
         className={`d-flex justify-content-center align-items-center ${style.image}`}
       >
-        <img src="/productImage/product2.png" alt="CartProduct" />
+        <img src={props.imageUrl} alt="CartProduct" />
       </div>
       <div
         className={`d-flex flex-column justify-content-around align-items-start mx-3 ${style.product}`}
@@ -17,12 +42,13 @@ const ShopingCartProduct = () => {
         <div className={`${style.name}`}>
           <h4>jocket</h4>
           <h5>T-Shirts</h5>
-          <h5>White</h5>
-          <h5>Size</h5>
+          <h5>{props.color}</h5>
+          <h5>{props.size}</h5>
         </div>
         <div className={`d-flex ${style.editBox}`}>
           <button
             type="button"
+            onClick={removeHandler}
             className={`d-flex justify-content-center align-items-center  ${style.delete}`}
           >
             <TrashIcon className={style.deleteIcon} />
@@ -30,6 +56,7 @@ const ShopingCartProduct = () => {
           <div className={`d-flex mx-2 ${style.quantityBox}`}>
             <button
               type="button"
+              onClick={decrementHandler}
               className={`d-flex align-items-center justify-content-center ${style.quantityButton}`}
             >
               -
@@ -37,10 +64,11 @@ const ShopingCartProduct = () => {
             <h4
               className={`d-flex flex-column align-items-center justify-content-center ${style.quantity}`}
             >
-              4
+              {props.quantity}
             </h4>
             <button
               type="button"
+              onClick={incrementHandler}
               className={`d-flex align-items-center justify-content-center ${style.quantityButton}`}
             >
               +
@@ -48,7 +76,7 @@ const ShopingCartProduct = () => {
           </div>
         </div>
       </div>
-      <h5 className={` ${style.price}`}>$2.22</h5>
+      <h5 className={` ${style.price}`}>${props.price}</h5>
     </div>
   );
 };

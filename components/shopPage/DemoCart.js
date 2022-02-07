@@ -2,7 +2,10 @@ import style from "./DemoCart.module.css";
 import { XIcon } from "@heroicons/react/solid";
 import DemoCartProduct from "./DemoCartProduct";
 import { createPortal } from "react-dom";
+import { useSelector } from "react-redux";
 const DemoCart = (props) => {
+  const cart = useSelector((state) => state.Order.orderProducts);
+  const total = useSelector((state) => state.Order.orderTotalPrice);
   const closeCart = (e) => {
     if (e.target.id === "overlayCart") {
       props.closeShopingCart();
@@ -35,17 +38,22 @@ const DemoCart = (props) => {
             className={` px-3 d-flex justify-content-between align-items-center ${style.totalPrice}`}
           >
             <h4>Total Item</h4>
-            <h2>$141.54</h2>
+            <h2>${total}</h2>
           </div>
         </div>
 
         <div className={`py-2 px-3  ${style.cartItems}`}>
-          <DemoCartProduct />
-          <DemoCartProduct />
-          <DemoCartProduct />
-          <DemoCartProduct />
-          <DemoCartProduct />
-          <DemoCartProduct />
+          {cart.map((product, index) => (
+            <DemoCartProduct
+              key={index}
+              id={product.productId}
+              color={product.color}
+              size={product.size}
+              quantity={product.quantity}
+              imageUrl={product.imageUrl}
+              price={product.productPrice}
+            />
+          ))}
         </div>
         <button className={`${style.doneButton}`} type="submit">
           Done

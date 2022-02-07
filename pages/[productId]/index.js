@@ -36,6 +36,9 @@ const Product = (props) => {
       <ProductOption
         colors={product.color}
         sizes={product.size}
+        productId={product.id}
+        productPrice={product.product_price}
+        imageUrl={product.pic_url[0]}
         openShopingCart={openCartHandler}
       />
       <CSSTransition
@@ -59,7 +62,7 @@ export async function getStaticPaths() {
   let result;
 
   const url =
-    "mongodb+srv://Ebrahim-73:VO1I4YdpiDIb9yua@cluster0.kbxqj.mongodb.net/shop?retryWrites=true&w=majorityy";
+    "mongodb+srv://Ebrahim-73:cKTJ9xmjziQKHPAe@cluster0.kbxqj.mongodb.net/shop?retryWrites=true&w=majorityy";
   const client = await MongoClient.connect(url);
   const db = client.db();
   const collection = db.collection("products");
@@ -78,7 +81,7 @@ export async function getStaticProps(context) {
   let result;
 
   const url =
-    "mongodb+srv://Ebrahim-73:VO1I4YdpiDIb9yua@cluster0.kbxqj.mongodb.net/shop?retryWrites=true&w=majorityy";
+    "mongodb+srv://Ebrahim-73:cKTJ9xmjziQKHPAe@cluster0.kbxqj.mongodb.net/shop?retryWrites=true&w=majorityy";
   const client = await MongoClient.connect(url);
   const db = client.db();
   const collection = db.collection("products");

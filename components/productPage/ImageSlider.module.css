@@ -1,6 +1,7 @@
 .imageSlider {
   width: 50%;
   height: 100%;
+  overflow: hidden auto;
 }
 .imageSlider span {
   color: rgb(158, 158, 158);

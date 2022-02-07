@@ -8,11 +8,16 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { getOrderList } from "../../redux/actions";
+import { getSession } from "next-auth/react";
+import useLogin from "../../hooks/useLogin";
 const Login = () => {
-  const sendUser = useFetch("login");
-  const googleSignin = useFetch("google");
-  const router = useRouter();
+  const { login: loginCredentials } = useLogin();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const {
     inputValue: emailInput,
     validateInput: emailValidate,
@@ -49,24 +54,12 @@ const Login = () => {
     //     toast.error(errorMessage(err.code));
     //   });
     setLoading(true);
-    try {
-      const result = await signIn("credentials", {
-        redirect: false,
-        email: emailInput,
-        pass: passInput,
-      });
-
-      console.log("result", result);
-      if (result.ok && !result.error) {
+    loginCredentials(emailInput, passInput)
+      .then(() => setLoading(false))
+      .catch((err) => {
+        console.log("login nashod", err.message);
         setLoading(false);
-        router.replace("/");
-      } else {
-        throw new Error(result.error);
-      }
-    } catch (err) {
-      console.log("login nashod", err.message);
-      setLoading(false);
-    }
+      });
   };
   //signin with google
   const googleSigninHandler = () => {
