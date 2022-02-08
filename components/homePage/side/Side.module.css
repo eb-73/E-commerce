@@ -1,13 +1,9 @@
-.side {
+.boxWraper {
   width: 100%;
-  border-radius: 2px;
-  color: #494949;
-}
-.side .boxWraper {
   border-radius: 3px;
   background-color: #f1f1ef;
 }
-.side h4 {
+.boxWraper h4 {
   width: 100%;
   padding: 5px;
   font-size: 1rem;
@@ -15,10 +11,10 @@
   cursor: pointer;
   user-select: none;
 }
-.side h4 .dropIcon {
+.boxWraper h4 .dropIcon {
   width: 15px;
 }
-.side .list {
+.boxWraper .list {
   width: 100%;
   list-style: none;
   padding: 0;
@@ -26,7 +22,7 @@
   max-height: 0;
   transition: max-height ease-out 0.5s;
 }
-.side .list li {
+.boxWraper .list li {
   height: 0px;
   cursor: pointer;
   user-select: none;
@@ -35,15 +31,15 @@
   visibility: hidden;
   transition: all ease 0.5s;
 }
-.side .list label {
+.boxWraper .list label {
   width: 100%;
   cursor: pointer;
 }
-.side .showList {
+.boxWraper .showList {
   max-height: 500px;
   transition: max-height ease-in 0.3s;
 }
-.side .showList li {
+.boxWraper .showList li {
   visibility: visible;
   opacity: 1;
 }

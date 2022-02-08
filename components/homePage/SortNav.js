@@ -58,7 +58,7 @@ const SortNav = (props) => {
           exitActive: style.hideModalActive,
         }}
       >
-        <Filter closeFilter={closeModal} page={props.page} />
+        <Filter closeFilter={closeModal}>{props.children}</Filter>
       </CSSTransition>
     </div>
   );

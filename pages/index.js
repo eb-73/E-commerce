@@ -16,7 +16,9 @@ function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Search />
-      <SortNav page="home" />
+      <SortNav>
+        <Side name="category" items={["T-Shirts", "Suits", "Coats"]} />
+      </SortNav>
       <div className="content mt-2 d-flex align-items-center align-items-sm-start  justify-content-sm-between">
         <SideWrapper>
           <Side name="category" items={["T-Shirts", "Suits", "Coats"]} />

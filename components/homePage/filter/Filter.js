@@ -1,17 +1,36 @@
-import FilterClothing from "./FilterClothing";
-import FilterHome from "./FilterHome";
-import FilterShoes from "./FilterShoes";
+import style from "./Filter.module.css";
+import { XIcon, ChevronDownIcon } from "@heroicons/react/solid";
+import { createPortal } from "react-dom";
 const Filter = (props) => {
-  switch (props.page) {
-    case "clothing":
-      return <FilterClothing closeFilter={props.closeFilter} />;
-    case "shoes":
-      return <FilterShoes closeFilter={props.closeFilter} />;
-    case "home":
-      return <FilterHome closeFilter={props.closeFilter} />;
-    default:
-      return <SideHome closeFilter={props.closeFilter} />;
-  }
+  const closeFilterHandler = (e) => {
+    if (e.target.id === "overlayFilter") {
+      props.closeFilter();
+    }
+  };
+
+  return createPortal(
+    <div
+      className={`d-block d-sm-none ${style.overlayFilter}`}
+      id="overlayFilter"
+      onClick={closeFilterHandler}
+    >
+      <form className={` ${style.filter} `}>
+        <div
+          className={`py-2 px-3 d-flex justify-content-between ${style.title}`}
+        >
+          <h2>Filters</h2>
+          <XIcon className={style.closeIcon} onClick={props.closeFilter} />
+        </div>
+
+        {props.children}
+
+        <button className={`fixed  ${style.searchFilterButton}`} type="submit">
+          Done
+        </button>
+      </form>
+    </div>,
+    document.getElementById("myportal")
+  );
 };
 
 export default Filter;
