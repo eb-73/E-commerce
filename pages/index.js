@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Search from "../components/homePage/Search";
+import SideWrapper from "../components/homePage/side/SideWrapper";
 import Side from "../components/homePage/side/Side";
 import SortNav from "../components/homePage/SortNav";
 import CardsWraper from "../components/homePage/CardsWraper";
@@ -17,7 +18,10 @@ function Home(props) {
       <Search />
       <SortNav page="home" />
       <div className="content mt-2 d-flex align-items-center align-items-sm-start  justify-content-sm-between">
-        <Side page="home" />
+        <SideWrapper>
+          <Side name="category" items={["T-Shirts", "Suits", "Coats"]} />
+        </SideWrapper>
+
         <CardsWraper products={products} />
       </div>
     </ContextProvider>

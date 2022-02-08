@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Search from "../../../components/homePage/Search";
 import SortNav from "../../../components/homePage/SortNav";
+import SideWrapper from "../../../components/homePage/side/SideWrapper";
 import Side from "../../../components/homePage/side/Side";
 import CardsWraper from "../../../components/homePage/CardsWraper";
 import { ContextProvider } from "../../../context/ctxStore";
-
 import { MongoClient } from "mongodb";
 import { useState } from "react";
 const ShoesPage = (props) => {
@@ -19,7 +19,10 @@ const ShoesPage = (props) => {
       <Search />
       <SortNav page="shoes" />
       <div className="content mt-2 d-flex align-items-center align-items-sm-start  justify-content-sm-between">
-        <Side page="shoes" />
+        <SideWrapper>
+          <Side name="category" items={["T-Shirts", "Suits", "Coats"]} />
+          <Side name="Size" items={["XS", "S", "M", "L", "XL", "XL"]} />
+        </SideWrapper>
         <CardsWraper products={shoes} />
       </div>
     </ContextProvider>
