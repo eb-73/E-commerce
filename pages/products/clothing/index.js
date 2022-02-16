@@ -17,7 +17,7 @@ const ClothePage = (props) => {
         <meta name="description" content="clothes" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <SortNav>
+      <SortNav quantity={clothes.length}>
         <Side name="category" items={["T-Shirts", "Suits", "Coats"]} />
         <Side name="Size" items={["XS", "S", "M", "L", "XL", "XL"]} />
       </SortNav>

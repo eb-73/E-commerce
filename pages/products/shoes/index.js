@@ -6,9 +6,9 @@ import Side from "../../../components/homePage/side/Side";
 import CardsWraper from "../../../components/homePage/CardsWraper";
 import { ContextProvider } from "../../../context/ctxStore";
 import { MongoClient } from "mongodb";
-import { useState } from "react";
 const ShoesPage = (props) => {
   const { shoesArray: shoes } = props;
+
   return (
     <ContextProvider>
       <Head>
@@ -17,7 +17,7 @@ const ShoesPage = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Search />
-      <SortNav>
+      <SortNav quantity={shoes.length}>
         <Side name="category" items={["T-Shirts", "Suits", "Coats"]} />
         <Side name="Size" items={["XS", "S", "M", "L", "XL", "XL"]} />
       </SortNav>

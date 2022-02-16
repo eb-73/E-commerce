@@ -23,7 +23,7 @@ const SortNav = (props) => {
     <div
       className={`mt-5 text-gray d-flex justify-content-between ${style.sort}`}
     >
-      <h6 className={` ${style.itemNumber}`}>3 Items Found</h6>
+      <h6 className={` ${style.itemNumber}`}>{props.quantity} Items Found</h6>
       <div className="d-flex justify-content-between align-items-center">
         <div
           className={`p-2 mx-2 d-flex justify-content-around align-items-center  ${style.viewIcons}`}

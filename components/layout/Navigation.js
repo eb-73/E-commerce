@@ -154,16 +154,20 @@ const Navigation = () => {
                   style.navDropDown2
                 } ${showDrop && style.showNavDropDown2}`}
               >
-                <li
-                  className={` d-flex  justify-content-start align-items-center`}
-                >
-                  Shoes
-                </li>
-                <li
-                  className={` d-flex  justify-content-start align-items-center`}
-                >
-                  Clothing
-                </li>
+                <Link href="/products/shoes">
+                  <li
+                    className={` d-flex  justify-content-start align-items-center`}
+                  >
+                    Shoes
+                  </li>
+                </Link>
+                <Link href="/products/clothing">
+                  <li
+                    className={` d-flex  justify-content-start align-items-center`}
+                  >
+                    Clothing
+                  </li>
+                </Link>
               </ul>
             </li>
             <li className={style.navItem}>

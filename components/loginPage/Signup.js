@@ -1,6 +1,6 @@
 import style from "./Signup.module.css";
 import Link from "next/link";
-import Loading from "./Loading";
+import Loading from "../ui/Loading";
 import useForm from "../../hooks/useForm";
 import useFetch, { errorMessage } from "../../hooks/useFetch";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";

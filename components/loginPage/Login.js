@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Loading from "./Loading";
+import Loading from "../ui/Loading";
 import style from "./Login.module.css";
 import useForm from "../../hooks/useForm";
 import useFetch, { errorMessage } from "../../hooks/useFetch";
@@ -9,8 +9,6 @@ import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { useDispatch } from "react-redux";
-import { getOrderList } from "../../redux/actions";
-import { getSession } from "next-auth/react";
 import useLogin from "../../hooks/useLogin";
 const Login = () => {
   const { login: loginCredentials } = useLogin();
