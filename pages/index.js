@@ -7,7 +7,7 @@ import CardsWraper from "../components/homePage/CardsWraper";
 import { ContextProvider } from "../context/ctxStore";
 import { MongoClient } from "mongodb";
 function Home(props) {
-  const { productsArray: products } = props;
+  const { productsArray: products, filters } = props;
 
   return (
     <ContextProvider>
@@ -18,29 +18,15 @@ function Home(props) {
       </Head>
       <Search />
       <SortNav quantity={products.length}>
-        <Side
-          name="category"
-          items={products.map((product) => product.sub_category)}
-        />
-        {/* <Side name="size" items={products.map((product) => product.size)} />
-        <Side name="color" items={products.map((product) => product.color)} /> */}
+        <Side name="category" items={filters.category} />
+        <Side name="size" items={filters.size} />
+        <Side name="color" items={filters.color} />
       </SortNav>
       <div className="content mt-2 d-flex align-items-center align-items-sm-start  justify-content-sm-between">
         <SideWrapper>
-          <Side
-            name="category"
-            items={products
-              .map((product) => product.sub_category)
-              .filter((item, index, self) => self.indexOf(item) == index)}
-          />
-          {/* <Side
-            name="size"
-            items={products.map((product) => product.size[0].name)}
-          /> */}
-          {/* <Side
-              name="color"
-              items={products.map((product) => product.color)}
-            /> */}
+          <Side name="category" items={filters.category} />
+          <Side name="size" items={filters.size} />
+          <Side name="color" items={filters.color} />
         </SideWrapper>
 
         <CardsWraper products={products} />
@@ -58,7 +44,20 @@ export async function getStaticProps() {
   const collection = db.collection("products");
   result = await collection.find().toArray();
   client.close();
+  //filter data
+  let colors = [];
+  result.forEach((items) => {
+    items.color.forEach((item) => {
+      colors.push(item);
+    });
+  });
 
+  let sizes = [];
+  result.forEach((items) => {
+    items.size.forEach((item) => {
+      sizes.push(item.name);
+    });
+  });
   return {
     props: {
       productsArray: result.map((item) => {
@@ -75,6 +74,15 @@ export async function getStaticProps() {
           size: item.size,
         };
       }),
+      filters: {
+        category: result
+          .map((item) => item.sub_category)
+          .filter((item, index, self) => self.indexOf(item) == index),
+        color: colors.filter(
+          (item, index, self) => self.indexOf(item) == index
+        ),
+        size: sizes.filter((item, index, self) => self.indexOf(item) == index),
+      },
     },
     revalidate: 86400,
   };

@@ -1,4 +1,5 @@
 import { orderAction } from "./orderSlice";
+import { searchProductsAction } from "./searchProducts";
 export const getOrderListFromDatabase = (authenticatedEmail) => {
   return async (dispatch) => {
     console.log("get order");
@@ -79,5 +80,29 @@ export const sendOrderListToDatabase = (cart) => {
 export const sendOrderListToLocal = (cart) => {
   return async (dispatch) => {
     localStorage.setItem("cart", JSON.stringify(cart));
+  };
+};
+export const getSearchProducts = (q, filter, category, size, color) => {
+  return async (dispatch) => {
+    dispatch(searchProductsAction.setLoading(true));
+    console.log("category", category);
+    const res = await fetch(
+      `/api/searching?q=${q}&filter=${filter}&category=${category}&size=${size}&color=${color}`
+    );
+    const data = await res.json();
+    const searchProducts = data.productsFilter.map((item) => ({
+      id: item._id.toString(),
+      product_title: item.product_title,
+      prosuct_sub_title: item.prosuct_sub_title,
+      product_description: item.product_description,
+      pic_url: item.pic_url,
+      product_price: item.product_price,
+      category: item.category,
+      sub_category: item.sub_category,
+      size: item.size,
+      color: item.color,
+    }));
+    dispatch(searchProductsAction.setProducts(searchProducts));
+    dispatch(searchProductsAction.setLoading(false));
   };
 };

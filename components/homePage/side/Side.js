@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./Side.module.css";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import CSSTransition from "react-transition-group/CSSTransition";
 const Side = (props) => {
   const router = useRouter();
   const [showBox, setShowBox] = useState(false);
@@ -10,16 +11,15 @@ const Side = (props) => {
     value: false,
   }));
   const [check, setCheck] = useState(initialValue);
-
+  //set checkbox with query data
   useEffect(() => {
-    if (
-      router.query[props.name] &&
-      Object.keys(router.query[props.name]).length > 0
-    ) {
+    if (router.query[props.name] || Array.isArray(router.query[props.name])) {
       const query = router.query[props.name];
       setCheck((prevState) =>
         prevState.map((item) => {
-          if (query.includes(item.name)) {
+          if (Array.isArray(query) && query.includes(item.name)) {
+            return { name: item.name, value: true };
+          } else if (!Array.isArray(query) && query === item.name) {
             return { name: item.name, value: true };
           } else {
             return { name: item.name, value: false };
@@ -28,7 +28,7 @@ const Side = (props) => {
       );
     }
   }, [router.query[props.name]]);
-
+  // update query string with checkbox form
   const filterHandler = (e) => {
     console.log("change");
     let queryString = check
@@ -41,7 +41,7 @@ const Side = (props) => {
           if (item.name === value) {
             return { name: item.name, value: true };
           } else {
-            return item;
+            return { name: item.name, value: item.value };
           }
         });
       });
@@ -52,7 +52,7 @@ const Side = (props) => {
           if (item.name === value) {
             return { name: item.name, value: false };
           } else {
-            return item;
+            return { name: item.name, value: item.value };
           }
         });
       });
@@ -88,22 +88,46 @@ const Side = (props) => {
         <ChevronDownIcon className={style.dropIcon} />
       </h4>
 
-      <ul className={` ${style.list} ${showBox && style.showList}`}>
-        {props.items.map((item, index) => (
-          <li key={index} className=" my-2 form-check">
-            <label className="px-2 form-check-label">
-              <input
-                onChange={filterHandler}
-                className=" form-check-input"
-                value={item}
-                checked={check[index].value}
-                type="checkbox"
-              ></input>
-              {item}
-            </label>
-          </li>
-        ))}
-      </ul>
+      <CSSTransition
+        in={showBox}
+        timeout={{
+          enter: 400,
+          exit: 500,
+        }}
+        unmountOnExit
+        mountOnEnter
+        classNames={{
+          enter: style.enter,
+          enterActive: style.enterActive,
+          exit: style.exit,
+          exitActive: style.exitActive,
+        }}
+      >
+        <ul className={` ${style.list} ${showBox && style.showList}`}>
+          {check.map((item, index) => (
+            <li key={index} className=" my-2 form-check ">
+              <label className="px-2 form-check-label">
+                <input
+                  onChange={filterHandler}
+                  className=" form-check-input"
+                  value={item.name}
+                  checked={item.value}
+                  type="checkbox"
+                ></input>
+                {item.name}
+              </label>
+              {props.name === "color" && (
+                <div
+                  style={{
+                    backgroundColor: item,
+                  }}
+                  className={style.colorShowBox}
+                ></div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </CSSTransition>
     </div>
   );
 };

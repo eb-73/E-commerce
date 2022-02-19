@@ -1,9 +1,17 @@
 .cardsWraper {
   width: 80%;
-  min-height: 400px;
+  /* min-height: 200px; */
   /* position: relative; */
 }
-
+.cardsWraper .noItem {
+  color: rgb(27, 27, 27);
+  font-size: 1rem;
+}
+.cardsWraper .noItem .noItemIcon {
+  width: 45px;
+  margin-bottom: 10px;
+  color: rgb(27, 27, 27);
+}
 @media screen and (max-width: 576px) {
   .cardsWraper {
     width: 100%;

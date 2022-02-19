@@ -8,9 +8,11 @@ import { ContextProvider } from "../../context/ctxStore";
 import { MongoClient } from "mongodb";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Loading from "../../components/ui/Loading";
-function SearchPage(props) {
-  const [products, setProducts] = useState(props.productsArray);
+import { useDispatch, useSelector } from "react-redux";
+import { getSearchProducts } from "../../redux/actions";
+function SearchPage({ filters }) {
+  const products = useSelector((state) => state.SearchProducts.products);
+  const dispatch = useDispatch();
   const router = useRouter();
   // const { q, category, size, color, price } = router.query;
   // console.log(router);
@@ -38,10 +40,15 @@ function SearchPage(props) {
 
   //fetch all query
   useEffect(() => {
-    console.log("query", router.query);
-    fetch(`/api/searching?q=${router.query.q}&filter=${router.query.filter}`)
-      .then((res) => res.json())
-      .then((data) => console.log("data", data));
+    dispatch(
+      getSearchProducts(
+        router.query.q,
+        router.query.filter,
+        router.query.category,
+        router.query.size,
+        router.query.color
+      )
+    );
   }, [router.query]);
   //
   return (
@@ -53,36 +60,23 @@ function SearchPage(props) {
       </Head>
       <Search />
       <SortNav quantity={products.length}>
-        <Side
-          name="category"
-          items={products.map((product) => product.sub_category)}
-        />
-        {/* <Side name="size" items={products.map((product) => product.size)} />
-        <Side name="color" items={products.map((product) => product.color)} /> */}
+        <Side name="category" items={filters.category} />
+        <Side name="size" items={filters.size} />
+        <Side name="color" items={filters.color} />
       </SortNav>
       <div className="content mt-2 d-flex align-items-center align-items-sm-start  justify-content-sm-between">
         <SideWrapper>
-          <Side
-            name="category"
-            items={products
-              .map((product) => product.sub_category)
-              .filter((item, index, self) => self.indexOf(item) == index)}
-          />
-          {/* <Side
-            name="size"
-            items={products.map((product) => product.size[0].name)}
-          /> */}
-          {/* <Side
-              name="color"
-              items={products.map((product) => product.color)}
-            /> */}
+          <Side name="category" items={filters.category} />
+          <Side name="size" items={filters.size} />
+          <Side name="color" items={filters.color} />
         </SideWrapper>
 
-        <CardsWraper products={products} />
+        <CardsWraper products={products} query={router.query.q} />
       </div>
     </ContextProvider>
   );
 }
+
 export async function getStaticProps() {
   let result;
 
@@ -93,23 +87,31 @@ export async function getStaticProps() {
   const collection = db.collection("products");
   result = await collection.find().toArray();
   client.close();
+  let colors = [];
+  result.forEach((items) => {
+    items.color.forEach((item) => {
+      colors.push(item);
+    });
+  });
+
+  let sizes = [];
+  result.forEach((items) => {
+    items.size.forEach((item) => {
+      sizes.push(item.name);
+    });
+  });
 
   return {
     props: {
-      productsArray: result.map((item) => {
-        return {
-          id: item._id.toString(),
-          product_price: item.product_price,
-          product_description: item.product_description,
-          category: item.category,
-          pic_url: item.pic_url,
-          product_title: item.product_title,
-          prosuct_sub_title: item.prosuct_sub_title,
-          sub_category: item.sub_category,
-          color: item.color,
-          size: item.size,
-        };
-      }),
+      filters: {
+        category: result
+          .map((item) => item.sub_category)
+          .filter((item, index, self) => self.indexOf(item) == index),
+        color: colors.filter(
+          (item, index, self) => self.indexOf(item) == index
+        ),
+        size: sizes.filter((item, index, self) => self.indexOf(item) == index),
+      },
     },
     revalidate: 86400,
   };

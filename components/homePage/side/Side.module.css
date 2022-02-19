@@ -19,27 +19,47 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 0;
-  transition: max-height ease-out 0.5s;
 }
+
 .boxWraper .list li {
-  height: 0px;
+  position: relative;
+  height: 25px;
   cursor: pointer;
   user-select: none;
-  height: 25px;
   opacity: 0;
   visibility: hidden;
-  transition: all ease 0.5s;
+  transition: all ease 0.3s;
+}
+.boxWraper .list li .colorShowBox {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .boxWraper .list label {
   width: 100%;
   cursor: pointer;
 }
-.boxWraper .showList {
-  max-height: 500px;
-  transition: max-height ease-in 0.3s;
-}
+
 .boxWraper .showList li {
   visibility: visible;
   opacity: 1;
+}
+.enter {
+  max-height: 0;
+  transition: max-height ease-out 0.4s;
+}
+.enterActive {
+  max-height: 1000px;
+  transition: max-height ease-in 0.4s;
+}
+.exit {
+  max-height: 1000px;
+  transition: max-height ease-in 0.5s;
+}
+.exitActive {
+  max-height: 0;
+  transition: max-height ease-out 0.5s;
 }
