@@ -6,25 +6,29 @@ async function searching(req, res) {
     const catArray = category.split(",");
     const sizeArray = size.split(",");
     const colorArray = color.split(",");
-    console.log("req Query", catArray.length);
+    console.log("req Query", colorArray);
     const client = await connectToDatabase();
     const db = client.db();
     const data = await db
       .collection("products")
       .find({
-        $and: [
+        $or: [
           {
-            product_title:
-              q === "undefined"
-                ? { $exists: false }
-                : { $regex: q, $options: "i" },
-          },
+            $and: [
+              {
+                product_title:
+                  q === "undefined"
+                    ? { $exists: false }
+                    : { $regex: q, $options: "i" },
+              },
 
-          {
-            category:
-              filter === "All" || filter === "undefined"
-                ? { $exists: false }
-                : { $regex: filter, $options: "i" },
+              {
+                category:
+                  filter === "All" || filter === "undefined"
+                    ? { $exists: true }
+                    : { $regex: filter, $options: "i" },
+              },
+            ],
           },
 
           {
@@ -39,7 +43,12 @@ async function searching(req, res) {
                 ? { $exists: false }
                 : { $in: [...sizeArray] },
           },
-
+          {
+            color:
+              colorArray[0] === "undefined"
+                ? { $exists: false }
+                : { $in: [...colorArray] },
+          },
           // { product_price: { $regex: price ? price : "", $options: "i" } },
         ],
       })

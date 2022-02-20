@@ -119,7 +119,7 @@ const Side = (props) => {
               {props.name === "color" && (
                 <div
                   style={{
-                    backgroundColor: item,
+                    backgroundColor: item.name,
                   }}
                   className={style.colorShowBox}
                 ></div>

@@ -1,11 +1,11 @@
 import Head from "next/head";
-import Search from "../components/homePage/Search";
+import Search from "../components/homePage/search/Search";
 import SideWrapper from "../components/homePage/side/SideWrapper";
 import Side from "../components/homePage/side/Side";
 import SortNav from "../components/homePage/SortNav";
 import CardsWraper from "../components/homePage/CardsWraper";
 import { ContextProvider } from "../context/ctxStore";
-import { MongoClient } from "mongodb";
+import { connectToDatabase } from "../lib/db";
 function Home(props) {
   const { productsArray: products, filters } = props;
 
@@ -36,10 +36,7 @@ function Home(props) {
 }
 export async function getStaticProps() {
   let result;
-
-  const url =
-    "mongodb+srv://Ebrahim-73:cKTJ9xmjziQKHPAe@cluster0.kbxqj.mongodb.net/shop?retryWrites=true&w=majorityy";
-  const client = await MongoClient.connect(url);
+  const client = await connectToDatabase();
   const db = client.db();
   const collection = db.collection("products");
   result = await collection.find().toArray();

@@ -2,7 +2,6 @@ import style from "./Search.module.css";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import filterSearch from "../../lib/filterSearch";
 const Search = () => {
   const router = useRouter();
   const searchValue = useRef();

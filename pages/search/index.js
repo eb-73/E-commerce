@@ -1,15 +1,15 @@
 import Head from "next/head";
-import Search from "../../components/homePage/Search";
+import Search from "../../components/homePage/search/Search";
 import SideWrapper from "../../components/homePage/side/SideWrapper";
 import Side from "../../components/homePage/side/Side";
 import SortNav from "../../components/homePage/SortNav";
 import CardsWraper from "../../components/homePage/CardsWraper";
 import { ContextProvider } from "../../context/ctxStore";
-import { MongoClient } from "mongodb";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchProducts } from "../../redux/actions";
+import { connectToDatabase } from "../../lib/db";
 function SearchPage({ filters }) {
   const products = useSelector((state) => state.SearchProducts.products);
   const dispatch = useDispatch();
@@ -79,10 +79,7 @@ function SearchPage({ filters }) {
 
 export async function getStaticProps() {
   let result;
-
-  const url =
-    "mongodb+srv://Ebrahim-73:cKTJ9xmjziQKHPAe@cluster0.kbxqj.mongodb.net/shop?retryWrites=true&w=majorityy";
-  const client = await MongoClient.connect(url);
+  const client = await connectToDatabase();
   const db = client.db();
   const collection = db.collection("products");
   result = await collection.find().toArray();
