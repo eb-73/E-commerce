@@ -14,30 +14,6 @@ function SearchPage({ filters }) {
   const products = useSelector((state) => state.SearchProducts.products);
   const dispatch = useDispatch();
   const router = useRouter();
-  // const { q, category, size, color, price } = router.query;
-  // console.log(router);
-  // useEffect(() => {
-  //   async function getSearch() {
-  //     const res = await fetch(
-  //       `/api/searching?${q ? `q=${q}&` : ""}${
-  //         category && Array.isArray(category)
-  //           ? `category=${category.join("&category=")}`
-  //           : ""
-  //       }${category && !Array.isArray(category) ? `category=${category}` : ""}${
-  //         size && Array.isArray(size) ? `size=${size.join("&size=")}` : ""
-  //       }${size && !Array.isArray(size) ? `size=${size}` : ""}${
-  //         color && Array.isArray(color) ? `color=${color.join("&color=")}` : ""
-  //       }${color && !Array.isArray(color) ? `color=${color}` : ""}`
-  //     );
-
-  //     const data = await res.json();
-  //     return data;
-  //   }
-  //   // if (Object.keys(router.query).length > 0) {
-  //   //   getSearch().then((data) => setProducts(data.productsFilter));
-  //   // }
-  // }, [router.query]);
-
   //fetch all query
   useEffect(() => {
     dispatch(
@@ -84,6 +60,7 @@ export async function getStaticProps() {
   const collection = db.collection("products");
   result = await collection.find().toArray();
   client.close();
+  const category = result.map((item) => item.sub_category);
   let colors = [];
   result.forEach((items) => {
     items.color.forEach((item) => {
@@ -101,9 +78,9 @@ export async function getStaticProps() {
   return {
     props: {
       filters: {
-        category: result
-          .map((item) => item.sub_category)
-          .filter((item, index, self) => self.indexOf(item) == index),
+        category: category.filter(
+          (item, index, self) => self.indexOf(item) == index
+        ),
         color: colors.filter(
           (item, index, self) => self.indexOf(item) == index
         ),

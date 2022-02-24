@@ -66,7 +66,8 @@ const order = createSlice({
         state.costumerId = action.payload.costumerId;
         state.orderDate = action.payload.date;
         state.orderStatus = action.payload.status;
-        state.orderTotalPrice = action.payload.item.productPrice;
+        state.orderTotalPrice =
+          +state.orderTotalPrice + +action.payload.item.productPrice;
         state.orderProducts.push(action.payload.item);
       } else if (state.orderProducts.length > 0) {
         let flag = false;
@@ -77,9 +78,9 @@ const order = createSlice({
             item.color === action.payload.item.color &&
             item.size === action.payload.item.size
           ) {
-            state.orderProducts[index].quantity =
-              +state.orderProducts[index].quantity + 1;
-            state.orderTotalPrice = +state.orderTotalPrice + +item.productPrice;
+            // state.orderProducts[index].quantity =
+            //   +state.orderProducts[index].quantity + 1;
+            // state.orderTotalPrice = +state.orderTotalPrice + +item.productPrice;
             flag = true;
           }
         });
@@ -101,8 +102,8 @@ const order = createSlice({
           item.size === action.payload.size
       );
       if (item) {
-        item.quantity++;
-        state.orderTotalPrice += +item.productPrice;
+        item.quantity = item.quantity + action.payload.step;
+        state.orderTotalPrice += action.payload.step * +item.productPrice;
       }
     },
     decrement(state, action) {
@@ -114,8 +115,8 @@ const order = createSlice({
           item.size === action.payload.size
       );
       if (item && item.quantity > 1) {
-        item.quantity--;
-        state.orderTotalPrice -= +item.productPrice;
+        item.quantity = item.quantity - action.payload.step;
+        state.orderTotalPrice -= action.payload.step * +item.productPrice;
       }
     },
     remove(state, action) {
@@ -128,14 +129,14 @@ const order = createSlice({
       );
       if (item) {
         state.orderProducts = state.orderProducts.filter((item) => {
-          //check for product with same id but in color and size is diffrent or product with diffrent id
+          //check for product with same id but color and size is diffrent or product with diffrent id
           if (
-            item.productId !== action.payload.id ||
-            (item.productId === action.payload.id &&
-              item.color !== action.payload.color &&
+            item.productId === action.payload.id &&
+            (item.color !== action.payload.color ||
               item.size !== action.payload.size)
-          )
+          ) {
             return true;
+          } else if (item.productId !== action.payload.id) return true;
         });
         state.orderTotalPrice -= +item.productPrice * +item.quantity;
       }

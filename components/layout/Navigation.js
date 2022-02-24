@@ -183,7 +183,7 @@ const Navigation = () => {
           </ul>
         </div>
 
-        <div className={`navbar-brand d-sm-block d-none  ${style.logo}`}>
+        <div className={`navbar-brand d-sm-block mx-0 d-none  ${style.logo}`}>
           <Link href="/">
             <a>
               <h5>shop</h5>

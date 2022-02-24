@@ -15,7 +15,7 @@ const CardsWraper = (props) => {
       className={`d-flex flex-wrap flex-sm-row align-items-sm-start  justify-content-center justify-content-sm-start ${style.cardsWraper}`}
     >
       {products.length > 0 ? (
-        props.products.map((item) => (
+        props.products.map((item, index) => (
           <Card
             key={item.id}
             id={item.id}

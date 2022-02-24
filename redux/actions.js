@@ -85,7 +85,6 @@ export const sendOrderListToLocal = (cart) => {
 export const getSearchProducts = (q, filter, category, size, color) => {
   return async (dispatch) => {
     dispatch(searchProductsAction.setLoading(true));
-    console.log("category", category);
     const res = await fetch(
       `/api/searching?q=${q}&filter=${filter}&category=${category}&size=${size}&color=${color}`
     );

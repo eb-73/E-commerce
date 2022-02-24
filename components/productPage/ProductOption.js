@@ -52,6 +52,7 @@ const ProductOption = (props) => {
         })
       );
     }
+
     props.openShopingCart();
   };
   return (

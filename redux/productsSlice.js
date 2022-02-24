@@ -1,13 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const products = createSlice({
-  name: "Products",
+const productsInfo = createSlice({
+  name: "ProductsInfo",
   initialState: [],
   reducers: {
-    setProducts(state, action) {
-      action.payload.forEach((item) => {
-        state.push(item);
-      });
+    setProductsInfo(state, action) {
+      const index = state.findIndex(
+        (item) => item.productId === action.payload.productId
+      );
+      if (index >= 0) {
+        state[index] = action.payload;
+      } else state.push(action.payload);
     },
   },
 });
+export const productsInfoAction = productsInfo.actions;
+export default productsInfo;

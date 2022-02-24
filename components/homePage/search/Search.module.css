@@ -67,6 +67,8 @@
   background-color: #080b1300;
   border: none;
   color: black;
+  font-weight: 500;
+  font-size: 1.1rem;
   border-radius: 0px 15px 15px 0px;
 }
 .inputGroup .searchSelect2 .dropdown input {

@@ -2,21 +2,72 @@ import style from "./DemoCartProduct.module.css";
 import { TrashIcon } from "@heroicons/react/outline";
 import { useDispatch } from "react-redux";
 import { orderAction } from "../../redux/orderSlice";
+import { useState, useEffect } from "react";
+import useSWR from "swr";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 const DemoCartProduct = (props) => {
   const dispatch = useDispatch();
+  const [productInfo, setProductInfo] = useState({});
+  const { data, error } = useSWR(
+    `/api/product/productInfo?id=${props.id}`,
+    fetcher
+  );
+  let title;
+  let maxQuantity;
+  if (data) {
+    const index = data.productInfo.size.findIndex((i) => i.name === props.size);
+    title = data.productInfo.product_title;
+    maxQuantity = data.productInfo.size[index].quantity;
+  }
+  // if quantity change in server
+  if (data && props.quantity > data?.productInfo.size[index].quantity) {
+    dispatch(
+      orderAction.decrement({
+        id: props.id,
+        size: props.size,
+        color: props.color,
+        step: props.quantity - data.productInfo.size[index].quantity,
+      })
+    );
+  } else if (data & (data?.productInfo.size[index].quantity == 0)) {
+    dispatch(
+      orderAction.remove({
+        id: props.id,
+        size: props.size,
+        color: props.color,
+      })
+    );
+  }
+  // useEffect(() => {
+  //   fetch(`/api/product/productInfo?id=${props.id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const index = data.productInfo.size.findIndex(
+  //         (i) => i.name === props.size
+  //       );
+  //       setProductInfo({
+  //         title: data.productInfo.product_title,
+  //         maxQuantity: data.productInfo.size[index].quantity,
+  //       });
+  //     });
+  // }, [props.id]);
   const removeHandler = () => {
     dispatch(
       orderAction.remove({ id: props.id, size: props.size, color: props.color })
     );
   };
   const incrementHandler = () => {
-    dispatch(
-      orderAction.increment({
-        id: props.id,
-        size: props.size,
-        color: props.color,
-      })
-    );
+    if (props.quantity < maxQuantity) {
+      dispatch(
+        orderAction.increment({
+          id: props.id,
+          size: props.size,
+          color: props.color,
+          step: 1,
+        })
+      );
+    }
   };
   const decrementHandler = () => {
     dispatch(
@@ -24,6 +75,7 @@ const DemoCartProduct = (props) => {
         id: props.id,
         size: props.size,
         color: props.color,
+        step: 1,
       })
     );
   };
@@ -40,7 +92,7 @@ const DemoCartProduct = (props) => {
         className={`d-flex flex-column justify-content-around align-items-start mx-3 ${style.product}`}
       >
         <div className={`${style.name}`}>
-          <h4>jocket</h4>
+          <h4>{title || "..."}</h4>
           <h5>${props.price}</h5>
         </div>
         <div className={`d-flex ${style.quantityBox}`}>

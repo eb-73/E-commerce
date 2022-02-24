@@ -3,9 +3,9 @@ import { connectToDatabase } from "../../../lib/db";
 async function searching(req, res) {
   if (req.method === "GET") {
     let { q, filter, category, size, color, price } = req.query;
-    const catArray = category.split(",");
-    const sizeArray = size.split(",");
-    const colorArray = color.split(",");
+    const catArray = category?.split(",");
+    const sizeArray = size?.split(",");
+    const colorArray = color?.split(",");
     console.log("req Query", colorArray);
     const client = await connectToDatabase();
     const db = client.db();
@@ -33,19 +33,19 @@ async function searching(req, res) {
 
           {
             sub_category:
-              catArray[0] === "undefined"
+              !catArray || catArray[0] === "undefined"
                 ? { $exists: false }
                 : { $in: [...catArray] },
           },
           {
             "size.name":
-              sizeArray[0] === "undefined"
+              !sizeArray || sizeArray[0] === "undefined"
                 ? { $exists: false }
                 : { $in: [...sizeArray] },
           },
           {
             color:
-              colorArray[0] === "undefined"
+              !colorArray || colorArray[0] === "undefined"
                 ? { $exists: false }
                 : { $in: [...colorArray] },
           },

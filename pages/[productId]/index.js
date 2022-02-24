@@ -37,6 +37,8 @@ const Product = (props) => {
         colors={product.color}
         sizes={product.size}
         productId={product.id}
+        productTitle={product.product_title}
+        subCategory={product.sub_category}
         productPrice={product.product_price}
         imageUrl={product.pic_url[0]}
         openShopingCart={openCartHandler}
