@@ -8,7 +8,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const DemoCartProduct = (props) => {
   const dispatch = useDispatch();
-  const [productInfo, setProductInfo] = useState({});
+
   const { data, error } = useSWR(
     `/api/product/productInfo?id=${props.id}`,
     fetcher

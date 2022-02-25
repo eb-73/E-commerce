@@ -2,7 +2,6 @@ import Link from "next/link";
 import Loading from "../ui/Loading";
 import style from "./Login.module.css";
 import useForm from "../../hooks/useForm";
-import useFetch, { errorMessage } from "../../hooks/useFetch";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -39,18 +38,7 @@ const Login = () => {
     if (!validateForm) {
       return;
     }
-    // setLoading(true);
-    // clearEmail();
-    // clearPass();
-    // sendUser("", emailInput, passInput)
-    //   .then(() => {
-    //     setLoading(false);
-    //     router.replace("/");
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     toast.error(errorMessage(err.code));
-    //   });
+
     setLoading(true);
     loginCredentials(emailInput, passInput)
       .then(() => setLoading(false))

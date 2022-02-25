@@ -2,7 +2,6 @@ import style from "./Signup.module.css";
 import Link from "next/link";
 import Loading from "../ui/Loading";
 import useForm from "../../hooks/useForm";
-import useFetch, { errorMessage } from "../../hooks/useFetch";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -10,8 +9,6 @@ import toast from "react-hot-toast";
 import createUser from "../../lib/createUser";
 import { signIn } from "next-auth/react";
 const Signup = () => {
-  const sendUser = useFetch("signup");
-  const googleSignin = useFetch("google");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const {
@@ -48,16 +45,7 @@ const Signup = () => {
     clearName();
     clearEmail();
     clearPass();
-    // sendUser(nameInput, emailInput, passInput)
-    //   .then(() => {
-    //     setLoading(false);
-    //     router.replace("/");
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     toast.error(errorMessage(err.code));
-    //     console.log(err.code);
-    //   });
+
     try {
       const res = await createUser({
         name: nameInput,
@@ -84,13 +72,6 @@ const Signup = () => {
     }
   };
   const googleSigninHandler = () => {
-    // googleSignin()
-    //   .then(() => {
-    //     router.replace("/");
-    //   })
-    //   .catch((err) => {
-    //     toast.error(err.code);
-    //   });
     signIn("google");
   };
   return (

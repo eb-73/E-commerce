@@ -48,7 +48,7 @@ const Navigation = () => {
 
   useEffect(() => {
     // get order list of user
-
+    console.log("auth change");
     if (auth.isAuth) {
       dispatch(getOrderListFromDatabase(auth.authenticatedEmail));
     } else if (!auth.isAuth) {
