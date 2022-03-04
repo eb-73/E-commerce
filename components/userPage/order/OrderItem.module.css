@@ -1,0 +1,57 @@
+.order {
+  width: 100%;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.order .orderTitle {
+  width: 100%;
+  margin: 0;
+  transition: all ease 0.5s;
+}
+.order .color {
+  background-color: #e2e2e2;
+}
+.order .orderTitle h4 {
+  margin: 0;
+  font-size: var(--font-tiny);
+}
+.order .orderButton {
+  border: none;
+  width: 4rem;
+  height: 35px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid var(--color-border);
+  font-size: var(--font-tiny);
+  color: black;
+}
+.order .orderButton:hover {
+  background-color: rgb(36, 36, 36);
+  color: white;
+}
+.order .orderBody {
+  width: 99%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all ease 0.5s, max-height ease 0.5s;
+}
+.orderBody .total {
+  border-top: 1px dashed var(--color-border);
+}
+.orderBody .total h2 {
+  font-size: var(--font-medium);
+  margin: 0;
+}
+.order .showBody {
+  visibility: visible;
+  opacity: 1;
+  max-height: 100vh;
+  transition: all ease 0.5s, max-height ease 0.5s;
+}

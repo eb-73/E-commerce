@@ -1,22 +1,24 @@
 import style from "./Navigation.module.css";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { signOut, useSession } from "next-auth/react";
-import { authAction } from "../../redux/authSlice";
+import { useSession } from "next-auth/react";
+import { authAction } from "../../../redux/authSlice";
+import { orderAction } from "../../../redux/orderSlice";
 import {
   getOrderListFromDatabase,
   getOrderListFromLocal,
   sendOrderListToDatabase,
   sendOrderListToLocal,
-} from "../../redux/actions";
-import { orderAction } from "../../redux/orderSlice";
+} from "../../../redux/actions";
 import { useEffect, useState } from "react";
 import {
   HeartIcon,
   ShoppingCartIcon,
   ChevronDownIcon,
+  MenuAlt2Icon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import ProfileButton from "./ProfileButton";
 const Navigation = () => {
   const [showDrop, setShowDrop] = useState(false);
   const auth = useSelector((state) => state.Auth);
@@ -54,7 +56,7 @@ const Navigation = () => {
     } else if (!auth.isAuth) {
       dispatch(getOrderListFromLocal());
     }
-  }, [auth.isAuth, auth.authenticatedEmail]);
+  }, [auth.isAuth]);
 
   // send updated cart to database
   useEffect(() => {
@@ -64,12 +66,6 @@ const Navigation = () => {
       dispatch(sendOrderListToLocal(cart));
     }
   }, [cart, isUser]);
-  //logout user
-  const logoutHandler = () => {
-    signOut({ redirect: false });
-    localStorage.removeItem("cart");
-    dispatch(orderAction.clearOrder());
-  };
   //login user
   const loginHandler = () => {
     router.replace("/signup");
@@ -101,9 +97,11 @@ const Navigation = () => {
           </Link>
           <div className={style.profile}>
             {auth.isAuth ? (
-              <button onClick={logoutHandler}>Logout</button>
+              <ProfileButton />
             ) : (
-              <button onClick={loginHandler}>Login</button>
+              <button className={style.loginButton} onClick={loginHandler}>
+                Login
+              </button>
             )}
           </div>
         </div>
@@ -116,12 +114,14 @@ const Navigation = () => {
           </Link>
         </div>
         <button
-          className="navbar-toggler"
+          className={`navbar-toggler border-0 `}
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapsibleNavbar"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span>
+            <MenuAlt2Icon className={style.toggleIcon} />
+          </span>
         </button>
 
         <div className="collapse navbar-collapse" id="collapsibleNavbar">
@@ -136,14 +136,14 @@ const Navigation = () => {
               >
                 <Link href="/products/shoes">
                   <li
-                    className={` d-flex  justify-content-center align-items-center`}
+                    className={` d-flex px-2 justify-content-start align-items-center`}
                   >
                     Shoes
                   </li>
                 </Link>
                 <Link href="/products/clothing">
                   <li
-                    className={` d-flex  justify-content-center align-items-center`}
+                    className={` d-flex px-2 justify-content-start align-items-center`}
                   >
                     Clothing
                   </li>

@@ -1,0 +1,17 @@
+.checkhoutContent {
+  width: 65%;
+}
+.summary {
+  width: 35%;
+}
+.summary h1 {
+  font-size: 1.6rem;
+}
+@media screen and (max-width: 576px) {
+  .checkhoutContent {
+    width: 100%;
+  }
+  .summary {
+    width: 100%;
+  }
+}

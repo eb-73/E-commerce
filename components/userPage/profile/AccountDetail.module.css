@@ -1,0 +1,96 @@
+.accountDetail {
+  width: 100%;
+}
+.accountDetail .backButton {
+  width: 50px;
+  height: 45px;
+  margin-bottom: 20px;
+  border: none;
+  background-color: rgba(128, 128, 128, 0);
+  text-align: start;
+}
+.backButton .backIcon {
+  width: 30px;
+}
+.accountDetail h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.accountDetail .accountForm {
+  width: 60%;
+}
+.accountDetail .accountForm .inputGroup {
+  width: 100%;
+  margin-bottom: 15px;
+  height: 45px;
+  padding: 5px;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 10px;
+  background-color: white;
+}
+.accountForm .inputGroup input,
+.accountForm .inputGroup select {
+  width: 95%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+.accountForm .inputGroup select {
+  width: 100%;
+}
+.accountForm .inputGroup input[id="date"] {
+  width: 100%;
+}
+.accountForm .inputGroup input:focus,
+.accountForm .inputGroup select:focus {
+  outline: none;
+}
+.accountDetail .deleteAccount {
+  width: 60%;
+  border-top: 1px solid rgb(206, 206, 206);
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+.saveButton button,
+.deleteAccount button {
+  width: 70px;
+  height: 35px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgb(206, 206, 206);
+}
+.saveButton button:hover,
+.deleteAccount button:hover {
+  border-color: black;
+}
+.saveButton button:disabled,
+.saveButton button:hover:disabled {
+  border: 1px solid rgb(206, 206, 206);
+}
+.accountForm .inputGroup .checkIcon {
+  width: 5%;
+  color: rgb(32, 136, 32);
+  animation: appear ease 500ms;
+}
+.accountForm .inputGroup .unCheckIcon {
+  width: 5%;
+  color: rgb(221, 0, 11);
+  animation: appear ease 500ms;
+}
+@keyframes appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 576px) {
+  .accountDetail .accountForm {
+    width: 100%;
+  }
+  .accountDetail .deleteAccount {
+    width: 100%;
+  }
+}

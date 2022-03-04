@@ -1,0 +1,56 @@
+.profileButton {
+  outline: none;
+  padding: 2px 5px;
+  border: none;
+  color: #080b13;
+  background-color: rgba(255, 0, 0, 0);
+  position: relative;
+}
+.profileButton .navIcon {
+  width: 22px;
+  color: #080b13;
+  cursor: pointer;
+}
+.profileButton:hover .profileButtonList {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(10px);
+}
+.profileButton .profileButtonList {
+  width: 150px;
+  padding: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 15px 80px rgb(56 93 165 / 5%), 0 15px 60px rgb(0 0 0 / 2%);
+  visibility: hidden;
+  opacity: 0;
+  background-color: white;
+  list-style: none;
+  position: absolute;
+  right: 0;
+  top: 22px;
+  transition: all ease 0.2s;
+}
+.profileButton .profileButtonList h5 {
+  margin: 10px 7px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: default;
+  color: black;
+}
+.profileButton .profileButtonList li {
+  width: 100%;
+  padding: 5px 7px;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  color: rgb(131, 131, 131);
+}
+.profileButton .profileButtonList li:hover {
+  color: black;
+}
+@media screen and (max-width: 576px) {
+  .profileButton:hover .profileButtonList {
+    display: none;
+  }
+}

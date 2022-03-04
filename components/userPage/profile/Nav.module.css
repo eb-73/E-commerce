@@ -1,0 +1,13 @@
+.list a {
+  text-decoration: none;
+  color: gray;
+  padding: 5px 0px;
+}
+.list a:hover {
+  border-bottom: 2px solid black;
+}
+.list .active a {
+  color: black;
+  font-weight: 500;
+  border-bottom: 2px solid black;
+}

@@ -1,0 +1,18 @@
+.itemProduct {
+  width: 100%;
+}
+.itemProduct .image {
+}
+.itemProduct .info {
+}
+.itemProduct .info h2 {
+  font-size: var(--font-small);
+}
+.itemProduct .quantity {
+  font-size: var(--font-medium);
+}
+
+.itemProduct .price {
+  margin-left: auto;
+  font-size: var(--font-medium);
+}

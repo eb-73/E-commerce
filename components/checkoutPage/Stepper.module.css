@@ -1,0 +1,82 @@
+.stepper {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stepperItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 33.33%;
+  padding: 0;
+}
+
+.stepperItem .stepperTitle {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(146, 146, 146);
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all ease 0.4s;
+  z-index: 4;
+}
+.stepperItem .stepperDesc {
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.stepperItem::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: calc(50% - 13px);
+  right: calc(50% + 15px);
+  width: calc(100% - 30px);
+  height: 2px;
+  background-color: rgb(219, 219, 219);
+  z-index: 2;
+}
+
+.stepperItem:first-child::before {
+  content: none;
+}
+
+.active .stepperDesc {
+  color: black;
+  font-weight: 500;
+}
+.active .stepperTitle {
+  background-color: black;
+  transform: scale(1.1);
+}
+
+.active::before {
+  content: " ";
+  position: absolute;
+  top: calc(50% - 13px);
+  right: calc(50% + 15px);
+  width: calc(100% - 30px);
+  height: 2px;
+  background-color: black;
+  z-index: 3;
+}
+.active:first-child::before {
+  content: none;
+}

@@ -1,0 +1,45 @@
+.profile .profileNav {
+  width: 30%;
+}
+.profile .profileContent {
+  width: 70%;
+}
+.list .activeLink {
+  color: black;
+}
+
+.list li {
+  width: 80%;
+  color: gray;
+  cursor: pointer;
+}
+.list li:hover,
+.list li:hover a {
+  color: black;
+}
+.list li a {
+  text-decoration: none;
+  color: gray;
+  font-size: 1.1rem;
+}
+.list li .profileIcons {
+  width: 20px;
+  margin-right: 10px;
+}
+.list li .arrowIcons {
+  width: 15px;
+  margin-left: auto;
+}
+@media screen and (max-width: 576px) {
+  .profile .profileNav {
+    width: 100%;
+    background-color: white;
+    padding: 0px 5px;
+  }
+  .profile .profileContent {
+    width: 100%;
+  }
+  .list li {
+    width: 100%;
+  }
+}

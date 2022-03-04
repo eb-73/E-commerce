@@ -18,7 +18,7 @@ const Signup = () => {
     change: changeName,
     blur: blurName,
     clear: clearName,
-  } = useForm("text");
+  } = useForm("text", "");
   const {
     inputValue: emailInput,
     validateInput: emailValidate,
@@ -26,7 +26,7 @@ const Signup = () => {
     change: changeEmail,
     blur: blurEmail,
     clear: clearEmail,
-  } = useForm("email");
+  } = useForm("email", "");
   const {
     inputValue: passInput,
     validateInput: passValidate,
@@ -34,7 +34,7 @@ const Signup = () => {
     change: changePass,
     blur: blurPass,
     clear: clearPass,
-  } = useForm("pass");
+  } = useForm("pass", "");
   const validateForm = nameValidate && emailValidate && passValidate;
   const submitHandler = async (e) => {
     e.preventDefault();

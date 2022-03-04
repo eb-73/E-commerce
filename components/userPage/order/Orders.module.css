@@ -1,0 +1,13 @@
+.ordersWrapper {
+  width: 100%;
+}
+.ordersWrapper .orderTitles {
+  width: 100%;
+
+  /* border-bottom: 1px solid var(--color-border); */
+}
+.orderTitles h2 {
+  margin: 0;
+  font-size: var(--font-small);
+  font-weight: 600;
+}

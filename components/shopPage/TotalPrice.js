@@ -1,7 +1,6 @@
 import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 import style from "./TotalPrice.module.css";
 const TotalPrice = (props) => {
-  console.log(props.totalPrice);
   return (
     <div className={` ${style.totalPrice}`}>
       <div className="d-flex align-items-center justify-content-between">

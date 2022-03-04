@@ -3,6 +3,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { comparePass, connectToDatabase } from "../../../lib/db";
 export default NextAuth({
+  session: {
+    jwt: true,
+  },
   providers: [
     CredentialsProvider({
       async authorize(credentials, req) {

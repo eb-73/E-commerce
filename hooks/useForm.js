@@ -1,6 +1,6 @@
 import { useState } from "react";
-function useForm(mode) {
-  const [input, setInput] = useState("");
+function useForm(mode, defaultValue) {
+  const [input, setInput] = useState(defaultValue);
   const [touched, setTouched] = useState(false);
 
   let validateInput;
@@ -10,14 +10,22 @@ function useForm(mode) {
     validateInput = input.includes("@") && input.includes(".com");
   } else if (mode === "pass") {
     validateInput = input.length >= 8;
+  } else if (mode === "postal") {
+    validateInput = input.trim().length === 10;
+  } else if (mode === "select") {
+    validateInput = input.trim().length !== 0;
+  } else if (mode === "phone") {
+    validateInput = input.trim().length === 10;
+  } else {
+    validateInput = false;
   }
   let inputIsNotValid = !validateInput && touched;
 
   const inputChangeHandler = (e) => {
-    setInput(e.target.value);
+    const value = e.target.value;
+    setInput(value);
   };
   const inputBlurHandler = () => {
-    console.log("blur");
     setTouched(true);
   };
   const clearInput = () => {

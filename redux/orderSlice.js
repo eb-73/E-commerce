@@ -28,7 +28,6 @@ const order = createSlice({
       if (state.orderProducts.length === 0) {
         state.orderId = action.payload.orderId;
         state.costumerId = action.payload.costumerId;
-
         state.orderDate = action.payload.date;
         state.orderStatus = action.payload.status;
         state.orderTotalPrice = action.payload.totalPrice;

@@ -1,0 +1,83 @@
+.delivery {
+  width: 100%;
+}
+.delivery h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.delivery .deliveryForm {
+  width: 90%;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr; */
+}
+.delivery .deliveryForm .inputGroup {
+  width: 100%;
+  margin-bottom: 15px;
+  height: 45px;
+  padding: 5px;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 10px;
+  background-color: white;
+}
+.deliveryForm .inputGroup input {
+  width: 95%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+
+.deliveryForm .inputGroup input:focus {
+  outline: none;
+}
+
+.delivery .formButton {
+  width: 100%;
+  height: 35px;
+}
+.formButton button {
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 5px;
+  border: 1px solid rgb(206, 206, 206);
+}
+
+.formButton button:hover {
+  background-color: rgb(70, 70, 70);
+}
+.formButton button:disabled,
+.formButton button:disabled:hover {
+  background-color: gray;
+  /* color: white; */
+}
+.deliveryForm .inputGroup .checkIcon {
+  width: 20px;
+  color: rgb(32, 136, 32);
+  animation: appear ease 500ms;
+}
+.deliveryForm .inputGroup .unCheckIcon {
+  width: 20px;
+  color: rgb(221, 0, 11);
+  animation: appear ease 500ms;
+}
+@keyframes appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .delivery .deliveryForm {
+    width: 100%;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr; */
+  }
+  .formButton button {
+    width: 100%;
+  }
+}

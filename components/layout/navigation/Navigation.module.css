@@ -20,6 +20,11 @@
   color: black;
 }
 
+.toggleIcon {
+  width: 30px;
+  border: none;
+  /* color: red; */
+}
 .shop {
   /* width: 120px; */
   color: #080b13;
@@ -60,7 +65,7 @@
   display: flex;
   width: 60px;
 }
-.profile button {
+.profile .loginButton {
   outline: none;
   padding: 2px 5px;
   border: 1px solid #53535369;
@@ -75,7 +80,12 @@
 
 .navItem .dropIcon {
   width: 10px;
-  margin-left: 15px;
+  margin-left: 7px;
+}
+.navItem:hover .navDropDown {
+  opacity: 1;
+  visibility: visible;
+  transform: perspective(1200px) rotateX(0deg);
 }
 .navItem .navDropDown {
   width: 200px;
@@ -90,14 +100,9 @@
   transform: perspective(1200px) rotateX(-30deg);
   opacity: 0;
   visibility: hidden;
-  transition: transform 0.3s, opacity 0.3s;
+  transition: visibility ease 350ms, opacity ease 350ms, transform ease 250ms;
 }
 
-.navItem:hover .navDropDown {
-  opacity: 1;
-  visibility: visible;
-  transform: perspective(1200px) rotateX(0deg);
-}
 .navItem .navDropDown li {
   width: 100%;
   height: 40px;

@@ -1,5 +1,5 @@
 import style from "./Layout.module.css";
-import Navigation from "./Navigation";
+import Navigation from "./navigation/Navigation";
 import Footer from "./Footer";
 import { Toaster } from "react-hot-toast";
 const Layout = (props) => {

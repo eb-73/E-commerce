@@ -22,6 +22,9 @@
 .checkoutButton:hover {
   background-color: rgb(65, 65, 65);
 }
+.checkoutButton:disabled {
+  background-color: rgb(80, 80, 80);
+}
 @media screen and (max-width: 576px) {
   .items {
     width: 100%;

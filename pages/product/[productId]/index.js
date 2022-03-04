@@ -1,11 +1,11 @@
 import style from "./index.module.css";
-import ProductInfo from "../../components/productPage/ProductInfo";
-import ImageSlider from "../../components/productPage/ImageSlider";
-import ProductOption from "../../components/productPage/ProductOption";
-import DemoCart from "../../components/shopPage/DemoCart";
+import ProductInfo from "../../../components/productPage/ProductInfo";
+import ImageSlider from "../../../components/productPage/ImageSlider";
+import ProductOption from "../../../components/productPage/ProductOption";
+import DemoCart from "../../../components/shopPage/DemoCart";
 import { ObjectId } from "mongodb";
 import { CSSTransition } from "react-transition-group";
-import { connectToDatabase } from "../../lib/db";
+import { connectToDatabase } from "../../../lib/db";
 import { useState } from "react";
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());

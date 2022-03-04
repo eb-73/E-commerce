@@ -7,7 +7,7 @@ const Card = (props) => {
   const ctx = useContext(Context);
   const router = useRouter();
   const clickHandler = () => {
-    router.replace(`/${props.id}`);
+    router.replace(`/product/${props.id}`);
   };
   return (
     <div

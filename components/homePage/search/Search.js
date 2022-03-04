@@ -27,7 +27,7 @@ const Search = () => {
     }
   };
   return (
-    <div className={`pt-2 ${style.search}`}>
+    <div className={`pt-5 ${style.search}`}>
       <h1>Search</h1>
       <form onSubmit={searchHandler} className={style.searchForm}>
         <div
