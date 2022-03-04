@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { getSession } from "next-auth/react";
 import AccountDetail from "../../../components/userPage/profile/AccountDetail";
 import ChangePass from "../../../components/userPage/profile/ChangePass";
@@ -48,6 +49,11 @@ const OptionPage = ({ pageName }) => {
   }
   return (
     <div className="pt-5">
+      <Head>
+        <title>Account</title>
+        <meta name="description" content="Created by Ebrahim" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Nav />
       {content}
     </div>

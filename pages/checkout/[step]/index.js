@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { getSession } from "next-auth/react";
 import Checkout from "../../../components/checkoutPage/Checkout";
 import Delivery from "../../../components/checkoutPage/Delivery";
@@ -29,6 +30,11 @@ const CheckoutStep = ({ pageName }) => {
   }
   return (
     <div className="pt-5">
+      <Head>
+        <title>Checkout</title>
+        <meta name="description" content="Created by Ebrahim" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Stepper />
       {content}
     </div>
