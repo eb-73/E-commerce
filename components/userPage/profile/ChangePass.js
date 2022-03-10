@@ -1,8 +1,11 @@
 import style from "./ChangePass.module.css";
 import useForm from "../../../hooks/useForm";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 import Link from "next/link";
 import { CheckIcon, XIcon, ArrowLeftIcon } from "@heroicons/react/outline";
 const ChangePass = (props) => {
+  const userEmail = useSelector((state) => state.Auth.authenticatedEmail);
   const {
     inputValue: oldPassValue,
     validateInput: validateOldPass,
@@ -32,8 +35,28 @@ const ChangePass = (props) => {
     validateNewPass &&
     validateNewPass2 &&
     newPassValue === newPass2Value;
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
+    const res = await fetch("/api/user/changePassword", {
+      method: "PUT",
+      body: JSON.stringify({
+        userEmail,
+        oldPass: oldPassValue,
+        newPass: newPass2Value,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await res.json();
+    if (res.ok) {
+      toast.success(result.message);
+    } else {
+      toast.error(result.message);
+    }
+    clearOldPass();
+    clearNewPass();
+    clearNewPass2();
   };
   return (
     <div

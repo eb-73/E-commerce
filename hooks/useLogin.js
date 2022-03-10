@@ -10,7 +10,7 @@ const useLogin = () => {
 
     console.log("result", result);
     if (result.ok && !result.error) {
-      router.replace("/");
+      return result;
       // get order list from database
       //   const session = await getSession();
       //   if (session && session.user.email) {

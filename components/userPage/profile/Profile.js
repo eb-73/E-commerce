@@ -1,5 +1,6 @@
 import style from "./Profile.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 import { orderAction } from "../../../redux/orderSlice";
 import { useDispatch } from "react-redux";
@@ -11,12 +12,13 @@ import {
 } from "@heroicons/react/outline";
 const Profile = (props) => {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   //logout user
   const logoutHandler = () => {
     signOut({ redirect: false });
     localStorage.removeItem("cart");
     dispatch(orderAction.clearOrder());
+    router.replace("/login");
   };
   return (
     <main className={`mt-5 d-flex flex-sm-row flex-column  ${style.profile}`}>

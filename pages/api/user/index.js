@@ -8,7 +8,7 @@ async function user(req, res) {
     try {
       client = await connectToDatabase();
     } catch {
-      res.status(411).json({ message: "connect_to_database_failed" });
+      res.status(411).json({ message: "connect-to-database-failed" });
     }
     try {
       const db = client.db();
@@ -19,10 +19,10 @@ async function user(req, res) {
           { $set: { dateOfBrith: newDateOfBrith, location: newLocation } }
         );
       if (user.modifiedCount)
-        res.status(201).json({ message: "user_information_updated" });
-      else res.status(411).json({ message: "user_not_found" });
+        res.status(201).json({ message: "user-information-updated" });
+      else res.status(411).json({ message: "user-not-found" });
     } catch {
-      res.status(411).json({ message: "insert_data_failed" });
+      res.status(411).json({ message: "insert-data-failed" });
       client.close();
     }
 

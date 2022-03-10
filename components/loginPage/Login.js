@@ -14,7 +14,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const { from } = router.query;
   const {
     inputValue: emailInput,
     validateInput: emailValidate,
@@ -38,24 +38,21 @@ const Login = () => {
     if (!validateForm) {
       return;
     }
-
-    setLoading(true);
-    loginCredentials(emailInput, passInput)
-      .then(() => setLoading(false))
-      .catch((err) => {
-        console.log("login nashod", err.message);
-        setLoading(false);
-      });
+    try {
+      setLoading(true);
+      const result = await loginCredentials(emailInput, passInput);
+      toast.success("Welcome to your account");
+      setLoading(false);
+      if (from == "/cart") router.replace("/checkout/delivery");
+      else router.replace("/");
+    } catch (err) {
+      toast.success(err.message);
+      setLoading(false);
+    }
   };
   //signin with google
   const googleSigninHandler = () => {
-    googleSignin()
-      .then(() => {
-        router.replace("/");
-      })
-      .catch((err) => {
-        toast.error(err.code);
-      });
+    signIn("google");
   };
   return (
     <div className={`d-flex flex-column align-items-center ${style.login}`}>

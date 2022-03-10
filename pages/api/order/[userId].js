@@ -8,7 +8,7 @@ async function getOrder(req, res) {
     try {
       client = await connectToDatabase();
     } catch {
-      res.status(422).json({ message: "connect_t0_database_failed" });
+      res.status(422).json({ message: "connect_to_database_failed" });
       return;
     }
 

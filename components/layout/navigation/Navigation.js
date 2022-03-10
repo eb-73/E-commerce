@@ -33,24 +33,18 @@ const Navigation = () => {
   allQuantity = cart.orderProducts.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.quantity;
   }, 0);
-  console.log("isuser", isUser);
-  console.log(session, status);
   useEffect(() => {
     //listen to change authState
-
-    if (isUser && status === "authenticated") {
+    if (isUser) {
       dispatch(authAction.login(userEmail));
       localStorage.removeItem("cart");
-    } else if (!isUser && status === "unauthenticated") {
+    } else if (!isUser) {
       dispatch(authAction.logout());
-    } else if (status === "loading") {
-      return;
     }
-  }, [status, isUser, userEmail]);
+  }, [isUser]);
 
   useEffect(() => {
     // get order list of user
-    console.log("auth change");
     if (auth.isAuth) {
       dispatch(getOrderListFromDatabase(auth.authenticatedEmail));
     } else if (!auth.isAuth) {
@@ -91,7 +85,7 @@ const Navigation = () => {
               <div
                 className={` ${allQuantity ? style.badge : style.hideBadge}`}
               >
-                {allQuantity}
+                {allQuantity > 9 ? "9+" : allQuantity}
               </div>
             </div>
           </Link>

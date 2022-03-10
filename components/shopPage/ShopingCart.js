@@ -2,11 +2,23 @@ import style from "./ShopingCart.module.css";
 import ShopingCartProduct from "./ShopingCartProduct";
 import TotalPrice from "./TotalPrice";
 import { useSelector } from "react-redux";
+import { getSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const ShopingCart = () => {
   const cart = useSelector((state) => state.Order.orderProducts);
   const total = useSelector((state) => state.Order.orderTotalPrice);
   const isEmpity = cart.length === 0;
+  const router = useRouter();
+  const pathName = router.pathname;
+  const checkoutHandler = async () => {
+    const session = await getSession();
+    if (session) {
+      router.push("/checkout/delivery");
+    } else if (!session) {
+      router.push(`/login?from=${pathName}`);
+    }
+  };
   return (
     <div
       className={`w-100 py-3 d-flex flex-column flex-sm-row align-items-center align-items-sm-start`}
@@ -40,7 +52,11 @@ const ShopingCart = () => {
       <div className={` mt-2 mb-5 ${style.summary}`}>
         <h1>Summary</h1>
         <TotalPrice totalPrice={total} />
-        <button className={`${style.checkoutButton}`} disabled={isEmpity}>
+        <button
+          className={`${style.checkoutButton}`}
+          disabled={isEmpity}
+          onClick={checkoutHandler}
+        >
           Checkout
         </button>
       </div>

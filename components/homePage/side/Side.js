@@ -67,9 +67,9 @@ const Side = (props) => {
       {
         pathname: "/search",
         query:
-          router.pathname === "/"
-            ? { [props.name]: queryString }
-            : { ...router.query, [props.name]: queryString },
+          router.pathname === "/search"
+            ? { ...router.query, [props.name]: queryString }
+            : { [props.name]: queryString },
       },
       undefined,
       { shallow: true }

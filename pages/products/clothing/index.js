@@ -25,7 +25,10 @@ const ClothePage = (props) => {
   const setSizeHandler = () => {
     setSize(size + 1);
     router.push(
-      { pathname: router.pathname, query: { page: size + 1, limit: "8" } },
+      {
+        pathname: router.pathname,
+        query: { ...router.query, page: size + 1, limit: "8" },
+      },
       null,
       { shallow: true }
     );

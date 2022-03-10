@@ -1,8 +1,12 @@
 import style from "./Dropdown.module.css";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 const Dropdown = () => {
   const [showDrop, setShowDrop] = useState(false);
+  const router = useRouter();
+  const pathName = router.pathname;
   const element = useRef();
   const closeDropdownHandler = (e) => {
     e.stopPropagation();
@@ -37,8 +41,33 @@ const Dropdown = () => {
           showDrop && style.showDropdown
         }`}
       >
-        <li>desc</li>
-        <li>asc</li>
+        <Link
+          href={{
+            pathname: pathName,
+            query: { sort: "newest" },
+          }}
+          shallow={true}
+        >
+          <li>Newest</li>
+        </Link>
+        <Link
+          href={{
+            pathname: pathName,
+            query: { ...router.query, sort: "priceDesc" },
+          }}
+          shallow={true}
+        >
+          <li>Price: High-Low</li>
+        </Link>
+        <Link
+          href={{
+            pathname: pathName,
+            query: { ...router.query, sort: "priceAsc" },
+          }}
+          shallow={true}
+        >
+          <li>Price: Low-High</li>
+        </Link>
       </ul>
     </div>
   );

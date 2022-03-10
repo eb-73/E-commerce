@@ -23,6 +23,7 @@ const ProfileButton = () => {
     signOut({ redirect: false });
     localStorage.removeItem("cart");
     dispatch(orderAction.clearOrder());
+    router.replace("/login");
   };
   return (
     <button className={style.profileButton} onClick={clickHandler}>

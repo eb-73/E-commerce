@@ -6,26 +6,41 @@ import SortNav from "../components/homePage/SortNav";
 import CardsWraper from "../components/homePage/CardsWraper";
 import { ContextProvider } from "../context/ctxStore";
 import { connectToDatabase } from "../lib/db";
+import { priceAsc, priceDesc } from "../lib/sortFunction";
 import usePagination from "../hooks/usePagination";
 import LoadingButton from "../components/ui/LoadingButton";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 let showLoadMore = true;
 function Home(props) {
   const { productsArray, filters } = props;
   const router = useRouter();
+  // const { sort } = router.query;
   const { products, size, setSize, isLoadingMore } = usePagination(
     productsArray,
     "All"
   );
+
   if (products && products.length === 25) {
     showLoadMore = false;
   }
+  //sort
 
+  // console.log("in sort");
+  // if (sort === "newest") {
+  // } else if (sort === "priceDesc") {
+  //   products = products.sort(priceDesc);
+  // } else if (sort === "priceAsc") {
+  //   products = products.sort(priceAsc);
+  // }
+
+  //
   const setSizeHandler = () => {
     setSize(size + 1);
     router.push(
-      { pathname: router.pathname, query: { page: size + 1, limit: "8" } },
+      {
+        pathname: router.pathname,
+        query: { ...router.query, page: size + 1, limit: "8" },
+      },
       null,
       { shallow: true }
     );

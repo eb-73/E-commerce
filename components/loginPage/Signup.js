@@ -8,8 +8,11 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import createUser from "../../lib/createUser";
 import { signIn } from "next-auth/react";
+import useLogin from "../../hooks/useLogin";
 const Signup = () => {
+  const { login: loginCredentials } = useLogin();
   const router = useRouter();
+  const { from } = router.query;
   const [loading, setLoading] = useState(false);
   const {
     inputValue: nameInput,
@@ -47,26 +50,32 @@ const Signup = () => {
     clearPass();
 
     try {
+      setLoading(true);
       const res = await createUser({
         name: nameInput,
         email: emailInput,
         pass: passInput,
       });
       //login
-      const result = await signIn("credentials", {
-        redirect: false,
-        email: emailInput,
-        pass: passInput,
-      });
-      if (result.ok && !result.error) {
-        setLoading(false);
-        router.replace("/");
-        toast.success("Wellcome");
-      } else {
-        throw new Error(result.error);
-      }
+      const result = await loginCredentials(emailInput, passInput);
+      toast.success("Create account successfuly");
+      setLoading(false);
+      if (from == "/cart") router.replace("/checkout/delivery");
+      else router.replace("/");
+      //
+      // const result = await signIn("credentials", {
+      //   redirect: false,
+      //   email: emailInput,
+      //   pass: passInput,
+      // });
+      // if (result.ok && !result.error) {
+      //   setLoading(false);
+      //   router.replace("/");
+      //   toast.success("Wellcome");
+      // } else {
+      //   throw new Error(result.error);
+      // }
     } catch (err) {
-      console.log(err.message);
       toast.error(err.message);
       setLoading(false);
     }
@@ -139,7 +148,7 @@ const Signup = () => {
         onClick={googleSigninHandler}
       >
         <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
-        Sign up with google
+        Login with google
       </button>
       <div className={`my-3 ${style.signupLink}`}>
         Already have an account? <Link href="/login">Login</Link>
