@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { orderAction } from "./orderSlice";
 import { searchProductsAction } from "./searchProducts";
 export const getOrderListFromDatabase = (authenticatedEmail) => {
@@ -53,34 +54,56 @@ export const getOrderListFromLocal = () => {
     );
   };
 };
-export const sendOrderListToDatabase = (cart) => {
-  return async (dispatch) => {
-    try {
-      const res = await fetch("/api/order", {
-        method: "POST",
-        body: JSON.stringify({
-          orderId: cart.orderId,
-          costumerId: cart.costumerId,
-          orderDate: cart.orderDate,
-          orderStatus: cart.orderStatus,
-          orderTotalPrice: cart.orderTotalPrice,
-          orderProducts: cart.orderProducts,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data.message);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+export const sendOrderListToDatabase = async (cart) => {
+  const res = await fetch("/api/order", {
+    method: "POST",
+    body: JSON.stringify({
+      orderId: cart.orderId,
+      costumerId: cart.costumerId,
+      orderDate: cart.orderDate,
+      orderStatus: cart.orderStatus,
+      orderTotalPrice: cart.orderTotalPrice,
+      orderProducts: cart.orderProducts,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  } else {
+    return data;
+  }
+};
+export const sendOrderDeliveryToDatabase = async (deliveryData) => {
+  const res = await fetch("/api/order", {
+    method: "PUT",
+    body: JSON.stringify({
+      costumerId: deliveryData.id,
+      name: deliveryData.name,
+      lastName: deliveryData.lastName,
+      address: deliveryData.address,
+      city: deliveryData.city,
+      email: deliveryData.email,
+      province: deliveryData.province,
+      phone: deliveryData.phone,
+      postalCode: deliveryData.postalCode,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message);
+  } else {
+    return data;
+  }
 };
 export const sendOrderListToLocal = (cart) => {
-  return async (dispatch) => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  };
+  localStorage.setItem("cart", JSON.stringify(cart));
 };
 export const getSearchProducts = (q, filter, category, size, color) => {
   return async (dispatch) => {

@@ -1,11 +1,14 @@
-import { MongoClient, ObjectId } from "mongodb";
-
+import { ObjectId } from "mongodb";
+import { connectToDatabase } from "../../../lib/db";
 async function order(req, res) {
   if (req.method === "POST") {
     const orderData = req.body;
-    const url =
-      "mongodb+srv://Ebrahim-73:cKTJ9xmjziQKHPAe@cluster0.kbxqj.mongodb.net/shop?retryWrites=true";
-    const client = await MongoClient.connect(url);
+    let client;
+    try {
+      client = await connectToDatabase();
+    } catch (err) {
+      res.status(500).json({ message: "connect-to-database-failed" });
+    }
     const db = client.db();
     if (orderData.orderId) {
       const result = await db.collection("orders").updateOne(
@@ -26,6 +29,42 @@ async function order(req, res) {
       res.status(202).json({ message: "order_updated" });
     }
 
+    client.close();
+  }
+  if (req.method === "PUT") {
+    const deliveryData = req.body;
+    let client;
+    try {
+      client = await connectToDatabase();
+    } catch (err) {
+      res.status(500).json({ message: "connect-to-database-failed" });
+    }
+    try {
+      const db = client.db();
+      const order = await db.collection("orders").updateOne(
+        { costumerId: deliveryData.costumerId, orderStatus: "pending" },
+        {
+          $set: {
+            delivery: {
+              name: deliveryData.name,
+              lastName: deliveryData.lastName,
+              address: deliveryData.address,
+              city: deliveryData.city,
+              email: deliveryData.email,
+              province: deliveryData.province,
+              phone: deliveryData.phone,
+              postalCode: deliveryData.postalCode,
+            },
+          },
+        }
+      );
+      if (order.modifiedCount)
+        res.status(201).json({ message: "order-information-updated" });
+      else res.status(411).json({ message: "order-not-found" });
+    } catch {
+      res.status(411).json({ message: "insert-data-failed" });
+      client.close();
+    }
     client.close();
   }
 }

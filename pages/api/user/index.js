@@ -8,7 +8,7 @@ async function user(req, res) {
     try {
       client = await connectToDatabase();
     } catch {
-      res.status(411).json({ message: "connect-to-database-failed" });
+      res.status(500).json({ message: "connect-to-database-failed" });
     }
     try {
       const db = client.db();

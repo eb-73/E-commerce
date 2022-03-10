@@ -19,6 +19,7 @@ import {
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import ProfileButton from "./ProfileButton";
+import toast from "react-hot-toast";
 const Navigation = () => {
   const [showDrop, setShowDrop] = useState(false);
   const auth = useSelector((state) => state.Auth);
@@ -55,9 +56,11 @@ const Navigation = () => {
   // send updated cart to database
   useEffect(() => {
     if (cart.orderId && isUser) {
-      dispatch(sendOrderListToDatabase(cart));
+      sendOrderListToDatabase(cart)
+        .then()
+        .catch((err) => toast.error(err.message));
     } else if (!cart.orderId && !isUser) {
-      dispatch(sendOrderListToLocal(cart));
+      sendOrderListToLocal(cart);
     }
   }, [cart, isUser]);
   //login user

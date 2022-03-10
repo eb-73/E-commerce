@@ -2,8 +2,16 @@ import style from "./Delivery.module.css";
 import useForm from "../../hooks/useForm";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { sendOrderDeliveryToDatabase } from "../../redux/actions";
+import toast from "react-hot-toast";
+import { useState } from "react";
 const Delivery = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const authenticatedEmail = useSelector(
+    (state) => state.Auth.authenticatedEmail
+  );
   const {
     inputValue: nameValue,
     validateInput: validateName,
@@ -83,7 +91,25 @@ const Delivery = () => {
     if (!formValidate) {
       return;
     }
-    router.push("/checkout/payment");
+    setLoading(true);
+    try {
+      const result = await sendOrderDeliveryToDatabase({
+        id: authenticatedEmail,
+        name: nameValue,
+        lastName: lastNameValue,
+        city: cityValue,
+        address: addressValue,
+        province: provinceValue,
+        email: emailValue,
+        phone: phoneValue,
+        postalCode: postalValue,
+      });
+      setLoading(true);
+      router.push("/checkout/payment");
+    } catch (err) {
+      toast.error(err);
+      setLoading(true);
+    }
   };
   return (
     <div className={style.delivery}>
@@ -235,6 +261,13 @@ const Delivery = () => {
           className={`m-0 d-flex justify-content-sm-end  ${style.formButton}`}
         >
           <button type="submit" disabled={!formValidate}>
+            {loading && (
+              <span
+                className="spinner-border spinner-border-sm mx-1"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            )}
             Save & Continue
           </button>
         </div>
