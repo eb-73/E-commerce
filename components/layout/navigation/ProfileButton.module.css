@@ -17,7 +17,7 @@
   transform: translateY(10px);
 }
 .profileButton .profileButtonList {
-  width: 150px;
+  width: 120px;
   padding: 5px 0;
   border-radius: 5px;
   box-shadow: 0 15px 80px rgb(56 93 165 / 5%), 0 15px 60px rgb(0 0 0 / 2%);
@@ -32,8 +32,8 @@
 }
 .profileButton .profileButtonList h5 {
   margin: 10px 7px;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: var(--font-small);
+  font-weight: 600;
   text-align: left;
   cursor: default;
   color: black;
@@ -44,7 +44,7 @@
   font-size: 0.9rem;
   text-align: left;
   cursor: pointer;
-  color: rgb(131, 131, 131);
+  color: var(--color-text-secondary);
 }
 .profileButton .profileButtonList li:hover {
   color: black;

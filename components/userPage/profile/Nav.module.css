@@ -2,6 +2,7 @@
   text-decoration: none;
   color: gray;
   padding: 5px 0px;
+  font-size: var(--font-small);
 }
 .list a:hover {
   border-bottom: 2px solid black;

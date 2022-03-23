@@ -6,15 +6,36 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { orderAction } from "../../redux/orderSlice";
 import { useSession } from "next-auth/react";
+import { favoriteAction } from "../../redux/favoriteSlice";
 const ProductOption = (props) => {
   const [option, setOption] = useState({ size: "", color: "" });
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
   const isUser = !!session?.user;
+  const userId = session?.user.userId;
   const setOptionHandler = (optionType, value) => {
     setOption((prevState) => ({ ...prevState, [optionType]: value }));
   };
+  const formNotValid = !option.color || !option.size;
+  //set favorite products
+  const sendToFavoritesHandler = () => {
+    if (status === "authenticated" && isUser) {
+      dispatch(
+        favoriteAction.setFavorite({
+          costumerId: userId,
+          item: {
+            productId: props.productId,
+            productTitle: props.title,
+            productSubTitle: props.subTitle,
+            imageUrl: props.imageUrl,
+          },
+        })
+      );
+    }
+  };
   const sendToCartHandler = () => {
+    // if  user not select color or size
+    if (formNotValid) return;
     //if user not login
     if (status === "unauthenticated" && !isUser) {
       dispatch(
@@ -25,8 +46,9 @@ const ProductOption = (props) => {
           item: {
             color: option.color,
             size: option.size,
+            productTitle: props.title,
             quantity: 1,
-            productPrice: props.productPrice,
+            productPrice: props.price,
             productId: props.productId,
             imageUrl: props.imageUrl,
           },
@@ -38,14 +60,15 @@ const ProductOption = (props) => {
     else if (status === "authenticated" && isUser) {
       dispatch(
         orderAction.setOrder({
-          costumerId: session.user.email,
+          costumerId: userId,
           date: new Date().toString(),
           status: "pending",
           item: {
             color: option.color,
             size: option.size,
+            productTitle: props.title,
             quantity: 1,
-            productPrice: props.productPrice,
+            productPrice: props.price,
             productId: props.productId,
             imageUrl: props.imageUrl,
           },
@@ -83,10 +106,14 @@ const ProductOption = (props) => {
       <div
         className={`d-flex justify-content-between align-items-center w-100 my-2 ${style.optionButton}`}
       >
-        <button className={` ${style.like}`}>
+        <button className={` ${style.like}`} onClick={sendToFavoritesHandler}>
           <HeartIcon className={`w-75`} />
         </button>
-        <button className={` ${style.checkout}`} onClick={sendToCartHandler}>
+        <button
+          className={` ${style.checkout}`}
+          onClick={sendToCartHandler}
+          disabled={formNotValid}
+        >
           Add to Card
         </button>
       </div>

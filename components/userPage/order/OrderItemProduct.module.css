@@ -1,18 +1,27 @@
 .itemProduct {
   width: 100%;
 }
+
+.itemProduct .imageWrapper {
+  width: 70px;
+}
+
 .itemProduct .image {
+  max-width: 100%;
+  max-height: 100%;
 }
 .itemProduct .info {
+  min-width: 90px;
+  width: 25%;
 }
 .itemProduct .info h2 {
-  font-size: var(--font-small);
+  font-size: var(--font-tiny);
 }
 .itemProduct .quantity {
-  font-size: var(--font-medium);
+  font-size: var(--font-small);
 }
 
 .itemProduct .price {
   margin-left: auto;
-  font-size: var(--font-medium);
+  font-size: var(--font-small);
 }

@@ -4,7 +4,7 @@ import SortNav from "../../../components/homePage/SortNav";
 import SideWrapper from "../../../components/homePage/side/SideWrapper";
 import Side from "../../../components/homePage/side/Side";
 import CardsWraper from "../../../components/homePage/CardsWraper";
-import { ContextProvider } from "../../../context/ctxStore";
+import { ViewContextProvider } from "../../../context/ctxStore";
 import { connectToDatabase } from "../../../lib/db";
 import LoaadingButton from "../../../components/ui/LoadingButton";
 import usePagination from "../../../hooks/usePagination";
@@ -38,11 +38,14 @@ const ShoesPage = (props) => {
     );
   };
   return (
-    <ContextProvider>
+    <ViewContextProvider>
       <Head>
-        <title>shoes</title>
-        <meta name="description" content="shoes" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Men's Shoes. E.B SHOP</title>
+        <meta
+          name="description"
+          content="Get laced up for training, sport and lifestyle with the latest designs of men's shoes from E.B SHOP."
+        />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <Search />
       <SortNav quantity={shoes.length}>
@@ -66,7 +69,7 @@ const ShoesPage = (props) => {
       ) : (
         <h5 className="my-4 text-center">No more products</h5>
       )}
-    </ContextProvider>
+    </ViewContextProvider>
   );
 };
 export async function getStaticProps() {
@@ -77,11 +80,11 @@ export async function getStaticProps() {
     .find({ category: "shoes" }, { limit: 8 })
     .toArray();
   const filterResult = await collection
-    .find({ category: "shoes" }, { color: 1, size: 1, sub_category: 1 })
+    .find({ category: "shoes" }, { color: 1, size: 1, subCategory: 1 })
     .toArray();
   client.close();
   //filter data
-  let category = filterResult.map((item) => item.sub_category);
+  let category = filterResult.map((item) => item.subCategory);
   let colors = [];
   filterResult.forEach((items) => {
     items.color.forEach((item) => {
@@ -100,13 +103,13 @@ export async function getStaticProps() {
       shoesArray: result.map((item) => {
         return {
           _id: item._id.toString(),
-          product_price: item.product_price,
-          product_description: item.product_description,
+          productPrice: item.productPrice,
+          productDescription: item.productDescription,
           category: item.category,
-          pic_url: item.pic_url,
-          product_title: item.product_title,
-          prosuct_sub_title: item.prosuct_sub_title,
-          sub_category: item.sub_category,
+          picUrl: item.picUrl,
+          productTitle: item.productTitle,
+          productSubTitle: item.productSubTitle,
+          subCategory: item.subCategory,
           color: item.color,
           size: item.size,
         };

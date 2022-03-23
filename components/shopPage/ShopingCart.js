@@ -21,7 +21,7 @@ const ShopingCart = () => {
   };
   return (
     <div
-      className={`w-100 py-3 d-flex flex-column flex-sm-row align-items-center align-items-sm-start`}
+      className={`w-100 pt-5 pb-3 d-flex flex-column flex-sm-row align-items-center align-items-sm-start`}
     >
       <div className={` my-2 ${style.items}`}>
         <h1>Bag</h1>
@@ -41,6 +41,7 @@ const ShopingCart = () => {
           <ShopingCartProduct
             key={index}
             id={product.productId}
+            title={product.productTitle}
             quantity={product.quantity}
             imageUrl={product.imageUrl}
             color={product.color}

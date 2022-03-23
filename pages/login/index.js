@@ -1,11 +1,18 @@
 import LayoutLogin from "../../components/loginPage/LayoutLogin";
 import Login from "../../components/loginPage/Login";
 import { getSession } from "next-auth/react";
+import Head from "next/head";
 const LoginPage = () => {
   return (
-    <LayoutLogin>
-      <Login />
-    </LayoutLogin>
+    <>
+      <Head>
+        <title>Login</title>
+        <link rel="icon" href="/logo.png" />
+      </Head>
+      <LayoutLogin>
+        <Login />
+      </LayoutLogin>
+    </>
   );
 };
 export async function getServerSideProps(context) {

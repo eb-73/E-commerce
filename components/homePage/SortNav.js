@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { CSSTransition } from "react-transition-group";
 import { useState, useContext } from "react";
-import Context from "../../context/ctxStore";
+import { ViewContext } from "../../context/ctxStore";
 const SortNav = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const ctx = useContext(Context);
+  const ctx = useContext(ViewContext);
   const showModalHandler = () => {
     setShowModal(true);
   };

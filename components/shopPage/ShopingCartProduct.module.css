@@ -2,7 +2,7 @@
   width: 100%;
 }
 .cartProduct:not(:last-child) {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.295);
+  border-bottom: 1px solid var(--color-border);
 }
 .cartProduct .image {
   width: 150px;
@@ -19,14 +19,14 @@
 }
 .product .name h4 {
   width: 100%;
-  font-size: 1rem;
+  font-size: var(--font-small);
   margin: 0;
   font-weight: bold;
 }
 .product .name h5 {
-  font-size: 0.9rem;
+  font-size: var(--font-tiny);
   margin: 7px 0;
-  color: rgba(65, 65, 65, 0.664);
+  color: var(--color-text-secondary);
 }
 .editBox .quantityBox {
   border-radius: 25px;
@@ -39,7 +39,7 @@
   border-radius: 50%;
   color: black;
   background-color: #f1f1ef;
-  font-size: 16px;
+  font-size: var(--font-tiny);
 }
 .editBox .quantityBox .quantityButton:hover {
   color: white;
@@ -48,7 +48,7 @@
 .editBox .quantityBox .quantity {
   width: 20px;
   height: 30px;
-  font-size: 1rem;
+  font-size: var(--font-small);
   margin: 0;
 }
 .editBox .delete {
@@ -68,6 +68,7 @@
   color: white;
 }
 .cartProduct .price {
+  font-size: var(--font-small);
   margin-left: auto;
   margin-bottom: auto;
 }

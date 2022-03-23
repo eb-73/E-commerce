@@ -1,0 +1,23 @@
+.itemProduct {
+}
+.itemProduct .imageWrapper {
+  min-width: 55px;
+  max-width: 65px;
+}
+
+.itemProduct .image {
+  max-width: 100%;
+  max-height: 100%;
+}
+.itemProduct .info {
+  /* width: 85%; */
+}
+.info h2 {
+  font-size: var(--font-tiny);
+  color: var(--color-text-secondary);
+  margin: 2px 0;
+}
+.info .title {
+  font-size: var(--font-small);
+  color: var(--color-text-main);
+}

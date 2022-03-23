@@ -20,12 +20,12 @@
   height: 100px;
 }
 .product .name h4 {
-  font-size: 0.8rem;
+  font-size: var(--font-tiny);
   margin: 0;
   font-weight: bold;
 }
 .product .name h5 {
-  font-size: 0.9rem;
+  font-size: var(--font-tiny);
   margin: 0;
   color: rgb(48, 179, 150);
 }
@@ -50,7 +50,7 @@
 }
 .product .quantityBox .quantity {
   width: 20px;
-  font-size: 1rem;
+  font-size: var(--font-small);
   margin: 0;
 }
 .cartProduct .close {
@@ -69,4 +69,33 @@
 .cartProduct .close:hover {
   background-color: rgb(250, 70, 70);
   color: white;
+}
+@media screen and (max-width: 576px) {
+  .cartProduct {
+    height: 120px;
+  }
+
+  .cartProduct .image {
+    width: 120px;
+    height: 120px;
+    background-color: #f1f1ef;
+  }
+  .cartProduct .close {
+    width: 38px;
+    height: 38px;
+  }
+  .product .name h4 {
+    font-size: var(--font-small);
+  }
+  .product .name h5 {
+    font-size: var(--font-small);
+  }
+  .product .quantityBox {
+    width: 95px;
+    height: 35px;
+  }
+  .product .quantityBox button {
+    width: 35px;
+    height: 35px;
+  }
 }

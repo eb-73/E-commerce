@@ -5,7 +5,7 @@ const SizeForm = (props) => {
     props.setSize(size);
   };
   return (
-    <div className={`w-100 mt-2 ${style.sizeSelect}`}>
+    <div className={`w-100 mt-2 ${style.sizeSelect} `}>
       <div
         className={`w-100  d-flex justify-content-start align-items-center  flex-wrap ${style.radioGroup}`}
       >

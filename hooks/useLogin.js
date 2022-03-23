@@ -8,7 +8,7 @@ const useLogin = () => {
       pass,
     });
 
-    console.log("result", result);
+    console.log("result login", result);
     if (result.ok && !result.error) {
       return result;
       // get order list from database

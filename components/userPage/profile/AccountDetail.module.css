@@ -13,7 +13,7 @@
   width: 30px;
 }
 .accountDetail h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-medium);
   margin-bottom: 20px;
 }
 .accountDetail .accountForm {
@@ -47,8 +47,8 @@
 }
 .accountDetail .deleteAccount {
   width: 60%;
-  border-top: 1px solid rgb(206, 206, 206);
-  border-bottom: 1px solid rgb(206, 206, 206);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 .saveButton button,
 .deleteAccount button {

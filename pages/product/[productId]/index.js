@@ -8,6 +8,7 @@ import { CSSTransition } from "react-transition-group";
 import { connectToDatabase } from "../../../lib/db";
 import { useState } from "react";
 import useSWR from "swr";
+import Head from "next/head";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const Product = (props) => {
   const [showCart, setShowCart] = useState(false);
@@ -22,13 +23,13 @@ const Product = (props) => {
     console.log("data", data);
     product = {
       id: data.productInfo._id.toString(),
-      product_price: data.productInfo.product_price,
-      product_description: data.productInfo.product_description,
+      productPrice: data.productInfo.productPrice,
+      productDescription: data.productInfo.productDescription,
       category: data.productInfo.category,
-      pic_url: data.productInfo.pic_url,
-      product_title: data.productInfo.product_title,
-      prosuct_sub_title: data.productInfo.prosuct_sub_title,
-      sub_category: data.productInfo.sub_category,
+      picUrl: data.productInfo.picUrl,
+      productTitle: data.productInfo.productTitle,
+      productSubTitle: data.productInfo.productSubTitle,
+      subCategory: data.productInfo.subCategory,
       color: data.productInfo.color,
       size: data.productInfo.size,
     };
@@ -40,47 +41,58 @@ const Product = (props) => {
     setShowCart(false);
   };
   return (
-    <div className={` d-flex flex-column flex-sm-row ${style.productPage}`}>
-      <ProductInfo
-        title={product.product_title}
-        subTitle={product.prosuct_sub_title}
-        price={product.product_price}
-        description={product.product_description}
-        className="d-none d-sm-flex"
-      />
-      <ImageSlider imagesUrl={product.pic_url} />
-      <ProductInfo
-        title={product.product_title}
-        subTitle={product.prosuct_sub_title}
-        price={product.product_price}
-        description={product.product_description}
-        className="d-flex d-sm-none"
-      />
-      <ProductOption
-        colors={product.color}
-        sizes={product.size}
-        productId={product.id}
-        productTitle={product.product_title}
-        subCategory={product.sub_category}
-        productPrice={product.product_price}
-        imageUrl={product.pic_url[0]}
-        openShopingCart={openCartHandler}
-      />
-      <CSSTransition
-        in={showCart}
-        timeout={500}
-        unmountOnExit
-        mountOnEnter
-        classNames={{
-          enter: style.showModal,
-          enterActive: style.showModalActive,
-          exit: style.hideModal,
-          exitActive: style.hideModalActive,
-        }}
-      >
-        <DemoCart closeShopingCart={closeCartHandler} />
-      </CSSTransition>
-    </div>
+    <>
+      <Head>
+        <title>{`${product.productTitle} ${product.productSubTitle}. E.B SHOP`}</title>
+        <meta
+          name="description"
+          content={`Find the ${product.productTitle} ${product.productSubTitle} at E.B SHOP.  Free delivery and returns.`}
+        />
+        <link rel="icon" href="/logo.png" />
+      </Head>
+      <div className={` d-flex flex-column flex-sm-row ${style.productPage}`}>
+        <ProductInfo
+          title={product.productTitle}
+          subTitle={product.productSubTitle}
+          price={product.productPrice}
+          description={product.productDescription}
+          className="d-none d-sm-flex"
+        />
+        <ImageSlider imagesUrl={product.picUrl} />
+        <ProductInfo
+          title={product.productTitle}
+          subTitle={product.productSubTitle}
+          price={product.productPrice}
+          description={product.productDescription}
+          className="d-flex d-sm-none"
+        />
+        <ProductOption
+          colors={product.color}
+          sizes={product.size}
+          productId={product.id}
+          title={product.productTitle}
+          subTitle={product.productSubTitle}
+          subCategory={product.subCategory}
+          price={product.productPrice}
+          imageUrl={product.picUrl[0]}
+          openShopingCart={openCartHandler}
+        />
+        <CSSTransition
+          in={showCart}
+          timeout={500}
+          unmountOnExit
+          mountOnEnter
+          classNames={{
+            enter: style.showModal,
+            enterActive: style.showModalActive,
+            exit: style.hideModal,
+            exitActive: style.hideModalActive,
+          }}
+        >
+          <DemoCart closeShopingCart={closeCartHandler} />
+        </CSSTransition>
+      </div>
+    </>
   );
 };
 export async function getStaticPaths() {
@@ -108,13 +120,13 @@ export async function getStaticProps(context) {
     props: {
       productInfo: {
         _id: result._id.toString(),
-        product_price: result.product_price,
-        product_description: result.product_description,
+        productPrice: result.productPrice,
+        productDescription: result.productDescription,
         category: result.category,
-        pic_url: result.pic_url,
-        product_title: result.product_title,
-        prosuct_sub_title: result.prosuct_sub_title,
-        sub_category: result.sub_category,
+        picUrl: result.picUrl,
+        productTitle: result.productTitle,
+        productSubTitle: result.productSubTitle,
+        subCategory: result.subCategory,
         color: result.color,
         size: result.size,
       },

@@ -1,4 +1,3 @@
-import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 import style from "./TotalPrice.module.css";
 const TotalPrice = (props) => {
   return (

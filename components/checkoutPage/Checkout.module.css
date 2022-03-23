@@ -4,13 +4,22 @@
 .summary {
   width: 35%;
 }
-.summary h1 {
-  font-size: 1.6rem;
+
+.order .orderList {
+  width: 100%;
 }
+.summary h1,
+.order h1 {
+  font-size: var(--font-medium);
+}
+.order h1 {
+  width: 100%;
+  height: 60px;
+  background-color: var(--color-border);
+}
+
 @media screen and (max-width: 576px) {
-  .checkhoutContent {
-    width: 100%;
-  }
+  .checkhoutContent,
   .summary {
     width: 100%;
   }

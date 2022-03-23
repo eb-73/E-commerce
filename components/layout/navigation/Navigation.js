@@ -5,8 +5,10 @@ import { useSession } from "next-auth/react";
 import { authAction } from "../../../redux/authSlice";
 import { orderAction } from "../../../redux/orderSlice";
 import {
+  getFavoriteFromDatabase,
   getOrderListFromDatabase,
   getOrderListFromLocal,
+  sendFavoriteToDatabase,
   sendOrderListToDatabase,
   sendOrderListToLocal,
 } from "../../../redux/actions";
@@ -17,6 +19,7 @@ import {
   ChevronDownIcon,
   MenuAlt2Icon,
 } from "@heroicons/react/outline";
+import { HeartIcon as HeartIcon2 } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import ProfileButton from "./ProfileButton";
 import toast from "react-hot-toast";
@@ -24,30 +27,33 @@ const Navigation = () => {
   const [showDrop, setShowDrop] = useState(false);
   const auth = useSelector((state) => state.Auth);
   const cart = useSelector((state) => state.Order);
+  const fav = useSelector((state) => state.Favorite);
   const dispatch = useDispatch();
   const router = useRouter();
   const { data: session, status } = useSession();
   const isUser = !!session?.user;
   const userEmail = session?.user.email;
+  const userId = session?.user.userId;
   let allQuantity;
-
+  console.log("session", session);
   allQuantity = cart.orderProducts.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.quantity;
   }, 0);
+
   useEffect(() => {
     //listen to change authState
     if (isUser) {
-      dispatch(authAction.login(userEmail));
-      localStorage.removeItem("cart");
+      dispatch(authAction.login({ userEmail, id: userId }));
     } else if (!isUser) {
       dispatch(authAction.logout());
     }
-  }, [isUser]);
+  }, [isUser, userEmail]);
 
   useEffect(() => {
     // get order list of user
     if (auth.isAuth) {
-      dispatch(getOrderListFromDatabase(auth.authenticatedEmail));
+      dispatch(getOrderListFromDatabase(auth.userId, "pending"));
+      dispatch(getFavoriteFromDatabase(auth.userId));
     } else if (!auth.isAuth) {
       dispatch(getOrderListFromLocal());
     }
@@ -63,6 +69,15 @@ const Navigation = () => {
       sendOrderListToLocal(cart);
     }
   }, [cart, isUser]);
+  //send favorite to database
+  useEffect(() => {
+    if (fav.userId && isUser) {
+      console.log("send fav to database");
+      sendFavoriteToDatabase(fav)
+        .then()
+        .catch((err) => toast.error(err.message));
+    }
+  }, [fav, isUser]);
   //login user
   const loginHandler = () => {
     router.replace("/signup");
@@ -79,7 +94,11 @@ const Navigation = () => {
         >
           <Link href="/favorites">
             <div className={style.favIcon}>
-              <HeartIcon className={style.navIcon} />
+              {fav.favProducts.length === 0 ? (
+                <HeartIcon className={style.navIcon} />
+              ) : (
+                <HeartIcon2 className={`${style.navIcon} ${style.appear}`} />
+              )}
             </div>
           </Link>
           <Link href="/cart">
@@ -102,11 +121,11 @@ const Navigation = () => {
             )}
           </div>
         </div>
-        <div className={`navbar-brand d-sm-none d-block  ${style.logo}`}>
+        <div className={`navbar-brand d-sm-none m-0 d-block  ${style.logo}`}>
           <Link href="/">
             <a>
-              <h5>shop</h5>
-              <h4>E.B</h4>
+              <h4>shop</h4>
+              <h5>E.B</h5>
             </a>
           </Link>
         </div>
@@ -169,22 +188,22 @@ const Navigation = () => {
             </li>
             <li className={style.navItem}>
               <a className="nav-link" href="#">
-                Contacts
+                Contacts Us
               </a>
             </li>
             <li className={style.navItem}>
               <a className="nav-link" href="#">
-                About
+                About Us
               </a>
             </li>
           </ul>
         </div>
 
-        <div className={`navbar-brand d-sm-block mx-0 d-none  ${style.logo}`}>
+        <div className={`navbar-brand d-sm-block m-0 d-none  ${style.logo}`}>
           <Link href="/">
             <a>
-              <h5>shop</h5>
-              <h4>E.B</h4>
+              <h4>shop</h4>
+              <h5>E.B</h5>
             </a>
           </Link>
         </div>

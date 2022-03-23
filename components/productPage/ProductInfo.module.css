@@ -1,7 +1,7 @@
 .productInfo {
   width: 25%;
   height: 100%;
-  border-right: 1px solid gray;
+  border-right: 1px solid var(--color-border);
   padding-right: 16px;
   overflow: hidden auto;
 }

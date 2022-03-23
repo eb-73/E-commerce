@@ -22,7 +22,7 @@ function usePaymentForm(mode, defaultValue) {
   const [touched, setTouched] = useState(false);
   let validateInput;
   if (mode === "creditCardNumber") {
-    validateInput = input.trim().length === 16;
+    validateInput = input.trim().length === 19;
   } else if (mode === "creditCardExpiry") {
     validateInput = input.trim().length === 2;
   } else if (mode === "creditCardCvv") {

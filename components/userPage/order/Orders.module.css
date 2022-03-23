@@ -8,6 +8,9 @@
 }
 .orderTitles h2 {
   margin: 0;
+  padding: 0 2px;
+  max-width: 20%;
+  word-wrap: break-word;
   font-size: var(--font-small);
   font-weight: 600;
 }

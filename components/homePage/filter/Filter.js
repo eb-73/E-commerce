@@ -16,7 +16,7 @@ const Filter = (props) => {
     >
       <form className={` ${style.filter} `}>
         <div
-          className={`py-2 px-3 d-flex justify-content-between ${style.title}`}
+          className={`py-2 px-3 mb-2 d-flex justify-content-between ${style.title}`}
         >
           <h2>Filters</h2>
           <XIcon className={style.closeIcon} onClick={props.closeFilter} />

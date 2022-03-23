@@ -25,19 +25,30 @@ const order = createSlice({
       state.orderProducts = [];
     },
     setInitialOrder(state, action) {
+      state.orderId = action.payload.orderId;
+      state.costumerId = action.payload.costumerId;
+      state.orderDate = action.payload.date;
+      state.orderStatus = action.payload.status;
+      state.orderTotalPrice = action.payload.totalPrice;
+      state.orderProducts = action.payload.items;
+      // action.payload.items.forEach((element) => {
+      //   state.orderProducts.push(element);
+      // });
+    },
+    mergeInitialOrder(state, action) {
       if (state.orderProducts.length === 0) {
         state.orderId = action.payload.orderId;
         state.costumerId = action.payload.costumerId;
         state.orderDate = action.payload.date;
         state.orderStatus = action.payload.status;
         state.orderTotalPrice = action.payload.totalPrice;
-        action.payload.items.forEach((element) => {
-          state.orderProducts.push(element);
-        });
+        state.orderProducts = action.payload.items;
+        // action.payload.items.forEach((element) => {
+        //   state.orderProducts.push(element);
+        // });
       } else if (state.orderProducts.length > 0) {
         state.orderId = action.payload.orderId;
         state.costumerId = action.payload.costumerId;
-
         state.orderTotalPrice =
           +state.orderTotalPrice + +action.payload.totalPrice;
         //check if items is array of cart

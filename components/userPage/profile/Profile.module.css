@@ -19,8 +19,8 @@
 }
 .list li a {
   text-decoration: none;
-  color: gray;
-  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-small);
 }
 .list li .profileIcons {
   width: 20px;

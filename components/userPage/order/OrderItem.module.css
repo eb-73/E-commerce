@@ -14,11 +14,21 @@
 }
 .order .orderTitle h4 {
   margin: 0;
+  padding: 5px 2px;
+  max-width: 20%;
+  overflow: hidden;
+  word-wrap: break-word;
   font-size: var(--font-tiny);
+}
+.order .buttonWrapper {
+  margin: 0;
+  padding: 0 2px;
+  max-width: 20%;
 }
 .order .orderButton {
   border: none;
-  width: 4rem;
+  min-width: 3rem;
+  max-width: 4rem;
   height: 35px;
   border-radius: 5px;
   background-color: white;
@@ -42,6 +52,7 @@
   border-radius: 10px;
   transition: all ease 0.5s, max-height ease 0.5s;
 }
+
 .orderBody .total {
   border-top: 1px dashed var(--color-border);
 }

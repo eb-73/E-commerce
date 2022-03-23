@@ -3,6 +3,7 @@
   max-height: 2000px;
   overflow: hidden;
 }
+
 .sizeSelect .radioGroup input {
   visibility: visible;
   display: none;

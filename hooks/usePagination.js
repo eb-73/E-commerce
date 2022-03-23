@@ -1,7 +1,7 @@
 import useSWRInfinite from "swr/infinite";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { priceAsc, priceDesc } from "../lib/sortFunction";
+import { priceAsc, priceDesc, newest } from "../lib/sortFunction";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const usePagination = (initialValue, category) => {
   const router = useRouter();
@@ -31,8 +31,8 @@ const usePagination = (initialValue, category) => {
   //sort
 
   if (sort === "newest") {
+    data = data.flat().sort(newest);
   } else if (sort === "priceDesc") {
-    console.log("in sort");
     data = data.flat().sort(priceDesc);
   } else if (sort === "priceAsc") {
     data = data.flat().sort(priceAsc);
@@ -42,13 +42,13 @@ const usePagination = (initialValue, category) => {
   const products = data.flat().map((item) => {
     return {
       id: item._id.toString(),
-      product_price: item?.product_price,
-      product_description: item?.product_description,
+      productPrice: item?.productPrice,
+      productDescription: item?.productDescription,
       category: item?.category,
-      pic_url: item?.pic_url,
-      product_title: item?.product_title,
-      prosuct_sub_title: item?.prosuct_sub_title,
-      sub_category: item?.sub_category,
+      picUrl: item?.picUrl,
+      productTitle: item?.productTitle,
+      productSubTitle: item?.productSubTitle,
+      subCategory: item?.subCategory,
       color: item?.color,
       size: item?.size,
     };

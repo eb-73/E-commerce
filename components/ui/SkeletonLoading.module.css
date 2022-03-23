@@ -1,0 +1,31 @@
+.all {
+  width: 100%;
+}
+.all .title {
+  width: 95%;
+  height: 40px;
+}
+.all .content {
+  width: 55%;
+  height: 15px;
+}
+.all .skeleton {
+  border-radius: 5px;
+  background-color: #ededed;
+  background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 60%
+    )
+    #ededed;
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1s loading ease-in-out infinite;
+}
+
+@keyframes loading {
+  to {
+    background-position-x: -20%;
+  }
+}

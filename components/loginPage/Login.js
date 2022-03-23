@@ -43,10 +43,10 @@ const Login = () => {
       const result = await loginCredentials(emailInput, passInput);
       toast.success("Welcome to your account");
       setLoading(false);
-      if (from == "/cart") router.replace("/checkout/delivery");
+      if (from === "/cart") router.replace("/checkout/delivery");
       else router.replace("/");
     } catch (err) {
-      toast.success(err.message);
+      toast.error(err.message);
       setLoading(false);
     }
   };

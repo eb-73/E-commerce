@@ -1,11 +1,11 @@
 .sort h6 {
-  font-size: 1rem;
+  font-size: var(--font-small);
 }
 .sort .itemNumber {
-  color: #2b2b2bad;
+  color: var(--color-text-secondary);
 }
 .sort .viewIcons {
-  border: 1px solid #acacacad;
+  border: 1px solid var(--color-border);
   width: 70px;
   border-radius: 10px;
 }

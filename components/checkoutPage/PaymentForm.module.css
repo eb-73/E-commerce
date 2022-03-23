@@ -1,9 +1,9 @@
 .paymentForm label h4 {
-  font-size: 1rem;
+  font-size: var(--font-small);
 }
 .paymentForm label h6 {
-  font-size: 0.7rem;
-  color: rgb(136, 136, 136);
+  font-size: var(--font-tiny);
+  color: var(--color-text-secondary);
 }
 
 .paymentForm .inputGroup {
@@ -64,6 +64,9 @@
   width: 20px;
   color: rgb(221, 0, 11);
   animation: appear ease 500ms;
+}
+.paymentForm .notValid {
+  border-color: rgb(221, 0, 11);
 }
 @keyframes appear {
   from {

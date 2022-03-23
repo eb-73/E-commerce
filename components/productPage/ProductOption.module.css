@@ -2,24 +2,24 @@
   width: 25%;
   /* height: clamp(100%,100%,100%); */
   height: 100%;
-  border-left: 1px solid gray;
+  border-left: 1px solid var(--color-border);
   padding-left: 16px;
   overflow: hidden auto;
   position: relative;
 }
 .producOption .sizeTitle h4 {
-  font-size: 1rem;
+  font-size: var(--font-small);
   margin: 0;
 }
 .producOption .sizeTitle h5 {
-  font-size: 0.8rem;
+  font-size: var(--font-tiny);
   margin: 0;
   font-weight: bold;
-  color: #a3a3a3;
+  color: var(--color-text-secondary);
 }
 
 .producOption .colorTitle h4 {
-  font-size: 1rem;
+  font-size: var(--font-small);
   margin: 0;
 }
 
@@ -33,7 +33,11 @@
   text-align: center;
 }
 .producOption .optionButton .checkout:hover {
-  background-color: rgba(0, 0, 0, 0.836);
+  background-color: rgb(65, 65, 65);
+}
+
+.producOption .optionButton .checkout:disabled {
+  background-color: rgb(80, 80, 80);
 }
 .producOption .optionButton .like {
   width: 35px;
@@ -45,7 +49,7 @@
   text-align: center;
 }
 .producOption .optionButton .like:hover {
-  border: 1px solid #d8d8d8;
+  border: 1px solid var(--border-color);
   color: red;
 }
 
@@ -60,7 +64,7 @@
     /* overflow: hidden; */
   }
   .producOption .optionButton {
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     position: fixed;
     bottom: -8px;
     padding: 5px 50px;

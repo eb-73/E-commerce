@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { orderAction } from "../../../redux/orderSlice";
 import { signOut } from "next-auth/react";
+import { favoriteAction } from "../../../redux/favoriteSlice";
 const ProfileButton = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const ProfileButton = () => {
     signOut({ redirect: false });
     localStorage.removeItem("cart");
     dispatch(orderAction.clearOrder());
+    dispatch(favoriteAction.clear());
     router.replace("/login");
   };
   return (

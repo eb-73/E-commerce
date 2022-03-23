@@ -10,6 +10,7 @@ import {
   KeyIcon,
   ChevronRightIcon,
 } from "@heroicons/react/outline";
+import { favoriteAction } from "../../../redux/favoriteSlice";
 const Profile = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -18,6 +19,7 @@ const Profile = (props) => {
     signOut({ redirect: false });
     localStorage.removeItem("cart");
     dispatch(orderAction.clearOrder());
+    dispatch(favoriteAction.clear());
     router.replace("/login");
   };
   return (

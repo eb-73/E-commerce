@@ -13,11 +13,9 @@ const DemoCartProduct = (props) => {
     `/api/product/productInfo?id=${props.id}`,
     fetcher
   );
-  let title;
   let maxQuantity;
   if (data) {
     const index = data.productInfo.size.findIndex((i) => i.name === props.size);
-    title = data.productInfo.product_title;
     maxQuantity = data.productInfo.size[index].quantity;
   }
   // if quantity change in server
@@ -92,14 +90,14 @@ const DemoCartProduct = (props) => {
         className={`d-flex flex-column justify-content-around align-items-start mx-3 ${style.product}`}
       >
         <div className={`${style.name}`}>
-          <h4>{title || "..."}</h4>
+          <h4>{props.title || "..."}</h4>
           <h5>${props.price}</h5>
         </div>
         <div className={`d-flex ${style.quantityBox}`}>
           <button
             type="button"
             onClick={decrementHandler}
-            className="d-flex flex-column align-items-center"
+            className="d-flex justify-content-center align-items-center"
           >
             -
           </button>
@@ -111,7 +109,7 @@ const DemoCartProduct = (props) => {
           <button
             type="button"
             onClick={incrementHandler}
-            className="d-flex flex-column align-items-center"
+            className="d-flex justify-content-center align-items-center"
           >
             +
           </button>

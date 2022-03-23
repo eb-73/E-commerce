@@ -1,10 +1,10 @@
 import { createContext, useState } from "react";
-const Context = createContext({
+//change view cards
+export const ViewContext = createContext({
   smallView: true,
   setView(type) {},
 });
-
-export const ContextProvider = (props) => {
+export const ViewContextProvider = (props) => {
   const [view, setView] = useState(true);
   const changeView = (type) => {
     if (type === "small") {
@@ -15,14 +15,13 @@ export const ContextProvider = (props) => {
   };
 
   return (
-    <Context.Provider
+    <ViewContext.Provider
       value={{
         smallView: view,
         setView: changeView,
       }}
     >
       {props.children}
-    </Context.Provider>
+    </ViewContext.Provider>
   );
 };
-export default Context;

@@ -1,11 +1,18 @@
 import LayoutLogin from "../../components/loginPage/LayoutLogin";
+import Head from "next/head";
 import Signup from "../../components/loginPage/Signup";
 import { getSession } from "next-auth/react";
 const SignupPage = () => {
   return (
-    <LayoutLogin>
-      <Signup />
-    </LayoutLogin>
+    <>
+      <Head>
+        <title>Signup</title>
+        <link rel="icon" href="/logo.png" />
+      </Head>
+      <LayoutLogin>
+        <Signup />
+      </LayoutLogin>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import SortNav from "../../../components/homePage/SortNav";
 import SideWrapper from "../../../components/homePage/side/SideWrapper";
 import Side from "../../../components/homePage/side/Side";
 import CardsWraper from "../../../components/homePage/CardsWraper";
-import { ContextProvider } from "../../../context/ctxStore";
+import { ViewContextProvider } from "../../../context/ctxStore";
 import { connectToDatabase } from "../../../lib/db";
 import LoaadingButton from "../../../components/ui/LoadingButton";
 import usePagination from "../../../hooks/usePagination";
@@ -19,7 +19,7 @@ const ClothePage = (props) => {
     setSize,
     isLoadingMore,
   } = usePagination(clothesArray, "clothing");
-  if (clothes && clothes.length === 10) {
+  if (clothes && clothes.length === 15) {
     showLoadMore = false;
   }
   const setSizeHandler = () => {
@@ -34,11 +34,14 @@ const ClothePage = (props) => {
     );
   };
   return (
-    <ContextProvider>
+    <ViewContextProvider>
       <Head>
-        <title>clothing</title>
-        <meta name="description" content="clothes" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Men's Clothing. E.B SHOP</title>
+        <meta
+          name="description"
+          content="Find Men's Clothing at E.B SHOP. Free delivery and returns."
+        />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <Search />
       <SortNav quantity={clothes.length}>
@@ -63,7 +66,7 @@ const ClothePage = (props) => {
       ) : (
         <h5 className="my-4 text-center">No more products</h5>
       )}
-    </ContextProvider>
+    </ViewContextProvider>
   );
 };
 export async function getStaticProps() {
@@ -74,11 +77,11 @@ export async function getStaticProps() {
     .find({ category: "clothing" }, { limit: 8 })
     .toArray();
   const filterResult = await collection
-    .find({ category: "clothing" }, { color: 1, size: 1, sub_category: 1 })
+    .find({ category: "clothing" }, { color: 1, size: 1, subCategory: 1 })
     .toArray();
   client.close();
   //filter data
-  let category = filterResult.map((item) => item.sub_category);
+  let category = filterResult.map((item) => item.subCategory);
   let colors = [];
   filterResult.forEach((items) => {
     items.color.forEach((item) => {
@@ -97,13 +100,13 @@ export async function getStaticProps() {
       clothesArray: result.map((item) => {
         return {
           _id: item._id.toString(),
-          product_price: item.product_price,
-          product_description: item.product_description,
+          productPrice: item.productPrice,
+          productDescription: item.productDescription,
           category: item.category,
-          pic_url: item.pic_url,
-          product_title: item.product_title,
-          prosuct_sub_title: item.prosuct_sub_title,
-          sub_category: item.sub_category,
+          picUrl: item.picUrl,
+          productTitle: item.productTitle,
+          productSubTitle: item.productSubTitle,
+          subCategory: item.subCategory,
           color: item.color,
           size: item.size,
         };

@@ -1,8 +1,16 @@
 import style from "./PaymentForm.module.css";
 import usePaymentForm from "../../hooks/usePaymentForm";
+import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { sendOrderPaymentToDatabase } from "../../redux/actions";
+import { orderAction } from "../../redux/orderSlice";
 const PaymentForm = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.Auth);
   const {
     inputValue: yearExpiryValue,
     validateInput: validateYearExpiry,
@@ -54,7 +62,21 @@ const PaymentForm = () => {
     if (!formValidate) {
       return;
     }
-    router.push("/checkout/payment");
+    setLoading(true);
+    try {
+      const result = await sendOrderPaymentToDatabase({
+        id: user.userId,
+        method: "credit payment",
+        email: user.authenticatedEmail,
+      });
+      setLoading(false);
+      dispatch(orderAction.clearOrder());
+      toast.success(result.message);
+      router.push(`/checkout/order-complete/${result.id}`);
+    } catch (err) {
+      setLoading(false);
+      toast.error(err.message);
+    }
   };
   return (
     <form onSubmit={onSubmitHandler} className={style.paymentForm}>
@@ -63,7 +85,11 @@ const PaymentForm = () => {
           <h4>Card Number</h4>
           <h6>Enter the 16-digit card number on the card</h6>
         </label>
-        <div className={` d-flex justify-content-between ${style.inputGroup}`}>
+        <div
+          className={` d-flex justify-content-between ${style.inputGroup} ${
+            creditNotValid && style.notValid
+          }`}
+        >
           <input
             id="ccn"
             type="tel"
@@ -82,7 +108,11 @@ const PaymentForm = () => {
           <h4>CVV2 Number</h4>
           <h6>Enter the 3 or 4 digit number on the card</h6>
         </label>
-        <div className={`d-flex w-sm-50 w-100 ${style.inputGroup}`}>
+        <div
+          className={`d-flex w-sm-50 w-100 ${style.inputGroup} ${
+            cvvNotValid && style.notValid
+          }`}
+        >
           <input
             id="ccv"
             type="text"
@@ -101,7 +131,9 @@ const PaymentForm = () => {
         </label>
         <div className="w-sm-50 w-100 my-3 d-flex justify-content-between align-items-center">
           <div
-            className={`d-flex  mr-2 w-50 ${style.inputGroup} ${style.expiryDate}`}
+            className={`d-flex  mr-2 w-50 ${style.inputGroup} ${
+              style.expiryDate
+            } ${monthExpiryNotValid && style.notValid}`}
           >
             <input
               id="cce"
@@ -115,10 +147,12 @@ const PaymentForm = () => {
           </div>
           <h5 className="h-100 m-0 p-0">/</h5>
           <div
-            className={`d-flex w-50 ${style.inputGroup} ${style.expiryDate}`}
+            className={`d-flex w-50 ${style.inputGroup} ${style.expiryDate} ${
+              yearExpiryNotValid && style.notValid
+            }`}
           >
             <input
-              id="cce"
+              id="cce2"
               type="tel"
               maxLength="2"
               placeholder="YEAR"
@@ -134,7 +168,11 @@ const PaymentForm = () => {
           <h4>Password </h4>
           <h6>Enter your dynamic password</h6>
         </label>
-        <div className={`d-flex w-sm-50 w-100 my-3 ${style.inputGroup}`}>
+        <div
+          className={`d-flex w-sm-50 w-100 my-3 ${style.inputGroup} ${
+            passwordNotValid && style.notValid
+          }`}
+        >
           <input
             id="password"
             type="password"
@@ -147,6 +185,13 @@ const PaymentForm = () => {
       </div>
       <div className={`m-0 d-flex justify-content-sm-end  ${style.formButton}`}>
         <button type="submit" disabled={!formValidate}>
+          {loading && (
+            <span
+              className="spinner-border spinner-border-sm mx-1"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          )}
           Pay & Continue
         </button>
       </div>

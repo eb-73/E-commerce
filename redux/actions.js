@@ -1,15 +1,34 @@
 import toast from "react-hot-toast";
+import { favoriteAction } from "./favoriteSlice";
 import { orderAction } from "./orderSlice";
 import { searchProductsAction } from "./searchProducts";
-export const getOrderListFromDatabase = (authenticatedEmail) => {
+export const getOrderListFromDatabase = (userId, status) => {
   return async (dispatch) => {
-    console.log("get order");
-    fetch(`/api/order/${authenticatedEmail}`)
+    //get order in dtabase if exixst
+    fetch(`/api/order/${userId}/${status}`)
       .then((res) => res.json())
       .then((data) => {
         const { order } = data;
-        if (order) {
-          console.log("order is in database");
+        const localCart = localStorage.getItem("cart");
+        console.log("localCart", localCart);
+        //order is in guest mode and login to your account
+        if (localCart && order) {
+          localStorage.removeItem("cart");
+          console.log("order is in database mergeinitial");
+          dispatch(
+            orderAction.mergeInitialOrder({
+              orderId: order._id.toString(),
+              costumerId: order.costumerId,
+              date: order.orderDate,
+              status: order.orderStatus,
+              totalPrice: order.orderTotalPrice,
+              items: order.orderProducts,
+            })
+          );
+        }
+        //get order when is loged in your account
+        else if (!localCart && order) {
+          console.log("order is in database setinitial");
           dispatch(
             orderAction.setInitialOrder({
               orderId: order._id.toString(),
@@ -20,12 +39,14 @@ export const getOrderListFromDatabase = (authenticatedEmail) => {
               items: order.orderProducts,
             })
           );
-        } else if (!order && data.orderId) {
+        }
+        //if order not exist in database, create pending order and set id
+        else if (!order && data.orderId) {
           console.log("not order in database", data.orderId);
           dispatch(
             orderAction.setOrderId({
               orderId: data.orderId,
-              costumerId: authenticatedEmail,
+              costumerId: userId,
               orderStatus: "pending",
             })
           );
@@ -34,6 +55,15 @@ export const getOrderListFromDatabase = (authenticatedEmail) => {
       })
       .catch((err) => console.log("error message", err));
   };
+};
+export const getOrderDetail = async (id, status) => {
+  const res = await fetch(`/api/order/${id}/${status}`);
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result.message);
+  } else {
+    return result;
+  }
 };
 export const getOrderListFromLocal = () => {
   return async (dispatch) => {
@@ -77,7 +107,7 @@ export const sendOrderListToDatabase = async (cart) => {
   }
 };
 export const sendOrderDeliveryToDatabase = async (deliveryData) => {
-  const res = await fetch("/api/order", {
+  const res = await fetch("/api/order?dataFor=delivery", {
     method: "PUT",
     body: JSON.stringify({
       costumerId: deliveryData.id,
@@ -89,6 +119,28 @@ export const sendOrderDeliveryToDatabase = async (deliveryData) => {
       province: deliveryData.province,
       phone: deliveryData.phone,
       postalCode: deliveryData.postalCode,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message);
+  } else {
+    return data;
+  }
+};
+export const sendOrderPaymentToDatabase = async (paymentData) => {
+  const res = await fetch("/api/order?dataFor=payment", {
+    method: "PUT",
+    body: JSON.stringify({
+      costumerId: paymentData.id,
+      isPaid: true,
+      paidAt: new Date(),
+      paymentMethod: paymentData.method,
+      email: paymentData.email,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -114,17 +166,52 @@ export const getSearchProducts = (q, filter, category, size, color) => {
     const data = await res.json();
     const searchProducts = data.productsFilter.map((item) => ({
       id: item._id.toString(),
-      product_title: item.product_title,
-      prosuct_sub_title: item.prosuct_sub_title,
-      product_description: item.product_description,
-      pic_url: item.pic_url,
-      product_price: item.product_price,
+      productTitle: item.productTitle,
+      productSubTitle: item.productSubTitle,
+      productDescription: item.productDescription,
+      picUrl: item.picUrl,
+      productPrice: item.productPrice,
       category: item.category,
-      sub_category: item.sub_category,
+      subCategory: item.subCategory,
       size: item.size,
       color: item.color,
     }));
     dispatch(searchProductsAction.setProducts(searchProducts));
     dispatch(searchProductsAction.setLoading(false));
   };
+};
+export const getFavoriteFromDatabase = (userId) => {
+  return async (dispatch) => {
+    const res = await fetch(`/api/favorite?id=${userId}`);
+    const result = await res.json();
+    if (res.ok && result && result.favorite) {
+      dispatch(
+        favoriteAction.setInitial({
+          costumerId: userId,
+          data: result.favorite,
+        })
+      );
+    } else {
+      return;
+    }
+  };
+};
+export const sendFavoriteToDatabase = async (favData) => {
+  console.log("send fav to database in action", favData);
+  const res = await fetch("/api/favorite", {
+    method: "PUT",
+    body: JSON.stringify({
+      id: favData.userId,
+      data: favData.favProducts,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result.message);
+  } else {
+    return result;
+  }
 };

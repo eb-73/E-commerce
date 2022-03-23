@@ -1,10 +1,16 @@
 import style from "./AccountDetail.module.css";
 import useForm from "../../../hooks/useForm";
-import { CheckIcon, XIcon, ArrowLeftIcon } from "@heroicons/react/outline";
-import { useSelector } from "react-redux";
+import DeleteModal from "./DeleteModal";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import { CheckIcon, XIcon, ArrowLeftIcon } from "@heroicons/react/outline";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { signIn } from "next-auth/react";
 const AccountDetail = (props) => {
+  const [showModal, setShowModal] = useState(false);
   const userEmail = useSelector((state) => state.Auth.authenticatedEmail);
+  const userId = useSelector((state) => state.Auth.userId);
   const {
     inputValue: textValue,
     validateInput: validateText,
@@ -43,6 +49,7 @@ const AccountDetail = (props) => {
   } = useForm("select", "Fars");
   const formValidate =
     validateText && validateEmail && validatePostal && dateValue && selectValue;
+  // save change user information
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (!formValidate) {
@@ -66,6 +73,29 @@ const AccountDetail = (props) => {
     });
     const data = await res.json();
     console.log(data.message);
+
+    if (userEmail !== emailValue) {
+      try {
+        const result = await signIn("credentials", {
+          redirect: false,
+          oldEmail: userEmail,
+          newEmail: emailValue,
+        });
+        if (result.ok && !result.error) {
+          toast.success("changes-successfully-added");
+        }
+      } catch (err) {
+        toast.error(err.message);
+      }
+    }
+  };
+  //show delete account modal
+  const showModalHandler = () => {
+    setShowModal(true);
+  };
+  //hide delete account modal
+  const hideModalHandler = () => {
+    setShowModal(false);
   };
   return (
     <div
@@ -134,7 +164,7 @@ const AccountDetail = (props) => {
           <input
             type="text"
             name="postalCode"
-            id="potal"
+            id="postal"
             placeholder="Enter your city"
             onChange={postalChange}
             value={postalValue}
@@ -152,8 +182,9 @@ const AccountDetail = (props) => {
       <div
         className={`py-3 my-4 d-flex justify-content-between align-items-center ${style.deleteAccount}`}
       >
-        Delete Account <button>Delete</button>
+        Delete Account <button onClick={showModalHandler}>Delete</button>
       </div>
+      {showModal && <DeleteModal userId={userId} hide={hideModalHandler} />}
     </div>
   );
 };

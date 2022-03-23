@@ -1,10 +1,10 @@
 import style from "./Card.module.css";
 import Image from "next/image";
-import Context from "../../context/ctxStore";
+import { ViewContext } from "../../context/ctxStore";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 const Card = (props) => {
-  const ctx = useContext(Context);
+  const ctx = useContext(ViewContext);
   const router = useRouter();
   const clickHandler = () => {
     router.replace(`/product/${props.id}`);
@@ -31,7 +31,6 @@ const Card = (props) => {
       </div>
 
       <h3 className={style.title}>{props.title}</h3>
-      <h4>{props.sub_title}</h4>
       <h1 className={style.price}>${props.price}</h1>
     </div>
   );

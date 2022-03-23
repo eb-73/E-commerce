@@ -12,11 +12,11 @@ const Stepper = () => {
   const { step } = router.query;
 
   useEffect(() => {
-    if (step === "delivery") {
+    if (step[0] === "delivery") {
       setActive({ delivery: true, payment: false, "order-complete": false });
-    } else if (step === "payment") {
+    } else if (step[0] === "payment") {
       setActive({ delivery: true, payment: true, "order-complete": false });
-    } else if (step === "order-complete") {
+    } else if (step[0] === "order-complete") {
       setActive({ delivery: true, payment: true, "order-complete": true });
     }
   }, [step]);

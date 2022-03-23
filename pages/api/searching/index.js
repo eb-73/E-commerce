@@ -6,7 +6,6 @@ async function searching(req, res) {
     const catArray = category?.split(",");
     const sizeArray = size?.split(",");
     const colorArray = color?.split(",");
-    console.log("req Query", colorArray);
     const client = await connectToDatabase();
     const db = client.db();
     const data = await db
@@ -16,7 +15,7 @@ async function searching(req, res) {
           {
             $and: [
               {
-                product_title:
+                productTitle:
                   q === "undefined"
                     ? { $exists: false }
                     : { $regex: q, $options: "i" },
@@ -32,7 +31,7 @@ async function searching(req, res) {
           },
 
           {
-            sub_category:
+            subCategory:
               !catArray || catArray[0] === "undefined"
                 ? { $exists: false }
                 : { $in: [...catArray] },

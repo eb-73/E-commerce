@@ -9,8 +9,6 @@ const DemoCart = (props) => {
   const closeCart = (e) => {
     if (e.target.id === "overlayCart") {
       props.closeShopingCart();
-    } else {
-      return;
     }
   };
   return createPortal(
@@ -47,6 +45,7 @@ const DemoCart = (props) => {
             <DemoCartProduct
               key={index}
               id={product.productId}
+              title={product.productTitle}
               color={product.color}
               size={product.size}
               quantity={product.quantity}
@@ -56,7 +55,7 @@ const DemoCart = (props) => {
           ))}
         </div>
         <button className={`${style.doneButton}`} type="submit">
-          Done
+          View bag
         </button>
       </form>
     </div>,

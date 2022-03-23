@@ -4,12 +4,12 @@
   border-radius: 5px;
   background-color: #ffffff00;
 }
-.logo h5 {
-  font-size: 20px;
+.logo h4 {
+  font-size: 18px;
   text-align: center;
   margin: 0;
 }
-.logo h4 {
+.logo h5 {
   font-size: 10px;
   text-align: center;
   margin: 0;
@@ -59,7 +59,7 @@
   cursor: pointer;
 }
 .shop .profile {
-  border-left: 1px solid #53535369;
+  border-left: 1px solid var(--color-border);
   padding-left: 7px;
   position: relative;
   display: flex;
@@ -68,7 +68,7 @@
 .profile .loginButton {
   outline: none;
   padding: 2px 5px;
-  border: 1px solid #53535369;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   color: #080b13;
   background-color: rgba(255, 0, 0, 0);
@@ -139,7 +139,9 @@
 .hideBadge {
   display: none;
 }
-
+.shop .appear {
+  animation: appear ease 0.5s;
+}
 @keyframes appear {
   from {
     transform: scale(0.5);
@@ -148,5 +150,20 @@
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+@media screen and (max-width: 576px) {
+  .shop .navIcon {
+    width: 19px;
+  }
+  .shop .cartIcon,
+  .shop .favIcon {
+    margin: 0 7px;
+  }
+  .logo h4 {
+    font-size: 16px;
+  }
+  .logo h5 {
+    font-size: 9px;
   }
 }

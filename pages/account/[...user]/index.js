@@ -15,8 +15,11 @@ const OptionPage = ({ pageName }) => {
   const showNavHandler = () => {
     setHideSide({ navSide: false, content: "" });
   };
+  //set title for haed and content for page body
+  let title;
   let content;
   if (!pageName[1] && pageName[0] === "profile") {
+    title = "Profile";
     content = (
       <Profile
         hideSide={hideSide.navSide}
@@ -31,6 +34,7 @@ const OptionPage = ({ pageName }) => {
     );
   }
   if (pageName[0] === "profile" && pageName[1] === "change-password") {
+    title = "Change password";
     content = (
       <Profile
         hideSide={hideSide.navSide}
@@ -45,14 +49,15 @@ const OptionPage = ({ pageName }) => {
     );
   }
   if (pageName[0] === "orders") {
+    title = "Orders";
     content = <Orders />;
   }
   return (
     <div className="pt-5">
       <Head>
-        <title>Account</title>
+        <title>{`Account ${title}`}</title>
         <meta name="description" content="Created by Ebrahim" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <Nav />
       {content}

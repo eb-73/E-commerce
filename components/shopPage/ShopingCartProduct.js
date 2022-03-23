@@ -11,13 +11,11 @@ const ShopingCartProduct = (props) => {
     `/api/product/productInfo?id=${props.id}`,
     fetcher
   );
-  let title;
   let subCategory;
   let maxQuantity;
   if (data) {
     const index = data.productInfo.size.findIndex((i) => i.name === props.size);
-    title = data.productInfo.product_title;
-    subCategory = data.productInfo.sub_category;
+    subCategory = data.productInfo.subCategory;
     maxQuantity = data.productInfo.size[index].quantity;
   }
 
@@ -115,7 +113,7 @@ const ShopingCartProduct = (props) => {
         className={`d-flex flex-column justify-content-around align-items-start mx-3 ${style.product}`}
       >
         <div className={`${style.name}`}>
-          <h4>{title || "..."}</h4>
+          <h4>{props.title || "..."}</h4>
           <h5>{subCategory || "..."}</h5>
           <h5>{props.color}</h5>
           <h5>{props.size}</h5>

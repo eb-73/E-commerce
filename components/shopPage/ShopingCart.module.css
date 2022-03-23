@@ -3,13 +3,13 @@
   margin-right: 20px;
 }
 .items h1 {
-  font-size: 1.6rem;
+  font-size: var(--font-large);
 }
 .summary {
   width: 35%;
 }
 .summary h1 {
-  font-size: 1.6rem;
+  font-size: var(--font-medium);
 }
 .checkoutButton {
   width: 100%;

@@ -6,7 +6,7 @@
 .boxWraper h4 {
   width: 100%;
   padding: 5px;
-  font-size: 1rem;
+  font-size: var(--font-small);
   margin: 0;
   cursor: pointer;
   user-select: none;
@@ -24,6 +24,7 @@
 .boxWraper .list li {
   position: relative;
   height: 25px;
+  font-size: var(--font-tiny);
   cursor: pointer;
   user-select: none;
   opacity: 0;

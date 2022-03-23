@@ -15,7 +15,7 @@ const Payment = () => {
   };
 
   return (
-    <div className={style.payment}>
+    <div className={`mt-2 ${style.payment}`}>
       <h2>Payment</h2>
       <h3>Select Payment Method</h3>
       <div className="">
@@ -38,7 +38,7 @@ const Payment = () => {
             name="payment-method"
             onChange={changeRadioHandler}
           />
-          <label htmlFor="pm2">Online Payment</label>
+          <label htmlFor="pm2">Online payment</label>
         </div>
       </div>
       <div className={` my-2 ${style.promoCode}`}>
@@ -58,8 +58,14 @@ const Payment = () => {
         </div>
       </div>
       {/* show conditionaly payment method content */}
-      {/* online payment method */}
+
       <div className={` my-3 ${style.paymentMethodContent}`}>
+        {paymentMethod === "pm1" ? (
+          <h2 className="my-3">Credit payment</h2>
+        ) : (
+          <h2 className="my-3">Online payment</h2>
+        )}
+        {/* online payment method */}
         {paymentMethod === "pm1" && (
           <div
             className={`my-3 d-flex justify-content-sm-end  ${style.payButton}`}

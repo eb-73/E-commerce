@@ -2,16 +2,14 @@ import style from "./Delivery.module.css";
 import useForm from "../../hooks/useForm";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { sendOrderDeliveryToDatabase } from "../../redux/actions";
 import toast from "react-hot-toast";
 import { useState } from "react";
 const Delivery = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const authenticatedEmail = useSelector(
-    (state) => state.Auth.authenticatedEmail
-  );
+  const userId = useSelector((state) => state.Auth.userId);
   const {
     inputValue: nameValue,
     validateInput: validateName,
@@ -94,7 +92,7 @@ const Delivery = () => {
     setLoading(true);
     try {
       const result = await sendOrderDeliveryToDatabase({
-        id: authenticatedEmail,
+        id: userId,
         name: nameValue,
         lastName: lastNameValue,
         city: cityValue,
@@ -104,15 +102,15 @@ const Delivery = () => {
         phone: phoneValue,
         postalCode: postalValue,
       });
-      setLoading(true);
+      setLoading(false);
       router.push("/checkout/payment");
     } catch (err) {
-      toast.error(err);
-      setLoading(true);
+      setLoading(false);
+      toast.error(err.message);
     }
   };
   return (
-    <div className={style.delivery}>
+    <div className={`mt-2 ${style.delivery}`}>
       <h2>Delivery Options</h2>
       <form
         className={` my-3 ${style.deliveryForm}`}

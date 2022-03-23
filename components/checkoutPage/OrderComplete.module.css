@@ -1,0 +1,121 @@
+.orderComplete,
+.orderComplete .content {
+  width: 100%;
+}
+
+.content .orderInfo {
+  width: 65%;
+  margin-right: 20px;
+  border: 1px solid var(--color-border);
+}
+.content .orderCart {
+  width: 35%;
+  margin-left: 20px;
+  border: 1px solid var(--color-border);
+}
+.orderCart .orderList {
+  width: 100%;
+}
+.orderCart h1 {
+  font-size: var(--font-medium);
+  width: 100%;
+  height: 55px;
+  background-color: var(--color-border);
+}
+.orderComplete .success {
+  width: 100%;
+}
+.success .checkIcon {
+  width: 60px;
+  color: rgb(72, 170, 72);
+  animation: appear 0.3s ease-out;
+}
+.success h2 {
+  font-size: var(--font-medium);
+  color: var(--color-text-main);
+}
+.orderId span {
+  color: rgb(72, 170, 72);
+  text-decoration: underline;
+}
+.orderInfo .header {
+  width: 100%;
+  height: 55px;
+  background-color: var(--color-black);
+  font-size: var(--font-medium);
+  color: white;
+}
+.orderInfo .orderId {
+  padding: 25px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-small);
+  color: var(--color-text-main);
+}
+.orderInfo .address,
+.orderInfo .payment {
+  padding: 25px 0;
+  /* border-bottom: 1px solid var(--color-border); */
+}
+.orderInfo .address {
+  border-bottom: 1px solid var(--color-border);
+}
+.address .title,
+.payment .title {
+  font-size: var(--font-small);
+  color: var(--color-text-main);
+}
+.address .shipingAddress,
+.payment .method {
+  font-size: var(--font-tiny);
+  color: var(--color-text-secondary);
+}
+.address .status,
+.payment .status {
+  font-size: var(--font-tiny);
+  color: var(--color-text-secondary);
+}
+.orderCart .total {
+  border-top: 1px dotted var(--color-border);
+}
+.orderCart .total h4 {
+  font-size: var(--font-small);
+}
+.orderCart .collapseIcon {
+  width: 20px;
+}
+.orderInfoButton button {
+  height: 40px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: 1px solid rgb(206, 206, 206);
+}
+
+.orderInfoButton button:hover {
+  background-color: rgb(70, 70, 70);
+}
+@keyframes appear {
+  from {
+    opacity: 0.5;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media screen and (max-width: 576px) {
+  .content .orderInfo,
+  .content .orderCart {
+    width: 100%;
+    margin: 0 0;
+  }
+  .orderCart h1,
+  .orderInfo .header {
+    height: 45px;
+  }
+  .orderInfoButton button {
+    width: 100%;
+  }
+}

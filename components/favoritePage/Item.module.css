@@ -1,0 +1,55 @@
+.card {
+  width: 250px;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 1;
+  transition: width ease 0.5s;
+}
+.card:hover {
+}
+.card button {
+  width: 38px;
+  padding: 7px;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+.card button:hover .heartIcon {
+  transform: scale(1.2);
+  transition: all ease 0.2s;
+}
+.card .pic {
+  background-color: #f1f1ef;
+  width: 100%;
+  transition: all ease 0.2s;
+}
+
+.pic img {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+}
+.card .title {
+  width: 100%;
+  text-align: start;
+  font-size: var(--font-small);
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin: 0;
+}
+.card .subTitle {
+  width: 100%;
+  text-align: start;
+  font-size: var(--font-tiny);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+@media screen and (max-width: 576px) {
+  .card {
+    width: 85%;
+  }
+}

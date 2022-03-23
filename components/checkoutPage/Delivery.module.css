@@ -2,7 +2,7 @@
   width: 100%;
 }
 .delivery h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-medium);
   margin-bottom: 20px;
 }
 .delivery .deliveryForm {

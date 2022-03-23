@@ -7,15 +7,15 @@
 }
 
 .totalPrice div h4 {
-  font-size: 1rem;
+  font-size: var(--font-small);
   margin: 0;
 }
 .totalPrice .total {
   padding: 20px 0px;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.295);
-  border-top: 1px solid rgba(128, 128, 128, 0.295);
+  border-bottom: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
 }
 .totalPrice .total h4 {
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-size: var(--font-tiny);
+  font-weight: 700;
 }

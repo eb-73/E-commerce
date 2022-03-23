@@ -1,11 +1,12 @@
 html {
   --color-black: #222;
   --color-background: #faf9f7;
-  --color-border: rgba(128, 128, 128, 0.295);
-  --color-text-main: black;
-  --color-text-secondary: gray;
+  --color-border: #8080804b;
+  --color-text-main: #111;
+  --color-text-secondary: #757575;
+  --font-huge: 3rem;
   --font-large: 2rem;
-  --font-medium: 1.5rem;
+  --font-medium: 1.3rem;
   --font-small: 1rem;
   --font-tiny: 0.8rem;
 }
@@ -72,6 +73,6 @@ nav {
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media screen and (min-width: 1400px) {
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
