@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { createUserGoogle } from "../../../lib/db";
 import { comparePass, connectToDatabase } from "../../../lib/db";
 export default NextAuth({
   session: {
@@ -77,11 +78,23 @@ export default NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ account, profile }) {
+      if (profile && account.provider === "google") {
+        try {
+          await createUserGoogle(profile.sub, profile.name, profile.email);
+        } catch (err) {
+          console.log(err.message);
+          return "/unauthorized";
+        }
+      }
+      return true;
+    },
     async jwt({ token, user }) {
       // Persist the OAuth access_token to the token right after signin
       if (user) {
         token.id = user.id;
       }
+
       return token;
     },
     async session({ session, token }) {

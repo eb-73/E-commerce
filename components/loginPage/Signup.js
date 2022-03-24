@@ -6,7 +6,7 @@ import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import createUser from "../../lib/createUser";
+import { createUser } from "../../lib/createUser";
 import { signIn } from "next-auth/react";
 import useLogin from "../../hooks/useLogin";
 const Signup = () => {
@@ -80,8 +80,12 @@ const Signup = () => {
       setLoading(false);
     }
   };
-  const googleSigninHandler = () => {
-    signIn("google");
+  const googleSigninHandler = async () => {
+    try {
+      const result = await signIn("google");
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
   return (
     <div className={`d-flex flex-column align-items-center ${style.signup}`}>

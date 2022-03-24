@@ -51,8 +51,12 @@ const Login = () => {
     }
   };
   //signin with google
-  const googleSigninHandler = () => {
-    signIn("google");
+  const googleSigninHandler = async () => {
+    try {
+      const result = await signIn("google");
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
   return (
     <div className={`d-flex flex-column align-items-center ${style.login}`}>
