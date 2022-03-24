@@ -1,7 +1,7 @@
 import style from "./Navigation.module.css";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import { authAction } from "../../../redux/authSlice";
 import { orderAction } from "../../../redux/orderSlice";
 import {
@@ -86,21 +86,27 @@ const Navigation = () => {
   const showDropdown = () => {
     setShowDrop((prevState) => !prevState);
   };
+  const clickFavHandler = async () => {
+    if (status === "authenticated" && isUser) {
+      router.push("/favorites");
+    } else if (status === "unauthenticated" && !isUser) {
+      router.push(`/login?from=/favorites`);
+    }
+  };
   return (
     <nav className="navbar fixed-top navbar-expand-sm  navbar-light px-sm-4 ">
       <div className="container-fluid d-flex flex-row-reverse justify-content-between">
         <div
           className={`d-flex justify-content-between align-items-center ${style.shop}`}
         >
-          <Link href="/favorites">
-            <div className={style.favIcon}>
-              {fav.favProducts.length === 0 ? (
-                <HeartIcon className={style.navIcon} />
-              ) : (
-                <HeartIcon2 className={`${style.navIcon} ${style.appear}`} />
-              )}
-            </div>
-          </Link>
+          <div className={style.favIcon} onClick={clickFavHandler}>
+            {fav.favProducts.length === 0 ? (
+              <HeartIcon className={style.navIcon} />
+            ) : (
+              <HeartIcon2 className={`${style.navIcon} ${style.appear}`} />
+            )}
+          </div>
+
           <Link href="/cart">
             <div className={style.cartIcon}>
               <ShoppingCartIcon className={style.navIcon} />

@@ -44,6 +44,7 @@ const Login = () => {
       toast.success("Welcome to your account");
       setLoading(false);
       if (from === "/cart") router.replace("/checkout/delivery");
+      else if (from === "/favorites") router.replace("/favorites");
       else router.replace("/");
     } catch (err) {
       toast.error(err.message);
@@ -52,8 +53,12 @@ const Login = () => {
   };
   //signin with google
   const googleSigninHandler = async () => {
+    let url;
+    if (from === "/cart") url = "/checkout/delivery";
+    else if (from === "/favorites") url = "/favorites";
+    else url = "/";
     try {
-      const result = await signIn("google");
+      const result = await signIn("google", { callbackUrl: url });
     } catch (err) {
       toast.error(err.message);
     }

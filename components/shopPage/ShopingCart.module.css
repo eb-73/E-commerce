@@ -13,14 +13,15 @@
 }
 .checkoutButton {
   width: 100%;
-  height: 45px;
+  height: 40px;
   border-radius: 25px;
   border: none;
-  background-color: rgb(3, 3, 3);
+  background-color: var(--color-black);
+  font-size: var(--font-medium);
   color: white;
 }
 .checkoutButton:hover {
-  background-color: rgb(65, 65, 65);
+  background-color: rgb(53, 53, 53);
 }
 .checkoutButton:disabled {
   background-color: rgb(80, 80, 80);
@@ -38,8 +39,11 @@
   }
   .checkoutButton {
     position: fixed;
+    width: 99%;
     bottom: 0px;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     border-radius: 0;
     border: 1px solid white;
   }

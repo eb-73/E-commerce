@@ -70,13 +70,13 @@
   border-radius: 5px;
   border: none;
   background-color: var(--color-black);
-  font-size: var(--font-small);
+  font-size: var(--font-medium);
   color: white;
   position: fixed;
-  bottom: 58px;
+  bottom: 57px;
 }
 .shopingCart .doneButton:hover {
-  background-color: rgb(66, 66, 66);
+  background-color: rgb(53, 53, 53);
 }
 @keyframes appear {
   from {
@@ -95,6 +95,6 @@
     width: 100%;
   }
   .shopingCart .doneButton {
-    width: 95%;
+    width: 98%;
   }
 }

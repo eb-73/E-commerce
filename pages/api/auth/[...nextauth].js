@@ -83,7 +83,6 @@ export default NextAuth({
         try {
           await createUserGoogle(profile.sub, profile.name, profile.email);
         } catch (err) {
-          console.log(err.message);
           return "/unauthorized";
         }
       }
