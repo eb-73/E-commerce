@@ -40,7 +40,7 @@
 }
 .formButton button {
   height: 35px;
-  background-color: black;
+  background-color: var(--color-black);
   color: white;
   border-radius: 5px;
   padding: 2px 5px;
@@ -48,7 +48,7 @@
 }
 
 .formButton button:hover {
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(53, 53, 53);
 }
 .formButton button:disabled,
 .formButton button:disabled:hover {
@@ -82,6 +82,6 @@
 @media screen and (max-width: 576px) {
   .formButton button {
     width: 100%;
-    height: 45px;
+    height: 40px;
   }
 }

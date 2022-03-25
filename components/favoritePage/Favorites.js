@@ -1,7 +1,6 @@
 import style from "./Favorites.module.css";
 import Item from "./Item";
 import { useSelector } from "react-redux";
-import favorite from "../../redux/favoriteSlice";
 const Favorites = () => {
   const favorites = useSelector((state) => state.Favorite.favProducts);
   return (

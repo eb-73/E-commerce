@@ -1,7 +1,6 @@
-import toast from "react-hot-toast";
-import { favoriteAction } from "./favoriteSlice";
-import { orderAction } from "./orderSlice";
-import { searchProductsAction } from "./searchProducts";
+import { favoriteAction } from "../redux/favoriteSlice";
+import { orderAction } from "../redux/orderSlice";
+import { searchProductsAction } from "../redux/searchProducts";
 export const getOrderListFromDatabase = (userId, status) => {
   return async (dispatch) => {
     //get order in dtabase if exixst
@@ -214,4 +213,18 @@ export const sendFavoriteToDatabase = async (favData) => {
   } else {
     return result;
   }
+};
+export const createUser = async (userData) => {
+  const response = await fetch("/api/auth/signup", {
+    method: "POST",
+    body: JSON.stringify(userData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "something is wrong");
+  }
+  return data;
 };

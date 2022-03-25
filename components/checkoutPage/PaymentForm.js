@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { sendOrderPaymentToDatabase } from "../../redux/actions";
+import { sendOrderPaymentToDatabase } from "../../actions/actions";
 import { orderAction } from "../../redux/orderSlice";
 const PaymentForm = () => {
   const [loading, setLoading] = useState(false);

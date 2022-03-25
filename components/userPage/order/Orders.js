@@ -1,8 +1,6 @@
 import style from "./Orders.module.css";
 import OrderItem from "./OrderItem";
-import { getOrderDetail } from "../../../redux/actions";
-import { getSession } from "next-auth/react";
-import LoadingDots from "../../ui/LoadingDots";
+import { getOrderDetail } from "../../../actions/actions";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";

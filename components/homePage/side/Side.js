@@ -30,7 +30,6 @@ const Side = (props) => {
   }, [router.query[props.name]]);
   // update query string with checkbox form
   const filterHandler = (e) => {
-    console.log("change");
     let queryString = check
       .filter((item) => item.value === true)
       .map((item) => item.name);
@@ -62,7 +61,6 @@ const Side = (props) => {
         }
       }
     }
-    console.log(router.pathname);
     router.push(
       {
         pathname: "/search",

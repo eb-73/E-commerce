@@ -3,7 +3,7 @@ import useForm from "../../hooks/useForm";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { sendOrderDeliveryToDatabase } from "../../redux/actions";
+import { sendOrderDeliveryToDatabase } from "../../actions/actions";
 import toast from "react-hot-toast";
 import { useState } from "react";
 const Delivery = () => {
@@ -209,7 +209,8 @@ const Delivery = () => {
                 type="text"
                 name="postalCode"
                 id="potal"
-                placeholder="Enter your city"
+                placeholder="Enter your postal code"
+                maxLength="10"
                 onChange={postalChange}
                 value={postalValue}
                 onBlur={postalBlur}

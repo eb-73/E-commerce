@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { useSession, getSession } from "next-auth/react";
 import { authAction } from "../../../redux/authSlice";
-import { orderAction } from "../../../redux/orderSlice";
 import {
   getFavoriteFromDatabase,
   getOrderListFromDatabase,
@@ -11,7 +10,7 @@ import {
   sendFavoriteToDatabase,
   sendOrderListToDatabase,
   sendOrderListToLocal,
-} from "../../../redux/actions";
+} from "../../../actions/actions";
 import { useEffect, useState } from "react";
 import {
   HeartIcon,

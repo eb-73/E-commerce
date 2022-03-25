@@ -6,7 +6,7 @@ import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import { createUser } from "../../lib/createUser";
+import { createUser } from "../../actions/actions";
 import { signIn } from "next-auth/react";
 import useLogin from "../../hooks/useLogin";
 const Signup = () => {

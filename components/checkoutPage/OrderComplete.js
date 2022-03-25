@@ -7,7 +7,7 @@ import {
 import OrderList from "./orderList/OrderList";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getOrderDetail } from "../../redux/actions";
+import { getOrderDetail } from "../../actions/actions";
 import toast from "react-hot-toast";
 import SkeletonLoading from "../ui/SkeletonLoading";
 import TotalPrice from "../shopPage/TotalPrice";

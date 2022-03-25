@@ -2,7 +2,6 @@ import style from "./DemoCartProduct.module.css";
 import { TrashIcon } from "@heroicons/react/outline";
 import { useDispatch } from "react-redux";
 import { orderAction } from "../../redux/orderSlice";
-import { useState, useEffect } from "react";
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
