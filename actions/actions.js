@@ -174,6 +174,7 @@ export const getSearchProducts = (q, filter, category, size, color) => {
       subCategory: item.subCategory,
       size: item.size,
       color: item.color,
+      productDate: item.productDate,
     }));
     dispatch(searchProductsAction.setProducts(searchProducts));
     dispatch(searchProductsAction.setLoading(false));

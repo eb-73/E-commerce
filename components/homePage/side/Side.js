@@ -11,10 +11,10 @@ const Side = (props) => {
     value: false,
   }));
   const [check, setCheck] = useState(initialValue);
+  const query = router.query[props.name];
   //set checkbox with query data
   useEffect(() => {
-    if (router.query[props.name] || Array.isArray(router.query[props.name])) {
-      const query = router.query[props.name];
+    if (query || Array.isArray(query)) {
       setCheck((prevState) =>
         prevState.map((item) => {
           if (Array.isArray(query) && query.includes(item.name)) {
@@ -27,7 +27,7 @@ const Side = (props) => {
         })
       );
     }
-  }, [router.query[props.name]]);
+  }, [query]);
   // update query string with checkbox form
   const filterHandler = (e) => {
     let queryString = check

@@ -44,7 +44,7 @@ const Dropdown = () => {
         <Link
           href={{
             pathname: pathName,
-            query: { sort: "newest" },
+            query: { ...router.query, sort: "newest" },
           }}
           shallow={true}
         >

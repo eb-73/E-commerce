@@ -165,7 +165,8 @@ const AccountDetail = (props) => {
             type="text"
             name="postalCode"
             id="postal"
-            placeholder="Enter your city"
+            placeholder="Enter your postal code"
+            maxLength="10"
             onChange={postalChange}
             value={postalValue}
             onBlur={postalBlur}

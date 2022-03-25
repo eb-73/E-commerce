@@ -25,23 +25,23 @@
 
 .producOption .optionButton .checkout {
   width: 80%;
-  height: 35px;
+  height: 40px;
   border: none;
   border-radius: 20px;
-  background-color: black;
+  background-color: var(--color-black);
   color: white;
   text-align: center;
 }
 .producOption .optionButton .checkout:hover {
-  background-color: rgb(65, 65, 65);
+  background-color: rgb(53, 53, 53);
 }
 
 .producOption .optionButton .checkout:disabled {
   background-color: rgb(80, 80, 80);
 }
 .producOption .optionButton .like {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border: 1px solid #f1f1ef;
   border-radius: 50%;
   background-color: white;

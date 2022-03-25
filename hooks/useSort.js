@@ -1,4 +1,4 @@
-import { priceAsc, priceDesc } from "../lib/sortFunction";
+import { priceAsc, priceDesc, newest } from "../lib/sortFunction";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 const useSort = (defaultProducts) => {
@@ -8,13 +8,14 @@ const useSort = (defaultProducts) => {
 
   useEffect(() => {
     if (sort) {
-      console.log(sort);
       if (sort === "newest") {
+        const products = sortedProducts.flat().sort(newest);
+        setSortedProducts(products);
       } else if (sort === "priceDesc") {
-        const products = sortedProducts.sort(priceDesc);
+        const products = sortedProducts.flat().sort(priceDesc);
         setSortedProducts(products);
       } else if (sort === "priceAsc") {
-        const products = sortedProducts.sort(priceAsc);
+        const products = sortedProducts.flat().sort(priceAsc);
         setSortedProducts(products);
       } else {
         setSortedProducts(defaultProducts);

@@ -112,6 +112,7 @@ export async function getStaticProps() {
           subCategory: item.subCategory,
           color: item.color,
           size: item.size,
+          productDate: item.productDate,
         };
       }),
       filters: {

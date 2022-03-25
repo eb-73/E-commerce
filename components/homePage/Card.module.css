@@ -50,10 +50,10 @@
 @media screen and (max-width: 576px) {
   .card.largeView {
     min-width: 200px;
-    width: 100%;
+    width: 95%;
   }
   .card.smallView {
     min-width: 150px;
-    width: 48%;
+    width: 45%;
   }
 }

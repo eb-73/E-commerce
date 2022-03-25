@@ -51,6 +51,7 @@ const usePagination = (initialValue, category) => {
       subCategory: item?.subCategory,
       color: item?.color,
       size: item?.size,
+      productDate: item?.productDate,
     };
   });
 
