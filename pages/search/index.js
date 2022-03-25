@@ -8,7 +8,7 @@ import { ViewContextProvider } from "../../context/ctxStore";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchProducts } from "../../redux/actions";
+import { getSearchProducts } from "../../actions/actions";
 import { connectToDatabase } from "../../lib/db";
 function SearchPage({ filters }) {
   const products = useSelector((state) => state.SearchProducts.products);

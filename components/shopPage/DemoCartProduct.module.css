@@ -81,15 +81,10 @@
     background-color: #f1f1ef;
   }
   .cartProduct .close {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
   }
-  .product .name h4 {
-    font-size: var(--font-small);
-  }
-  .product .name h5 {
-    font-size: var(--font-small);
-  }
+
   .product .quantityBox {
     width: 95px;
     height: 35px;
