@@ -3,7 +3,7 @@
 } */
 .productPage {
   width: 100%;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 60px);
 }
 .showModal {
   opacity: 0;

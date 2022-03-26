@@ -1,12 +1,17 @@
+import toast from "react-hot-toast";
 import { favoriteAction } from "../redux/favoriteSlice";
 import { orderAction } from "../redux/orderSlice";
 import { searchProductsAction } from "../redux/searchProducts";
 export const getOrderListFromDatabase = (userId, status) => {
   return async (dispatch) => {
     //get order in dtabase if exixst
-    fetch(`/api/order/${userId}/${status}`)
-      .then((res) => res.json())
-      .then((data) => {
+    let res;
+    let data;
+    try {
+      res = await fetch(`/api/order/${userId}/${status}`);
+      data = await res.json();
+
+      if (data && data.order) {
         const { order } = data;
         const localCart = localStorage.getItem("cart");
         console.log("localCart", localCart);
@@ -49,10 +54,13 @@ export const getOrderListFromDatabase = (userId, status) => {
               orderStatus: "pending",
             })
           );
-          return;
         }
-      })
-      .catch((err) => console.log("error message", err));
+      } else if (data && data.message) {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 };
 export const getOrderDetail = async (id, status) => {
@@ -159,45 +167,58 @@ export const sendOrderListToLocal = (cart) => {
 export const getSearchProducts = (q, filter, category, size, color) => {
   return async (dispatch) => {
     dispatch(searchProductsAction.setLoading(true));
-    const res = await fetch(
-      `/api/searching?q=${q}&filter=${filter}&category=${category}&size=${size}&color=${color}`
-    );
-    const data = await res.json();
-    const searchProducts = data.productsFilter.map((item) => ({
-      id: item._id.toString(),
-      productTitle: item.productTitle,
-      productSubTitle: item.productSubTitle,
-      productDescription: item.productDescription,
-      picUrl: item.picUrl,
-      productPrice: item.productPrice,
-      category: item.category,
-      subCategory: item.subCategory,
-      size: item.size,
-      color: item.color,
-      productDate: item.productDate,
-    }));
-    dispatch(searchProductsAction.setProducts(searchProducts));
-    dispatch(searchProductsAction.setLoading(false));
+    try {
+      const res = await fetch(
+        `/api/searching?q=${q}&filter=${filter}&category=${category}&size=${size}&color=${color}`
+      );
+      const data = await res.json();
+      if (res.ok) {
+        const searchProducts = data.productsFilter.map((item) => ({
+          id: item._id.toString(),
+          productTitle: item.productTitle,
+          productSubTitle: item.productSubTitle,
+          productDescription: item.productDescription,
+          picUrl: item.picUrl,
+          productPrice: item.productPrice,
+          category: item.category,
+          subCategory: item.subCategory,
+          size: item.size,
+          color: item.color,
+          productDate: item.productDate,
+        }));
+        dispatch(searchProductsAction.setProducts(searchProducts));
+      } else {
+        toast.error(data.message);
+      }
+
+      dispatch(searchProductsAction.setLoading(false));
+    } catch (err) {
+      toast.error(err.message);
+      dispatch(searchProductsAction.setLoading(false));
+    }
   };
 };
 export const getFavoriteFromDatabase = (userId) => {
   return async (dispatch) => {
-    const res = await fetch(`/api/favorite?id=${userId}`);
-    const result = await res.json();
-    if (res.ok && result && result.favorite) {
-      dispatch(
-        favoriteAction.setInitial({
-          costumerId: userId,
-          data: result.favorite,
-        })
-      );
-    } else {
-      return;
+    try {
+      const res = await fetch(`/api/favorite?id=${userId}`);
+      const result = await res.json();
+      if (res.ok && result && result.favorite) {
+        dispatch(
+          favoriteAction.setInitial({
+            costumerId: userId,
+            data: result.favorite,
+          })
+        );
+      } else if (!res.ok && result && result.message) {
+        toast.error(result.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 };
 export const sendFavoriteToDatabase = async (favData) => {
-  console.log("send fav to database in action", favData);
   const res = await fetch("/api/favorite", {
     method: "PUT",
     body: JSON.stringify({
@@ -211,9 +232,7 @@ export const sendFavoriteToDatabase = async (favData) => {
   const result = await res.json();
   if (!res.ok) {
     throw new Error(result.message);
-  } else {
-    return result;
-  }
+  } else return result;
 };
 export const createUser = async (userData) => {
   const response = await fetch("/api/auth/signup", {
@@ -226,6 +245,5 @@ export const createUser = async (userData) => {
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.message || "something is wrong");
-  }
-  return data;
+  } else return data;
 };

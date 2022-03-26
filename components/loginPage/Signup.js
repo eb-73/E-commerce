@@ -44,13 +44,13 @@ const Signup = () => {
     if (!validateForm) {
       return;
     }
-    setLoading(true);
     clearName();
     clearEmail();
     clearPass();
 
     try {
       setLoading(true);
+      //create user
       const res = await createUser({
         name: nameInput,
         email: emailInput,
@@ -62,19 +62,6 @@ const Signup = () => {
       setLoading(false);
       if (from == "/cart") router.replace("/checkout/delivery");
       else router.replace("/");
-      //
-      // const result = await signIn("credentials", {
-      //   redirect: false,
-      //   email: emailInput,
-      //   pass: passInput,
-      // });
-      // if (result.ok && !result.error) {
-      //   setLoading(false);
-      //   router.replace("/");
-      //   toast.success("Wellcome");
-      // } else {
-      //   throw new Error(result.error);
-      // }
     } catch (err) {
       toast.error(err.message);
       setLoading(false);

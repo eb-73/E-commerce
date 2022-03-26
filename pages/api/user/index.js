@@ -6,7 +6,6 @@ async function user(req, res) {
   if (req.method === "PUT") {
     const { currentUserEmail, newEmail, newDateOfBrith, newLocation } =
       req.body;
-    console.log("current email", currentUserEmail);
     let client;
     try {
       client = await connectToDatabase();
@@ -52,9 +51,7 @@ async function user(req, res) {
         res.status(201).json({ message: "user-was-deleted" });
       else res.status(411).json({ message: "user-not-found" });
     } catch {
-      res
-        .status(411)
-        .json({ message: "delete-user-failed-please-delete-again" });
+      res.status(411).json({ message: "delete-user-failed-please-try-again" });
       client.close();
     }
 

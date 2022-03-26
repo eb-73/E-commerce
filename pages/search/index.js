@@ -10,19 +10,21 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchProducts } from "../../actions/actions";
 import { connectToDatabase } from "../../lib/db";
-import useSort from "../../hooks/useSort";
+import { sortList } from "../../lib/sortFunction";
 function SearchPage({ filters }) {
   const initialProducts = useSelector((state) => state.SearchProducts.products);
-  const { sortedProducts: products } = useSort(initialProducts);
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log("search products", products);
-  const { q, filter, category, size, color } = router.query;
+  const { q, filter, category, size, color, sort } = router.query;
+  const { sortedProducts: products } = sortList(sort, initialProducts);
+
+  console.log("products", products, "initial", initialProducts);
   //fetch all query
   useEffect(() => {
     dispatch(getSearchProducts(q, filter, category, size, color));
   }, [q, filter, category, size, color]);
   //
+
   return (
     <ViewContextProvider>
       <Head>
