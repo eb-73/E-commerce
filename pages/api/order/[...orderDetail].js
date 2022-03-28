@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../../../lib/db";
 async function getOrder(req, res) {
   if (req.method === "GET") {

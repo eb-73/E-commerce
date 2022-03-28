@@ -5,7 +5,7 @@ import Side from "../../components/homePage/side/Side";
 import SortNav from "../../components/homePage/SortNav";
 import CardsWraper from "../../components/homePage/CardsWraper";
 import { ViewContextProvider } from "../../context/ctxStore";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchProducts } from "../../actions/actions";
@@ -17,8 +17,6 @@ function SearchPage({ filters }) {
   const router = useRouter();
   const { q, filter, category, size, color, sort } = router.query;
   const { sortedProducts: products } = sortList(sort, initialProducts);
-
-  console.log("products", products, "initial", initialProducts);
   //fetch all query
   useEffect(() => {
     dispatch(getSearchProducts(q, filter, category, size, color));

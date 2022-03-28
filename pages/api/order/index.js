@@ -87,14 +87,11 @@ async function order(req, res) {
         );
         if (order && order.lastErrorObject.updatedExisting)
           res.status(201).json({
-            message: "order-information-updated",
+            message: "order-successfully-placed",
             id: order.value._id.toString(),
           });
         else res.status(411).json({ message: "order-not-found" });
       }
-
-      // console.log("order", order.lastErrorObject.updatedExisting);
-      // console.log("order id", order.value._id.toString());
     } catch {
       res.status(411).json({ message: "insert-data-failed" });
       client.close();

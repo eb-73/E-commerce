@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/solid";
 import OrderList from "./orderList/OrderList";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getOrderDetail } from "../../actions/actions";
 import toast from "react-hot-toast";
@@ -27,7 +28,6 @@ const OrderComplete = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       const result = await getOrderDetail(step[1], "paid");
-      console.log(result.order);
       const {
         order: { _id: id, delivery, payment, orderProducts, orderTotalPrice },
       } = result;
@@ -45,7 +45,6 @@ const OrderComplete = () => {
       fetchOrder()
         .then()
         .catch((err) => {
-          console.log(err);
           toast.error(err.message);
         });
     }
@@ -92,7 +91,9 @@ const OrderComplete = () => {
             <div
               className={`m-3 d-flex justify-content-center justify-content-sm-end ${style.orderInfoButton}`}
             >
-              <button>Go to shop</button>
+              <Link href="/" replace={true}>
+                <button>Go to shop</button>
+              </Link>
             </div>
           </div>
         ) : (

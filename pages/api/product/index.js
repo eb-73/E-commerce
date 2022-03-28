@@ -1,5 +1,5 @@
 import { connectToDatabase } from "../../../lib/db";
-async function order(req, res) {
+async function product(req, res) {
   if (req.method === "GET") {
     const { page, category, limit } = req.query;
     let client;
@@ -33,4 +33,4 @@ async function order(req, res) {
     client.close();
   }
 }
-export default order;
+export default product;

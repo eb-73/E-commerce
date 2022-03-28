@@ -1,4 +1,3 @@
-import { MongoClient } from "mongodb";
 import { connectToDatabase } from "../../../lib/db";
 async function searching(req, res) {
   if (req.method === "GET") {

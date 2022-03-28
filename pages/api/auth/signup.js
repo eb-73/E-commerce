@@ -3,7 +3,6 @@ import {
   hashedPassword,
   insertToCollection,
 } from "../../../lib/db";
-
 const signup = async (req, res) => {
   if (req.method !== "POST") {
     return;

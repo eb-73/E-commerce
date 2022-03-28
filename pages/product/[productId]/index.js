@@ -20,7 +20,6 @@ const Product = (props) => {
   );
   let product;
   if (data && data.productInfo) {
-    console.log("data", data);
     product = {
       id: data.productInfo._id.toString(),
       productPrice: data.productInfo.productPrice,
@@ -100,7 +99,6 @@ export async function getStaticPaths() {
   const db = client.db();
   const collection = db.collection("products");
   const result = await collection.find({}, { _id: true }).limit(5).toArray();
-  console.log("result", result);
   client.close();
   return {
     paths: result.map((item) => ({

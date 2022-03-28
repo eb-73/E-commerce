@@ -4,13 +4,23 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { sendOrderPaymentToDatabase } from "../../actions/actions";
+import {
+  checkQuantity,
+  sendOrderPaymentToDatabase,
+  updateQuantity,
+} from "../../actions/actions";
 import { orderAction } from "../../redux/orderSlice";
 const PaymentForm = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.Auth);
+  const orderProducts = useSelector((state) => state.Order.orderProducts);
+  const orderedProducts = orderProducts.map((item) => ({
+    id: item.productId,
+    qty: item.quantity,
+    size: item.size,
+  }));
   const {
     inputValue: yearExpiryValue,
     validateInput: validateYearExpiry,
@@ -63,11 +73,20 @@ const PaymentForm = () => {
       return;
     }
     setLoading(true);
+
     try {
+      //check quantity in stock
+      const ok = await checkQuantity(orderedProducts);
+      // if qty is ok, pay order
       const result = await sendOrderPaymentToDatabase({
         id: user.userId,
         method: "credit payment",
         email: user.authenticatedEmail,
+      });
+      //decrease qty from stock
+      const update = await updateQuantity({
+        quantities: orderedProducts,
+        oldQty: ok.oldQty,
       });
       setLoading(false);
       dispatch(orderAction.clearOrder());

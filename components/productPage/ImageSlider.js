@@ -1,6 +1,5 @@
 import style from "./ImageSlider.module.css";
 import ProductImg from "./ProductImg";
-
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 const ImageSlider = (props) => {
   const firstPic = props.imagesUrl[0];
@@ -20,8 +19,6 @@ const ImageSlider = (props) => {
             active={item === firstPic && true}
           />
         ))}
-        {/* <ProductImg url={props.imagesUrl[0]} className="active" />
-        <ProductImg url={props.imagesUrl[1]} /> */}
       </div>
       <button
         className="carousel-control-prev"

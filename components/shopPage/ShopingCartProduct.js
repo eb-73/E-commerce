@@ -20,7 +20,6 @@ const ShopingCartProduct = (props) => {
 
   // if quantity change in server
   if (data && props.quantity > data?.productInfo.size[index].quantity) {
-    console.log(props.quantity, props.id, maxQuantity);
     dispatch(
       orderAction.decrement({
         id: props.id,
@@ -38,40 +37,6 @@ const ShopingCartProduct = (props) => {
       })
     );
   }
-
-  // useEffect(() => {
-  //   fetch(`/api/product/productInfo?id=${props.id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const index = data.productInfo.size.findIndex(
-  //         (i) => i.name === props.size
-  //       );
-  //       setProductInfo({
-  //         title: data.productInfo.product_title,
-  //         subCategory: data.productInfo.sub_category,
-  //         maxQuantity: data.productInfo.size[index].quantity,
-  //       });
-  //       // if quantity change in server
-  //       if (props.quantity > data.productInfo.size[index].quantity) {
-  //         dispatch(
-  //           orderAction.decrement({
-  //             id: props.id,
-  //             size: props.size,
-  //             color: props.color,
-  //             step: props.quantity - data.productInfo.size[index].quantity,
-  //           })
-  //         );
-  //       } else if (data.productInfo.size[index].quantity == 0) {
-  //         dispatch(
-  //           orderAction.remove({
-  //             id: props.id,
-  //             size: props.size,
-  //             color: props.color,
-  //           })
-  //         );
-  //       }
-  //     });
-  // }, [props.id]);
   const removeHandler = () => {
     dispatch(
       orderAction.remove({ id: props.id, size: props.size, color: props.color })

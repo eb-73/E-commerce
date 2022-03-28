@@ -1,6 +1,5 @@
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../../../lib/db";
-
 async function user(req, res) {
   //put request
   if (req.method === "PUT") {

@@ -1,7 +1,7 @@
 import style from "./Navigation.module.css";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { useSession, getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { authAction } from "../../../redux/authSlice";
 import {
   getFavoriteFromDatabase,
@@ -34,7 +34,6 @@ const Navigation = () => {
   const userEmail = session?.user.email;
   const userId = session?.user.userId;
   let allQuantity;
-  console.log("session", session);
   allQuantity = cart.orderProducts.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.quantity;
   }, 0);
@@ -71,7 +70,6 @@ const Navigation = () => {
   //send favorite to database
   useEffect(() => {
     if (fav.userId && isUser) {
-      console.log("send fav to database");
       sendFavoriteToDatabase(fav)
         .then()
         .catch((err) => toast.error(err.message));

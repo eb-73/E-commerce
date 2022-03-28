@@ -6,10 +6,10 @@ import SortNav from "../components/homePage/SortNav";
 import CardsWraper from "../components/homePage/CardsWraper";
 import { ViewContextProvider } from "../context/ctxStore";
 import { connectToDatabase } from "../lib/db";
-import { priceAsc, priceDesc } from "../lib/sortFunction";
 import usePagination from "../hooks/usePagination";
 import LoadingButton from "../components/ui/LoadingButton";
 import { useRouter } from "next/router";
+import { checkQuantity } from "../actions/actions";
 let showLoadMore = true;
 function Home(props) {
   const { productsArray, filters } = props;
@@ -23,17 +23,6 @@ function Home(props) {
   if (products && products.length === 25) {
     showLoadMore = false;
   }
-  //sort
-
-  // console.log("in sort");
-  // if (sort === "newest") {
-  // } else if (sort === "priceDesc") {
-  //   products = products.sort(priceDesc);
-  // } else if (sort === "priceAsc") {
-  //   products = products.sort(priceAsc);
-  // }
-
-  //
   const setSizeHandler = () => {
     setSize(size + 1);
     router.push(

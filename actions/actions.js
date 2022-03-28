@@ -14,11 +14,11 @@ export const getOrderListFromDatabase = (userId, status) => {
       if (data && data.order) {
         const { order } = data;
         const localCart = localStorage.getItem("cart");
-        console.log("localCart", localCart);
+
         //order is in guest mode and login to your account
         if (localCart && order) {
           localStorage.removeItem("cart");
-          console.log("order is in database mergeinitial");
+
           dispatch(
             orderAction.mergeInitialOrder({
               orderId: order._id.toString(),
@@ -32,7 +32,6 @@ export const getOrderListFromDatabase = (userId, status) => {
         }
         //get order when is loged in your account
         else if (!localCart && order) {
-          console.log("order is in database setinitial");
           dispatch(
             orderAction.setInitialOrder({
               orderId: order._id.toString(),
@@ -44,19 +43,16 @@ export const getOrderListFromDatabase = (userId, status) => {
             })
           );
         }
-        //if order not exist in database, create pending order and set id
-        else if (!order && data.orderId) {
-          console.log("not order in database", data.orderId);
-          dispatch(
-            orderAction.setOrderId({
-              orderId: data.orderId,
-              costumerId: userId,
-              orderStatus: "pending",
-            })
-          );
-        }
-      } else if (data && data.message) {
-        toast.error(data.message);
+      }
+      //if order not exist in database, create pending order and set id
+      else if (!data.order && data.orderId) {
+        dispatch(
+          orderAction.setOrderId({
+            orderId: data.orderId,
+            costumerId: userId,
+            orderStatus: "pending",
+          })
+        );
       }
     } catch (err) {
       toast.error(err.message);
@@ -244,6 +240,32 @@ export const createUser = async (userData) => {
   });
   const data = await response.json();
   if (!response.ok) {
+    throw new Error(data.message || "something is wrong");
+  } else return data;
+};
+export const checkQuantity = async (orderedProducts) => {
+  const res = await fetch("/api/product/productQty?forr=check", {
+    method: "PUT",
+    body: JSON.stringify(orderedProducts),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message || "something is wrong");
+  } else return data;
+};
+export const updateQuantity = async (orderedProducts) => {
+  const res = await fetch("/api/product/productQty?forr=update", {
+    method: "PUT",
+    body: JSON.stringify(orderedProducts),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
     throw new Error(data.message || "something is wrong");
   } else return data;
 };

@@ -1,7 +1,7 @@
 import style from "./Search.module.css";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 const Search = () => {
   const router = useRouter();
   const searchValue = useRef();
@@ -9,11 +9,6 @@ const Search = () => {
   const changeSearchHandler = (e) => {
     if (e.target.checked) setSearchMode(e.target.value);
   };
-  // useEffect(() => {
-  //   if (router.pathname === "/search" && router.query.q&&router.query.filter) {
-  //     filterSearch("q", router.query.q).then((data) => console.log(data));
-  //   }
-  // }, [router.query.q,router.query.filter, router.pathname]);
   const searchHandler = async (e) => {
     e.preventDefault();
     if (searchValue.current.value.trim()) {

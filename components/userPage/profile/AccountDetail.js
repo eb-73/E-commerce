@@ -72,7 +72,6 @@ const AccountDetail = (props) => {
       },
     });
     const data = await res.json();
-    console.log(data.message);
 
     if (userEmail !== emailValue) {
       try {

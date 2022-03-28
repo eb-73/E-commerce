@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { getSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 const useLogin = () => {
   const login = async (email, pass) => {
     const result = await signIn("credentials", {
@@ -7,8 +6,6 @@ const useLogin = () => {
       email,
       pass,
     });
-
-    console.log("result login", result);
     if (result.ok && !result.error) {
       return result;
       // get order list from database

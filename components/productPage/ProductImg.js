@@ -1,5 +1,5 @@
 import style from "./ProductImg.module.css";
-
+import Image from "next/image";
 const ProductImg = (props) => {
   return (
     <div
@@ -7,7 +7,15 @@ const ProductImg = (props) => {
         style.productImg
       } `}
     >
-      <img src={props.url} className="d-block mx-auto" />
+      {/* <img src={props.url} className="d-block mx-auto" /> */}
+      <Image
+        src={props.url}
+        alt="product picture"
+        layout="fill"
+        objectFit="contain"
+        priority={false}
+        loading="eager"
+      />
     </div>
   );
 };

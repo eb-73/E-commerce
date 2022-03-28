@@ -15,7 +15,7 @@ const usePagination = (initialValue, category) => {
     fetcher,
     { fallbackData: initialValue, revalidateAll: true }
   );
-  console.log("render usePagination");
+
   useEffect(() => {
     if (+page) {
       setSize(+page);

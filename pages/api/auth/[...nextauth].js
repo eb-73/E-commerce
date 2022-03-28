@@ -8,7 +8,7 @@ export default NextAuth({
     jwt: true,
   },
   jwt: {
-    secret: "LlKq6ZtYbr+hTC073$HkBAh9/h2HwMfsFo4hrfCx5mLg=",
+    secret: process.env.SECRET,
     encryption: true,
   },
   providers: [
@@ -25,7 +25,6 @@ export default NextAuth({
         //
         // update email name for exists account
         if (credentials && credentials.newEmail && credentials.oldEmail) {
-          console.log("email ha", credentials.newEmail, credentials.oldEmail);
           const db = client.db();
           const updateUser = await db.collection("users").findOneAndUpdate(
             {
@@ -36,7 +35,6 @@ export default NextAuth({
             }
           );
           if (updateUser && updateUser.lastErrorObject.updatedExisting) {
-            console.log("user email updated");
             return {
               email: credentials.newEmail,
               id: updateUser.value._id.toString(),
@@ -59,7 +57,6 @@ export default NextAuth({
               id: user._id.toString(),
               email: user.email,
             };
-          console.log(userToken);
           //
           //check password is correct
           const isEqual = await comparePass(credentials.pass, user.password);
@@ -103,5 +100,5 @@ export default NextAuth({
       return session;
     },
   },
-  secret: "LlKq6ZtYbr+hTC073$HkBAh9/h2HwMfsFo4hrfCx5mLg=",
+  secret: process.env.SECRET,
 });

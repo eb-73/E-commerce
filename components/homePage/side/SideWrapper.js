@@ -1,4 +1,3 @@
-import Side from "./Side";
 import style from "./SideWrapper.module.css";
 const sideWrapper = (props) => {
   return (

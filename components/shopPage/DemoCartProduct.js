@@ -4,10 +4,8 @@ import { useDispatch } from "react-redux";
 import { orderAction } from "../../redux/orderSlice";
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 const DemoCartProduct = (props) => {
   const dispatch = useDispatch();
-
   const { data, error } = useSWR(
     `/api/product/productInfo?id=${props.id}`,
     fetcher
@@ -36,19 +34,6 @@ const DemoCartProduct = (props) => {
       })
     );
   }
-  // useEffect(() => {
-  //   fetch(`/api/product/productInfo?id=${props.id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const index = data.productInfo.size.findIndex(
-  //         (i) => i.name === props.size
-  //       );
-  //       setProductInfo({
-  //         title: data.productInfo.product_title,
-  //         maxQuantity: data.productInfo.size[index].quantity,
-  //       });
-  //     });
-  // }, [props.id]);
   const removeHandler = () => {
     dispatch(
       orderAction.remove({ id: props.id, size: props.size, color: props.color })

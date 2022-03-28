@@ -20,7 +20,6 @@ function useForm(mode, defaultValue) {
     validateInput = false;
   }
   let inputIsNotValid = !validateInput && touched;
-
   const inputChangeHandler = (e) => {
     const value = e.target.value;
     setInput(value);
