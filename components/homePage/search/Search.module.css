@@ -72,9 +72,9 @@
   font-size: var(--font-small);
   border-radius: 0px 15px 15px 0px;
 }
-/* .inputGroup .searchSelect2 .dropdown {
+.inputGroup .searchSelect2 .dropdown {
   width: 70px;
-} */
+}
 .inputGroup .searchSelect2 .dropdown input {
   display: none;
 }
@@ -111,7 +111,7 @@
     width: 70%;
   }
   .inputGroup .searchSelect2 {
-    width: 30%;
+    width: 25%;
     margin-right: 7px;
   }
 }

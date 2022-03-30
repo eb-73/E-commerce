@@ -2,19 +2,22 @@ import style from "./Filter.module.css";
 import { XIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import { createPortal } from "react-dom";
 const Filter = (props) => {
-  const closeFilterHandler = (e) => {
+  const overlayCloseFilterHandler = (e) => {
     if (e.target.id === "overlayFilter") {
       props.closeFilter();
     }
   };
-
+  const closeFilterHandler = (e) => {
+    e.preventDefault();
+    props.closeFilter();
+  };
   return createPortal(
     <div
       className={`d-block d-sm-none ${style.overlayFilter}`}
       id="overlayFilter"
-      onClick={closeFilterHandler}
+      onClick={overlayCloseFilterHandler}
     >
-      <form className={` ${style.filter} `}>
+      <form className={` ${style.filter} `} onSubmit={closeFilterHandler}>
         <div
           className={`py-2 px-3 mb-2 d-flex justify-content-between ${style.title}`}
         >
@@ -23,11 +26,7 @@ const Filter = (props) => {
         </div>
         <div className={style.content}>{props.children}</div>
 
-        <button
-          className={`fixed  ${style.searchFilterButton}`}
-          type="button"
-          onclick={props.closeFilter}
-        >
+        <button className={`fixed  ${style.searchFilterButton}`} type="submit">
           Done
         </button>
       </form>
