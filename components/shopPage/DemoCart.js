@@ -3,6 +3,7 @@ import { XIcon } from "@heroicons/react/solid";
 import DemoCartProduct from "./DemoCartProduct";
 import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 const DemoCart = (props) => {
   const cart = useSelector((state) => state.Order.orderProducts);
   const total = useSelector((state) => state.Order.orderTotalPrice);
@@ -17,7 +18,7 @@ const DemoCart = (props) => {
       id="overlayCart"
       onClick={closeCart}
     >
-      <form
+      <div
         className={`d-flex flex-column justify-content-start align-items-center ${style.shopingCart} `}
       >
         <div
@@ -54,10 +55,10 @@ const DemoCart = (props) => {
             />
           ))}
         </div>
-        <button className={`${style.doneButton}`} type="submit">
-          View bag
-        </button>
-      </form>
+        <Link href="/cart" replace={true}>
+          <button className={`${style.doneButton}`}>View bag</button>
+        </Link>
+      </div>
     </div>,
     document.getElementById("myportal")
   );

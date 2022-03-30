@@ -21,10 +21,13 @@ const Filter = (props) => {
           <h2>Filters</h2>
           <XIcon className={style.closeIcon} onClick={props.closeFilter} />
         </div>
+        <div className={style.content}>{props.children}</div>
 
-        {props.children}
-
-        <button className={`fixed  ${style.searchFilterButton}`} type="submit">
+        <button
+          className={`fixed  ${style.searchFilterButton}`}
+          type="button"
+          onclick={props.closeFilter}
+        >
           Done
         </button>
       </form>

@@ -8,7 +8,7 @@
   height: 100%;
   background: rgba(121, 121, 121, 0.473);
   margin: auto;
-  z-index: 999;
+  z-index: 4;
 }
 .stage {
   width: 200px;

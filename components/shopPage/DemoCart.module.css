@@ -67,7 +67,6 @@
 .shopingCart .doneButton {
   width: 440px;
   height: 40px;
-  border-radius: 5px;
   border: none;
   background-color: var(--color-black);
   font-size: var(--font-medium);
@@ -95,6 +94,6 @@
     width: 100%;
   }
   .shopingCart .doneButton {
-    width: 98%;
+    width: 100%;
   }
 }
