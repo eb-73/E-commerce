@@ -73,7 +73,7 @@
   border-radius: 0px 15px 15px 0px;
 }
 .inputGroup .searchSelect2 .dropdown {
-  width: 70px;
+  min-width: 100%;
 }
 .inputGroup .searchSelect2 .dropdown input {
   display: none;
@@ -82,7 +82,7 @@
   padding: 2px 10px;
   cursor: pointer;
 }
-.inputGroup .searchSelect2 .dropdown input:checked + label {
+.inputGroup .searchSelect2 .dropdown .active {
   background-color: black;
   color: white;
 }

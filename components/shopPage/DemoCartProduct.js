@@ -2,6 +2,7 @@ import style from "./DemoCartProduct.module.css";
 import { TrashIcon } from "@heroicons/react/outline";
 import { useDispatch } from "react-redux";
 import { orderAction } from "../../redux/orderSlice";
+import Image from "next/image";
 import useSWR from "swr";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const DemoCartProduct = (props) => {
@@ -68,7 +69,14 @@ const DemoCartProduct = (props) => {
       <div
         className={`d-flex justify-content-center align-items-center ${style.image}`}
       >
-        <img src={props.imageUrl} alt="CartProduct" />
+        <Image
+          src={props.imageUrl}
+          alt="CartProduct"
+          layout="fill"
+          objectFit="contain"
+          priority={false}
+          loading="eager"
+        />
       </div>
       <div
         className={`d-flex flex-column justify-content-around align-items-start mx-3 ${style.product}`}

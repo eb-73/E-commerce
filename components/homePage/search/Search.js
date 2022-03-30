@@ -87,7 +87,12 @@ const Search = () => {
                 name="selec"
                 value="All"
               />
-              <label htmlFor="allCat" className="dropdown-item">
+              <label
+                htmlFor="allCat"
+                className={`dropdown-item ${
+                  searchMode === "All" && style.active
+                }`}
+              >
                 All
               </label>
               <input
@@ -97,7 +102,12 @@ const Search = () => {
                 name="selec"
                 value="Clothing"
               />
-              <label htmlFor="cat1" className="dropdown-item">
+              <label
+                htmlFor="cat1"
+                className={`dropdown-item ${
+                  searchMode === "Clothing" && style.active
+                }`}
+              >
                 Clothing
               </label>
               <input
@@ -107,7 +117,12 @@ const Search = () => {
                 name="selec"
                 value="Shoes"
               />
-              <label htmlFor="cat2" className="dropdown-item">
+              <label
+                htmlFor="cat2"
+                className={`dropdown-item ${
+                  searchMode === "Shoes" && style.active
+                }`}
+              >
                 Shoes
               </label>
             </div>

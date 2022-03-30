@@ -53,4 +53,7 @@
   .profileButton:hover .profileButtonList {
     display: none;
   }
+  .profileButton .navIcon {
+    width: 19px;
+  }
 }

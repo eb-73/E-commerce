@@ -63,6 +63,7 @@
   margin: 0;
   padding: 5px 0;
   color: white;
+  font-size: var(--font-tiny);
 }
 @media screen and (max-width: 576px) {
   .socials {
@@ -79,5 +80,8 @@
     width: 25px;
     height: 25px;
     margin: 0px 5px;
+  }
+  .footer .ownerName {
+    font-size: xx-small;
   }
 }
