@@ -16,3 +16,6 @@
 * Redux and Context API to manage state of Application like cart data, products, user authentication, ...
 * NextAuth to authenticate user 
 * ...
+
+## you can view this project:
+http://e-commerce-eb-73.vercel.app/
