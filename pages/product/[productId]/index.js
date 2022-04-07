@@ -113,8 +113,9 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const id = context.params.productId;
   let result;
+  let client;
   try {
-    const client = await connectToDatabase();
+    client = await connectToDatabase();
     const db = client.db();
     const collection = db.collection("products");
     result = await collection.findOne({ _id: ObjectId(id) });
