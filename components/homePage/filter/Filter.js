@@ -24,7 +24,7 @@ const Filter = (props) => {
           <h2>Filters</h2>
           <XIcon className={style.closeIcon} onClick={props.closeFilter} />
         </div>
-        <div className={style.content}>{props.children}</div>
+        <div className={`px-3 ${style.content}`}>{props.children}</div>
 
         <button className={`fixed  ${style.searchFilterButton}`} type="submit">
           Done

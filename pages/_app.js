@@ -5,21 +5,6 @@ import { Provider } from "react-redux";
 import store from "../redux/store";
 import { useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
-// function MyApp({ Component, pageProps }) {
-//   useEffect(() => {
-//     import("bootstrap/dist/js/bootstrap");
-//   }, []);
-//   return (
-//     <Provider store={store}>
-//       <Layout>
-//         <Component {...pageProps} />
-//       </Layout>
-//     </Provider>
-//   );
-// }
-
-// export default MyApp;
-
 function App({ Component, pageProps: { session, ...pageProps } }) {
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap");

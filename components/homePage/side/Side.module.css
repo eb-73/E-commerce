@@ -42,6 +42,7 @@
 .boxWraper .list label {
   width: 100%;
   cursor: pointer;
+  word-wrap: break-word;
 }
 
 .boxWraper .showList li {

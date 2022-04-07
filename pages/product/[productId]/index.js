@@ -98,7 +98,10 @@ export async function getStaticPaths() {
   const client = await connectToDatabase();
   const db = client.db();
   const collection = db.collection("products");
-  const result = await collection.find({}, { _id: true }).limit(5).toArray();
+  const result = await collection
+    .find({}, { projection: { _id: true } })
+    .limit(5)
+    .toArray();
   client.close();
   return {
     paths: result.map((item) => ({
@@ -109,27 +112,38 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps(context) {
   const id = context.params.productId;
-  const client = await connectToDatabase();
-  const db = client.db();
-  const collection = db.collection("products");
-  const result = await collection.findOne({ _id: ObjectId(id) });
+  let result;
+  try {
+    const client = await connectToDatabase();
+    const db = client.db();
+    const collection = db.collection("products");
+    result = await collection.findOne({ _id: ObjectId(id) });
+  } catch (err) {
+    client.close();
+    return { notFound: true };
+  }
+
   client.close();
-  return {
-    props: {
-      productInfo: {
-        _id: result._id.toString(),
-        productPrice: result.productPrice,
-        productDescription: result.productDescription,
-        category: result.category,
-        picUrl: result.picUrl,
-        productTitle: result.productTitle,
-        productSubTitle: result.productSubTitle,
-        subCategory: result.subCategory,
-        color: result.color,
-        size: result.size,
+  if (result) {
+    return {
+      props: {
+        productInfo: {
+          _id: result._id.toString(),
+          productPrice: result.productPrice,
+          productDescription: result.productDescription,
+          category: result.category,
+          picUrl: result.picUrl,
+          productTitle: result.productTitle,
+          productSubTitle: result.productSubTitle,
+          subCategory: result.subCategory,
+          color: result.color,
+          size: result.size,
+        },
       },
-    },
-    revalidate: 86400,
-  };
+      revalidate: 86400,
+    };
+  } else {
+    return { notFound: true };
+  }
 }
 export default Product;

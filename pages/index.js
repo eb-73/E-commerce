@@ -80,7 +80,6 @@ export async function getStaticProps() {
     .toArray();
   client.close();
   //filter data
-
   let category = filterResult.map((item) => item.subCategory);
   let colors = [];
   filterResult.forEach((items) => {

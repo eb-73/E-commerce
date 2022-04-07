@@ -104,10 +104,10 @@ const Side = (props) => {
           exitActive: style.exitActive,
         }}
       >
-        <ul className={` ${style.list} ${showBox && style.showList}`}>
+        <ul className={` px-2 ${style.list} ${showBox && style.showList}`}>
           {check.map((item, index) => (
             <li key={index} className=" my-2 form-check ">
-              <label className="px-2 form-check-label">
+              <label className=" form-check-label">
                 <input
                   onChange={filterHandler}
                   className=" form-check-input"

@@ -31,9 +31,6 @@ const order = createSlice({
       state.orderStatus = action.payload.status;
       state.orderTotalPrice = action.payload.totalPrice;
       state.orderProducts = action.payload.items;
-      // action.payload.items.forEach((element) => {
-      //   state.orderProducts.push(element);
-      // });
     },
     mergeInitialOrder(state, action) {
       if (state.orderProducts.length === 0) {
@@ -43,9 +40,6 @@ const order = createSlice({
         state.orderStatus = action.payload.status;
         state.orderTotalPrice = action.payload.totalPrice;
         state.orderProducts = action.payload.items;
-        // action.payload.items.forEach((element) => {
-        //   state.orderProducts.push(element);
-        // });
       } else if (state.orderProducts.length > 0) {
         state.orderId = action.payload.orderId;
         state.costumerId = action.payload.costumerId;
@@ -88,9 +82,6 @@ const order = createSlice({
             item.color === action.payload.item.color &&
             item.size === action.payload.item.size
           ) {
-            // state.orderProducts[index].quantity =
-            //   +state.orderProducts[index].quantity + 1;
-            // state.orderTotalPrice = +state.orderTotalPrice + +item.productPrice;
             flag = true;
           }
         });
